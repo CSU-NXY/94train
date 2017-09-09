@@ -15,5 +15,4 @@ public class RegisterAndLoginController {
     public String printHello(ModelMap model) {
         return "login";
     }
-
 }
