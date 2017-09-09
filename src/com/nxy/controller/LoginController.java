@@ -9,7 +9,7 @@ import com.nxy.model.*;
 
 @Controller
 @RequestMapping(value = "/hello", method = RequestMethod.GET)
-public class HelloController {
+public class LoginController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String printHello(ModelMap model) {
