@@ -17,7 +17,7 @@ public class HelloController {
         // model.addAttribute("name", "nxy");
         String name = (String)model.get("name");
         model.addAttribute("name", name);
-        return "hello";
+        return "login";
     }
 
     @RequestMapping("/haha.do")
