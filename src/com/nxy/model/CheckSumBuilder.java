@@ -1,4 +1,4 @@
-package com.nxy.controller;
+package com.nxy.model;
 
 import java.security.MessageDigest;
 
