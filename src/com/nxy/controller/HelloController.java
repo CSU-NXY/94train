@@ -1,4 +1,4 @@
-package com.nxy.hello;
+package com.nxy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,4 @@
-package com.nxy.hello;
+package com.nxy.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
