@@ -17,7 +17,7 @@
         <div class="col-sm-8">
             <div class="row">
                 <h3>精彩图文</h3>
-                <img src="${pageContext.request.contextPath}/WEB-INF/images/tomas.jpg" class="img-thumbnail">
+                <img src="${pageContext.request.contextPath}/static/images/tomas.jpg" class="img-thumbnail">
             </div>
 
             <div class="row">
@@ -35,6 +35,24 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
                     <tr>
                         <td>1</td>
                         <td>1</td>
