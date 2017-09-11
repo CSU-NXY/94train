@@ -14,7 +14,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="../../static/images/favicon.ico">
 
     <title>Signin Template for Bootstrap</title>
 

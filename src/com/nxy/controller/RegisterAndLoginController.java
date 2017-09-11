@@ -11,8 +11,8 @@ import com.nxy.model.*;
 @RequestMapping(value = "/registerAndLogin", method = RequestMethod.GET)
 public class RegisterAndLoginController {
 
-    @RequestMapping(value = "/viewLogin.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewRegister.do", method = RequestMethod.GET)
     public String printHello(ModelMap model) {
-        return "login";
+        return "register";
     }
 }

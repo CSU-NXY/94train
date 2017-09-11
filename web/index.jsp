@@ -8,10 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
 
-<div class="container">
-    <div class="jumbotron">
-        <h1>94火车售票系统</h1>
-    </div>
+
 
     <div class="row">
         <div class="col-sm-8">
@@ -80,7 +77,7 @@
                     <input type="password" class="form-control" placeholder="password">
                 </div><br>
                 <button type="button" class="btn btn-default btn-sm">登录</button>
-                <button type="button" class="btn btn-default btn-sm">注册</button>
+                <a href="registerAndLogin/viewRegister.do"><button type="button" class="btn btn-default btn-sm">注册</button></a>
             </div>
 
 
