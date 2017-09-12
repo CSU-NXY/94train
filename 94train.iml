@@ -46,5 +46,15 @@
     <orderEntry type="library" name="respond" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/nxy/下载/mail/javax.mail.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
