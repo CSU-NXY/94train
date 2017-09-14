@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.*;
 public class IndexController {
     @RequestMapping("/viewIndex.do")
     public String viewIndex() {
-        return "index";
+        return "/WEB-INF/index.jsp";
     }
 }

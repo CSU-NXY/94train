@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="common/IncludeTop.jsp"/>
+<jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
 
 
 <style type="text/css">
@@ -39,10 +39,10 @@
 </style>
 
 
-<link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="../../static/css/dcalendar.picker.css"/>
-<script type="text/javascript" src="../../static/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="../../static/js/dcalendar.picker.js"></script>
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/dcalendar.picker.css"/>
+<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="static/js/dcalendar.picker.js"></script>
 
 <br>
 <div class="row" style="background-color: #fcfffb">
@@ -80,42 +80,7 @@
         format: 'yyyy-mm-dd'
     });
 </script>
-<!--
-<div class="row">
-<div class="col-xs-1"></div>
-
-<div class="col-xs-10">
-<table class="table table-hover">
-<caption>列车信息</caption>
-<thead>
-<tr>
-<th>车次</th>
-<th>出发地</th>
-<th>目的地</th>
-<th>出发时间</th>
-<th>到达时间</th>
-<th>运行时间</th>
-<th>票价</th>
-<th>剩余票数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
--->
 
 </body>
 
-<jsp:include page="common/IncludeBottom.jsp"/>
+<jsp:include page="WEB-INF/views/common/IncludeBottom.jsp"/>
