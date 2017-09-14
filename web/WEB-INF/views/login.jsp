@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../static/images/favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>94购票网用户登录</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

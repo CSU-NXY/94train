@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
+<jsp:include page="common/IncludeTop.jsp"/>
 
 
 
@@ -77,7 +77,7 @@
                     <input type="password" class="form-control" placeholder="password">
                 </div><br>
                 <button type="button" class="btn btn-default btn-sm">登录</button>
-                <a href="search/viewSearch.do"><button type="button" class="btn btn-default btn-sm">注册</button></a>
+                <a href="/registerAndLogin/viewRegister.do"><button type="button" class="btn btn-default btn-sm">注册</button></a>
             </div>
 
 
@@ -96,4 +96,4 @@
 </div>
 </body>
 
-<jsp:include page="WEB-INF/views/common/IncludeBottom.jsp"/>
+<jsp:include page="common/IncludeBottom.jsp"/>

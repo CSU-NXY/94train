@@ -10,8 +10,8 @@
 <head>
     <title>94购票网</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/scrollable.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/scrollable.js"></script>
     <style type="text/css">
         .container{
             min-height: 700px;
@@ -208,7 +208,7 @@
 
                         <div  class="information">
                             <label class="form_tips">
-                                <input type="checkbox">我同意并遵守<a href="protocol.jsp" target="_blank">《94购票网服务协议》</a>
+                                <input type="checkbox">我同意并遵守<a href="/protocol/viewProtocol.do" target="_blank">《94购票网服务协议》</a>
                             </label>
 
                         </div>
@@ -219,7 +219,7 @@
                     </div>
 
                     <div>
-                        <p>已有账号，立刻<a href="index.jsp">登录</a>!</p>
+                        <p>已有账号，立刻<a href="/registerAndLogin/viewLogin.do">登录</a>!</p>
                     </div>
                 </div>
 
@@ -238,9 +238,9 @@
                             <div class="space">
                             </div>
 
-                            <div class="btn information">
+                            <div >
                                 <input type="button" class="prev" style="float:left" value="&laquo;上一步" />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                                 <input type="button" class="next right" value="下一步&raquo;" />
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                         </div>
 
                         <div class="col-md-offset-4 btn information">
-                            <a href="index.jsp"><input type="button" class="next right" value="确认"></a>
+                            <a href="/index/viewIndex.do"><input type="button" class="next right" value="确认"></a>
                         </div>
                     </div>
                 </div>
@@ -284,6 +284,8 @@
             });
         });
     </script>
+
+
 </div>
 </body>
 </html>
