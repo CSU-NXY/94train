@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
+<jsp:include page="common/IncludeTop.jsp"/>
 
 
 <style type="text/css">
@@ -39,10 +39,10 @@
 </style>
 
 
-<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="static/css/dcalendar.picker.css"/>
-<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="static/js/dcalendar.picker.js"></script>
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../static/css/dcalendar.picker.css"/>
+<script type="text/javascript" src="../../static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../static/js/dcalendar.picker.js"></script>
 
 <br>
 <div class="row" style="background-color: #fcfffb">
@@ -83,4 +83,4 @@
 
 </body>
 
-<jsp:include page="WEB-INF/views/common/IncludeBottom.jsp"/>
+<jsp:include page="common/IncludeBottom.jsp"/>
