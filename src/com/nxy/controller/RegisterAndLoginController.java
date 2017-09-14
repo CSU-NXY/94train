@@ -12,7 +12,7 @@ import com.nxy.model.*;
 public class RegisterAndLoginController {
 
     @RequestMapping(value = "/viewRegister.do", method = RequestMethod.GET)
-    public String printHello(ModelMap model) {
+    public String viewRegister(ModelMap model) {
         return "register";
     }
 }
