@@ -15,17 +15,19 @@
 </head>
 <body>
 
-
-
 <div class="container">
-    <div class="row">
-        <div class="col-sm-3" >
+    <div class="row" style="background-color:#004a49">
+        <div class="col-sm-2" >
             <img src="${pageContext.request.contextPath}/static/images/tomas.jpg" class="img-thumbnail">
 
         </div>
 
-        <div class="col-sm-9" style="background-color: red;height: 100px; ">
+        <div class="col-sm-7">
 
+        </div>
+
+        <div class="col-sm-3" style="">
+            <button class="btn-link" style="color: #ffffff;"><h3>登录</h3></button> | <button class="btn-link" style="color: #ffffff;"><h3>注册</h3></button>
         </div>
 
 
