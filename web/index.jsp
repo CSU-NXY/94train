@@ -6,8 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style type="text/css">
 
+
+<style type="text/css">
     .input_control{
         width: 70%;
         margin: 20px auto;
@@ -34,7 +35,15 @@
         border: 1px solid #90feff;
     }
 </style>
+
+
+
 <jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/dcalendar.picker.css"/>
+<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="static/js/dcalendar.picker.js"></script>
+
 <br>
 <div class="row" style="background-color: #fcfffb">
     <br>
@@ -50,19 +59,26 @@
         </div>
 
         <div class="input_control">
-            <input type="text" class="form-input" placeholder="时间">
+            <input id='mydatepicker' class="form-input" type="text"/>
         </div>
 
-        <button class="btn btn-default" style="width: 70%;height: 2.9em;background-color: lawngreen;margin-left: 15%;margin-bottom: 5%">查询</button>
+
+        <button class="btn btn-default" style="width: 70%;height: 2.9em;background-color: #8029fc;margin-left: 15%;margin-bottom: 5%;font-size: small"><font size="4.4em">查询</font> </button>
 
 
         <br>
         <br>
 
     </div>
-
 </div>
 
+
+<script type="text/javascript">
+    $('#mydatepicker').dcalendarpicker({
+        format:'yyyy-mm-dd'
+    });
+</script>
+<!--
 <div class="row">
     <div class="col-xs-1"></div>
 
@@ -96,8 +112,7 @@
         </table>
     </div>
 </div>
-
-
+-->
 
 </body>
 
