@@ -12,14 +12,23 @@ public class ConnectionGenerator {
     private final static String user = "root";
     //MySQL配置时的密码
     //不同自己改!!!
-    private static String password = "Ezio1234";
+    private static String password = "1234";
 
-    public static Connection GetConnetct() throws SQLException, ClassNotFoundException {
+    public static Connection GetConnetct(){
         //加载驱动程序
-        Class.forName(driver);
-        //1.getConnection()方法，连接MySQL数据库！！
-        Connection connection = DriverManager.getConnection(url, user, password);
+        Connection connection = null;
+        try {
+            Class.forName(driver);
+            //1.getConnection()方法，连接MySQL数据库！！
+            connection = DriverManager.getConnection(url, user, password);
+            return connection;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return connection;
     }
+
 
 }

@@ -8,11 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserService {
-    public  static  boolean Register(User user) throws SQLException, ClassNotFoundException {
+    //
+    public  static  boolean Register(User user){
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "INSERT INTO `94train`.`user` (`PhoneNum`, `Password`, `Name`, `ID`, `Email`) VALUES (?, ?, ?, ?, ?);";
 
-        PreparedStatement pstmt;
+        PreparedStatement pstmt=null;
         int i;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -24,9 +25,8 @@ public class UserService {
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            conn.close();
             return false;
         }
         if(i==0)
@@ -36,7 +36,7 @@ public class UserService {
         return true;
     }
 
-    public static boolean Login(User user) throws SQLException, ClassNotFoundException {
+    public static boolean Login(User user){
         Connection conn = ConnectionGenerator.GetConnetct();
         int col=0;
         String sql = "select count(*) from 94train.user where PhoneNum = ? and Password = ?";
@@ -50,7 +50,9 @@ public class UserService {
             rs.next();
             col = rs.getInt("count(*)");
             System.out.println(col);
-        } catch (SQLException e) {
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         if(col==1)
