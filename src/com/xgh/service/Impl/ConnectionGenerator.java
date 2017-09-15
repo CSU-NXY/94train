@@ -1,8 +1,7 @@
-package com.xgh.service;
+package com.xgh.service.Impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class ConnectionGenerator {
     private final  static String driver = "com.mysql.jdbc.Driver";
