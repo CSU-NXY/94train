@@ -20,7 +20,6 @@ public class ConnectionGenerator {
         //1.getConnection()方法，连接MySQL数据库！！
         Connection connection = DriverManager.getConnection(url, user, password);
         return connection;
-
     }
 
 }
