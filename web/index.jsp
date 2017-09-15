@@ -34,21 +34,21 @@
     input[type="text"]:focus{
         border: 1px solid #90feff;
     }
+
+    .btn btn-default{
+        border-radius:0px;
+    }
 </style>
 
 
 
 <jsp:include page="WEB-INF/views/common/IncludeTop.jsp"/>
-<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="static/css/dcalendar.picker.css"/>
-<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="static/js/dcalendar.picker.js"></script>
 
 <br>
 <div class="row" style="background-color: #fcfffb">
     <br>
     <div class="col-xs-1"></div>
-    <div class="col-xs-4" style="background:rgba(100,100,100,0.6);margin-bottom: 5%"> <br>
+    <div class="col-xs-4" style="background:rgba(100,100,100,0.6);margin-bottom: 20%"> <br>
 
         <div class="input_control">
             <input type="text" class="form-input" placeholder="出发地">
@@ -63,8 +63,7 @@
         </div>
 
 
-        <button class="btn btn-default" style="width: 70%;height: 2.9em;background-color: #8029fc;margin-left: 15%;margin-bottom: 5%;font-size: small"><font size="4.4em">查询</font> </button>
-
+        <button class="btn btn-default" style="width: 70%;height: 2.9em;margin-left: 15%;margin-bottom: 5%;font-size: small"><font size="4.4em">查询</font> </button>
 
         <br>
         <br>
