@@ -11,7 +11,7 @@ import java.util.List;
 
 //TRY-CATCH 和 各种CLOSE() 有问题!!!!!!!!!!!!
 public class TicketService {
-    public static List<TrainTable> SearchByID(String TrainID) throws SQLException, ClassNotFoundException {
+    public static List<TrainTable> SearchByID(String TrainID){
         List<TrainTable> list = new ArrayList<>();
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "Select * \n" +
@@ -31,10 +31,11 @@ public class TicketService {
                 temp.setRepatureTime(rs.getTime("DepartureTime"));
                 temp.setCountLeft(rs.getInt("Count"));
                 temp.setPrice(rs.getDouble("Price"));
-                temp.setStartStation(GetStationNameByID(conn,rs.getInt("StationID")));
+                temp.setStartStation(GetStationNameByID(rs.getInt("StationID")));
                 list.add(temp);
             }
             pstmt.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,7 +43,7 @@ public class TicketService {
     }
 
 
-    public static List<TrainTable> SearchByStation(String StartStation,String EndStation) throws SQLException, ClassNotFoundException {
+    public static List<TrainTable> SearchByStation(String StartStation,String EndStation){
         //返回的结果
         List<TrainTable> list = new ArrayList<>() ;
 
@@ -68,24 +69,21 @@ public class TicketService {
                 temp.setEndStartion(EndStation);
                 temp.setArrivalTime(rs.getTime("e.ArrivalTime"));
                 temp.setRepatureTime(rs.getTime("s.DepartureTime"));
-
-                //大工程~~~~
+                //大工程~~~~?
                 CalSumAndTicketCount(conn,temp,rs.getInt("s.Index"),rs.getInt("e.Index"),temp.getStrainID());
-
                 list.add(temp);
             }
             pstmt.close();
             conn.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            conn.close();
         }
         return list;
 
     }
 
 
-    private static void CalSumAndTicketCount(Connection conn,TrainTable temp,int s,int e,String TrainID) throws SQLException, ClassNotFoundException {
+    private static void CalSumAndTicketCount(Connection conn,TrainTable temp,int s,int e,String TrainID){
         String sql = "SELECT sum(Price),min(count)\n" +
                 "From 94train.section\n" +
                 "where 94train.section.Index>=? and 94train.section.Index<? and section.TrainID = ?";
@@ -101,14 +99,15 @@ public class TicketService {
             temp.setCountLeft(rs.getInt(2));
             pstmt.close();
             rs.close();
+            conn.close();
         }
         catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
-    private static String GetStationNameByID(Connection conn,int id) throws SQLException {
+    private static String GetStationNameByID(int id){
+        Connection conn = ConnectionGenerator.GetConnetct();
         String name = null;
         String sql = "SELECT StationName\n" +
                 "FROM 94train.station\n" +
@@ -122,6 +121,7 @@ public class TicketService {
             name = rs.getString(1);
             pstmt.close();
             rs.close();
+            conn.close();
         }
         catch (SQLException ex) {
             ex.printStackTrace();
