@@ -1,20 +1,15 @@
 package com.xgh.service;
 
-import com.nxy.model.Order;
-import com.nxy.model.TrainTable;
+import com.nxy.model.*;
 import com.xgh.service.*;
 
-import javax.print.DocFlavor;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 //TRY-CATCH 和 各种CLOSE() 有问题!!!!!!!!!!!!
 public class TicketService {
-    public static List<TrainTable> SearchByID(String TrainID) throws SQLException, ClassNotFoundException {
+    public static List<TrainTable> SearchByID(String TrainID){
         List<TrainTable> list = new ArrayList<>();
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "Select * \n" +
@@ -38,6 +33,7 @@ public class TicketService {
                 list.add(temp);
             }
             pstmt.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,7 +41,7 @@ public class TicketService {
     }
 
 
-    public static List<TrainTable> SearchByStation(String StartStation,String EndStation) throws SQLException, ClassNotFoundException {
+    public static List<TrainTable> SearchByStation(String StartStation,String EndStation){
         //返回的结果
         List<TrainTable> list = new ArrayList<>() ;
 
@@ -71,24 +67,21 @@ public class TicketService {
                 temp.setEndStartion(EndStation);
                 temp.setArrivalTime(rs.getTime("e.ArrivalTime"));
                 temp.setRepatureTime(rs.getTime("s.DepartureTime"));
-
-                //大工程~~~~
+                //大工程~~~~?
                 CalSumAndTicketCount(conn,temp,rs.getInt("s.Index"),rs.getInt("e.Index"),temp.getStrainID());
-
                 list.add(temp);
             }
             pstmt.close();
             conn.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            conn.close();
         }
         return list;
 
     }
 
 
-    private static void CalSumAndTicketCount(Connection conn,TrainTable temp,int s,int e,String TrainID) throws SQLException, ClassNotFoundException {
+    private static void CalSumAndTicketCount(Connection conn,TrainTable temp,int s,int e,String TrainID){
         String sql = "SELECT sum(Price),min(count)\n" +
                 "From 94train.section\n" +
                 "where 94train.section.Index>=? and 94train.section.Index<? and section.TrainID = ?";
@@ -104,22 +97,21 @@ public class TicketService {
             temp.setCountLeft(rs.getInt(2));
             pstmt.close();
             rs.close();
+            conn.close();
         }
         catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
-    private static String GetStationNameByID(int id) throws SQLException {
+    private static String GetStationNameByID(int id){
+        Connection conn = ConnectionGenerator.GetConnetct();
         String name = null;
         String sql = "SELECT StationName\n" +
                 "FROM 94train.station\n" +
                 "where StationID = ?";
         PreparedStatement pstmt;
-
         try {
-            Connection conn = ConnectionGenerator.GetConnetct();
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -127,37 +119,15 @@ public class TicketService {
             name = rs.getString(1);
             pstmt.close();
             rs.close();
+            conn.close();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return name;
     }
 
-    private static int GetStationIDByName(String name) throws SQLException, ClassNotFoundException {
-        Connection conn = ConnectionGenerator.GetConnetct();
-        String sql = "SELECT StationID"+
-        "FROM 94train.station"+
-        "where StationName = ?";
-        PreparedStatement pstmt;
-        int id = 0;
-        try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            pstmt.setString(1, name);
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            id = rs.getInt(1);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return  id;
-    }
-
-    public  static boolean BuyTicket(int UserID,TrainTable trainTable,int count)
+    public  static boolean BuyTicket(int UserID,TrainTable trainTable)
     {
         Order order = new Order();
         order.setUserID(UserID);
@@ -169,15 +139,35 @@ public class TicketService {
         order.setStatus(0);
         order.setType(0);
         order.setPrice(trainTable.getPrice());
+        int i = 0;
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "INSERT INTO `94train`.`order` (`UserID`, `TrainID`, `StartStation`, `EndStation`,`DepartureTime`,`ArrivalTime`,`Type`, `Price`, `Status`,`OrderDate`) "+
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?);";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setInt(1, order.getUserID());
+            pstmt.setString(2, order.getTrainID());
+            pstmt.setString(3, order.getStartStation());
+            pstmt.setString(4, order.getEndStation());
+            pstmt.setTime(5, order.getDepartureTime());
+            pstmt.setTime(6, order.getArrivalTime());
+            pstmt.setInt(7,order.getType());
+            pstmt.setDouble(8,order.getPrice());
+            pstmt.setInt(9,order.getStatus());
+            java.util.Date date=new java.util.Date();
+            pstmt.setDate(10,new Date(date.getTime()));
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        if(i==1)
+            return true;
         return false;
     }
 
-    public static List<Order> FindOrder(int UserID)
-    {
-        List<Order> list = new ArrayList<>();
-
-        return list;
-    }
 
 }
-

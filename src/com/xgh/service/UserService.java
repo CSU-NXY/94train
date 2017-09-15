@@ -36,27 +36,26 @@ public class UserService {
         return true;
     }
 
-    public static boolean Login(User user){
+    public static int Login(User user){
         Connection conn = ConnectionGenerator.GetConnetct();
-        int col=0;
-        String sql = "select count(*) from 94train.user where PhoneNum = ? and Password = ?";
+        String sql = "select * from 94train.user where PhoneNum = ? and Password = ?";
         PreparedStatement pstmt;
+        int id=-1;
         try {
             pstmt = (PreparedStatement)conn.prepareStatement(sql);
             pstmt.setString(1, user.getPhoneNum());
             pstmt.setString(2,user.getPassword());
             ResultSet rs = pstmt.executeQuery();
             //这才是开头...
-            rs.next();
-            col = rs.getInt("count(*)");
-            System.out.println(col);
+            while(rs.next())
+            {
+                id = rs.getInt("UserID");
+            }
             pstmt.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(col==1)
-            return true;
-        return false;
+        return id;
     }
 }
