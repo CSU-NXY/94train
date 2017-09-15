@@ -1,7 +1,10 @@
 package com.xgh.service;
 
+import com.nxy.model.Order;
 import com.nxy.model.TrainTable;
 import com.xgh.service.*;
+
+import javax.print.DocFlavor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +34,7 @@ public class TicketService {
                 temp.setRepatureTime(rs.getTime("DepartureTime"));
                 temp.setCountLeft(rs.getInt("Count"));
                 temp.setPrice(rs.getDouble("Price"));
-                temp.setStartStation(GetStationNameByID(conn,rs.getInt("StationID")));
+                temp.setStartStation(GetStationNameByID(rs.getInt("StationID")));
                 list.add(temp);
             }
             pstmt.close();
@@ -108,13 +111,15 @@ public class TicketService {
 
     }
 
-    private static String GetStationNameByID(Connection conn,int id) throws SQLException {
+    private static String GetStationNameByID(int id) throws SQLException {
         String name = null;
         String sql = "SELECT StationName\n" +
                 "FROM 94train.station\n" +
                 "where StationID = ?";
         PreparedStatement pstmt;
+
         try {
+            Connection conn = ConnectionGenerator.GetConnetct();
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -123,9 +128,49 @@ public class TicketService {
             pstmt.close();
             rs.close();
         }
-        catch (SQLException ex) {
-            ex.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return name;
     }
+
+    private static int GetStationIDByName(String name) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "SELECT StationID"+
+        "FROM 94train.station"+
+        "where StationName = ?";
+        PreparedStatement pstmt;
+        int id = 0;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            id = rs.getInt(1);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return  id;
+    }
+
+    public  static boolean BuyTicket(int UserID,TrainTable trainTable,int count)
+    {
+        Order order = new Order();
+        order.setUserID(UserID);
+        order.setTrainID(trainTable.getStrainID());
+        order.setStartStation(trainTable.getStartStation());
+        order.setEndStation(trainTable.getEndStartion());
+        order.setDepartureTime(trainTable.getRepatureTime());
+        order.setArrivalTime(trainTable.getArrivalTime());
+        order.setStatus(0);
+        order.setType(0);
+        order.setPrice(trainTable.getPrice());
+
+
+    }
 }
+
