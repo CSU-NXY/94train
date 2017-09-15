@@ -169,8 +169,15 @@ public class TicketService {
         order.setStatus(0);
         order.setType(0);
         order.setPrice(trainTable.getPrice());
-
-
+        return false;
     }
+
+    public static List<Order> FindOrder(int UserID)
+    {
+        List<Order> list = new ArrayList<>();
+
+        return list;
+    }
+
 }
 
