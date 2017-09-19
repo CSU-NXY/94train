@@ -3,8 +3,6 @@ package com.nxy.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import com.nxy.model.*;
-
 
 
 @Controller
@@ -12,7 +10,12 @@ import com.nxy.model.*;
 public class RegisterAndLoginController {
 
     @RequestMapping(value = "/viewRegister.do", method = RequestMethod.GET)
-    public String printHello(ModelMap model) {
+    public String viewRegister(ModelMap model) {
         return "register";
+    }
+
+    @RequestMapping(value = "/viewLogin.do", method = RequestMethod.GET)
+    public String viewLogin(ModelMap model) {
+        return "login";
     }
 }
