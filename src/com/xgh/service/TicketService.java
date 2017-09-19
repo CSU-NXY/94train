@@ -30,6 +30,7 @@ public class TicketService {
                 temp.setCountLeft(rs.getInt("Count"));
                 temp.setPrice(rs.getDouble("Price"));
                 temp.setStartStation(GetStationNameByID(rs.getInt("StationID")));
+                //终点站为空
                 list.add(temp);
             }
             pstmt.close();

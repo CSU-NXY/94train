@@ -3,7 +3,6 @@ package com.nxy.model;
 import com.sun.istack.internal.Nullable;
 
 public class User {
-    //不能setUserID
     private int UserID;
     private String PhoneNum;
     //不能getPassword
@@ -16,6 +15,10 @@ public class User {
         return UserID;
     }
 
+    public void setUserID(int i)
+    {
+        UserID=i;
+    }
     public String getPhoneNum() {
         return PhoneNum;
     }

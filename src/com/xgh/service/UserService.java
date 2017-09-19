@@ -56,6 +56,37 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        user.setUserID(id);
         return id;
+    }
+
+    public static boolean Update(User user)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "UPDATE `94train`.`user` \n" +
+                "SET `PhoneNum`=?, `Password`=?, `Name`=?, `ID`=?, `Email`=? \n" +
+                "WHERE `UserID`='1';";
+
+        PreparedStatement pstmt=null;
+        int i;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, user.getPhoneNum());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getName());
+            pstmt.setString(4, user.getID());
+            pstmt.setString(5, user.getEmail());
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
     }
 }
