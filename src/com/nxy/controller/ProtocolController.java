@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProtocolController {
     @RequestMapping("/viewProtocol")
     public String viewProtocol() {
-        return "protocol";
+        return "Protocol";
     }
 }
