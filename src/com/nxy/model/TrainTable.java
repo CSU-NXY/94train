@@ -2,13 +2,14 @@ package com.nxy.model;
 
 import java.sql.Time;
 
+// 两个站点间某辆列车数据
 public class TrainTable {
     private String StrainID;
     private String StartStation;
-    private String EndStartion;
-    private Time RepatureTime;
+    private String EndStation;
+    private Time DepartureTime;
     private Time ArrivalTime;
-    private int CountLeft;
+    private int CountLeft;  // 剩余票数
     private double price;
 
     public String getStrainID() {
@@ -27,20 +28,20 @@ public class TrainTable {
         StartStation = startStation;
     }
 
-    public String getEndStartion() {
-        return EndStartion;
+    public String getEndStation() {
+        return EndStation;
     }
 
-    public void setEndStartion(String endStartion) {
-        EndStartion = endStartion;
+    public void setEndStation(String endStation) {
+        EndStation = endStation;
     }
 
-    public Time getRepatureTime() {
-        return RepatureTime;
+    public Time getDepartureTime() {
+        return DepartureTime;
     }
 
-    public void setRepatureTime(Time repatureTime) {
-        RepatureTime = repatureTime;
+    public void setDepartureTime(Time departureTime) {
+        DepartureTime = departureTime;
     }
 
     public Time getArrivalTime() {

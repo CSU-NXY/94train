@@ -10,14 +10,14 @@
 <jsp:include page="common/IncludeTop.jsp"/>
 
 <style type="text/css">
-    .search{
+    .search {
         background-color: #563d7c;
         margin-left: -100px;
         color: #ffffff;
         margin-bottom: 0px;
     }
 
-    .result{
+    .result {
         background-color: #f3f3f3;
         margin-bottom: 0px;
     }
@@ -27,7 +27,7 @@
         margin: 20px auto;
     }
 
-    .btn-search{
+    .btn-search {
         background-color: inherit;
         width: auto;
         margin: 20px 5px 20px 0;
@@ -52,21 +52,23 @@
     <div class="row">
         <div class="col-md-3 form-group search">
             <br>
-            <div class="input_control">
-                <h4><strong>出发地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
-            </div>
+            <form action="${pageContext.request.contextPath}/search/viewSearch.do">
+                <div class="input_control">
+                    <h4><strong>出发地</strong></h4><input class="form-control" name="departure" placeholder="请填写汉字">
+                </div>
 
-            <div class="input_control">
-                <h4><strong>目的地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
-            </div>
+                <div class="input_control">
+                    <h4><strong>目的地</strong></h4><input class="form-control" name="destination" placeholder="请填写汉字">
+                </div>
 
-            <div class="input_control">
-                <h4><strong>日期</strong></h4><input id='mydatepicker' class="form-control" placeholder="点击以选择日期" type="text"/>
-            </div>
+                <div class="input_control">
+                    <h4><strong>日期</strong></h4><input id='mydatepicker' class="form-control" placeholder="点击以选择日期"/>
+                </div>
 
-            <div class="input_control">
-                <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询</button>
-            </div>
+                <div class="input_control">
+                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询</button>
+                </div>
+            </form>
             <br>
         </div>
 

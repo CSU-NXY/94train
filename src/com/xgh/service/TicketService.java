@@ -26,7 +26,7 @@ public class TicketService {
                 TrainTable temp = new TrainTable();
                 temp.setStrainID(rs.getString("TrainID"));
                 temp.setArrivalTime(rs.getTime("ArrivalTime"));
-                temp.setRepatureTime(rs.getTime("DepartureTime"));
+                temp.setDepartureTime(rs.getTime("DepartureTime"));
                 temp.setCountLeft(rs.getInt("Count"));
                 temp.setPrice(rs.getDouble("Price"));
                 temp.setStartStation(GetStationNameByID(rs.getInt("StationID")));
@@ -65,13 +65,14 @@ public class TicketService {
                 TrainTable temp = new TrainTable();
                 temp.setStrainID(rs.getString("s.TrainID"));
                 temp.setStartStation(StartStation);
-                temp.setEndStartion(EndStation);
+                temp.setEndStation(EndStation);
                 temp.setArrivalTime(rs.getTime("e.ArrivalTime"));
-                temp.setRepatureTime(rs.getTime("s.DepartureTime"));
+                temp.setDepartureTime(rs.getTime("s.DepartureTime"));
                 //大工程~~~~?
-                CalSumAndTicketCount(conn,temp,rs.getInt("s.Index"),rs.getInt("e.Index"),temp.getStrainID());
+                CalSumAndTicketCount(temp,rs.getInt("s.Index"),rs.getInt("e.Index"),temp.getStrainID());
                 list.add(temp);
             }
+            rs.close();
             pstmt.close();
             conn.close();
         } catch (Exception e) {
@@ -82,7 +83,8 @@ public class TicketService {
     }
 
 
-    private static void CalSumAndTicketCount(Connection conn,TrainTable temp,int s,int e,String TrainID){
+    private static void CalSumAndTicketCount(TrainTable temp,int s,int e,String TrainID){
+        Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "SELECT sum(Price),min(count)\n" +
                 "From 94train.section\n" +
                 "where 94train.section.Index>=? and 94train.section.Index<? and section.TrainID = ?";
@@ -134,8 +136,8 @@ public class TicketService {
         order.setUserID(UserID);
         order.setTrainID(trainTable.getStrainID());
         order.setStartStation(trainTable.getStartStation());
-        order.setEndStation(trainTable.getEndStartion());
-        order.setDepartureTime(trainTable.getRepatureTime());
+        order.setEndStation(trainTable.getEndStation());
+        order.setDepartureTime(trainTable.getDepartureTime());
         order.setArrivalTime(trainTable.getArrivalTime());
         order.setStatus(0);
         order.setType(0);
