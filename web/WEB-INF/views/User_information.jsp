@@ -252,9 +252,7 @@
     });
 </script>
 
-<script type="text/css">
-
-</script>
+<script type="text/css"></script>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
 

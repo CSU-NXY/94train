@@ -61,5 +61,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Spring MVC-4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

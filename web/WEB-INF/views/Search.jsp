@@ -4,106 +4,89 @@
   Date: 17-9-13
   Time: 下午5:09
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <jsp:include page="common/IncludeTop.jsp"/>
 
 <hr>
 
 <!--车票搜索框-->
-<div align="center">
+<div>
     <div class="container">
-        <form class="form-inline" action="#">
+        <form class="form-inline" id="searchForm">
             <div class="form-group">
-                <label for="position">出发地：</label>
-                <input class="form-control" id="position" placeholder="出发地" name="position">
+                <label for="departure">出发地：</label>
+                <input class="form-control" id="departure" name="departure" value="${departure}">
             </div>
             <div class="form-group">
                 <label for="destination">目的地：</label>
-                <input class="form-control" id="destination" placeholder="目的地" name="destination">
+                <input class="form-control" id="destination" name="destination" value="${destination}">
             </div>
-            <button type="submit" class="btn btn-primary">搜索</button>
+            <button class="btn btn-primary">搜索</button>
         </form>
     </div>
 </div>
 
-
-<div class="row">
-    <table class="table">
-        <caption>车次信息</caption>
-        <thead>
-        <tr>
-            <th>车次</th>
-            <th>出发站</th>
-            <th>到达站</th>
-            <th>发车时间</th>
-            <th>到达时间</th>
-            <th>历时</th>
-            <th>票价</th>
-            <th>票量</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>k12</td>
-            <td>长沙</td>
-            <td>武汉</td>
-            <td>10:16</td>
-            <td>12:18</td>
-            <td>2小时02分</td>
-            <td>20元</td>
-            <td>充足</td>
-            <td>
-                <button type="button" class="btn btn-xs btn-primary">购买</button>
-            </td>
-        </tr>
-        <tr>
-            <td>G2633</td>
-            <td>长沙</td>
-            <td>武汉</td>
-            <td>2:23</td>
-            <td>3:06</td>
-            <td>43分</td>
-            <td>65元</td>
-            <td>15张</td>
-            <td>
-                <button type="button" class="btn btn-xs btn-primary">购买</button>
-            </td>
-        </tr>
-        <tr>
-            <td>G2506</td>
-            <td>长沙</td>
-            <td>武汉</td>
-            <td>15:37</td>
-            <td>16:14</td>
-            <td>37分</td>
-            <td>65元</td>
-            <td>20张</td>
-            <td>
-                <button type="button" class="btn btn-xs btn-primary">购买</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <!--选择页数-->
-    <div class="card-footer p-0">
-        <nav aria-label="...">
-            <ul class="pagination justify-content-end mt-3 mr-3 pull-right">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item active"><span class="page-link">1<span class="sr-only">(current)</span>
-                            </span></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+<div class="panel panel-primary" style="margin-top: 65px;">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
     </div>
-
-</div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>车次</th>
+                <th>出发站</th>
+                <th>到达站</th>
+                <th>发车时间</th>
+                <th>到达时间</th>
+                <th>历时</th>
+                <th>票价</th>
+                <th>票量</th>
+                <th style="width:15%;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="template" style="display:none;">
+            <tr>
+                <th class="_StrainID"></th>
+                <td class="_StartStation"></td>
+                <td class="_EndStation"></td>
+                <td class="_DepartureTime"></td>
+                <td class="_ArrivalTime"></td>
+                <td class="_CountLeft"></td>
+                <td class="_price"></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm">购买</button>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="dataGrid"></tbody>
+        </table>
+    </div>
 </div>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
+
+<script type="text/javascript">
+$(function () {
+    var searchForm = $("#searchForm");
+    var dataGrid = $("#dataGrid");
+    var template = $("#template").children;
+    searchForm.submit(function () {
+        $.get(
+            "/search/searchTrains.do",
+            searchForm.serializeArray(),
+            function (data) {
+                alert(data);
+                dataGrid.empty();
+                $.each(data, function (index, row) {
+                    var tr = template.clone();
+                    dataGrid.append(tr);
+                    $.each(row, function (name, value) {
+                        tr.find("._" + name).text(value);
+                    })
+                });
+            }, "json");
+        return false;
+    }).submit();
+});
+</script>
