@@ -10,6 +10,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 
 @Controller
+@SessionAttributes({"S_UserID","S_Username"})
+
+
 @RequestMapping(value = "/registerAndLogin", method = RequestMethod.GET)
 public class RegisterAndLoginController {
 
@@ -24,7 +27,7 @@ public class RegisterAndLoginController {
     }
 
     @RequestMapping(value = "/Login.do",method = RequestMethod.POST)
-    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model)
+    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model,ModelMap modelMap)
     {
         int userid  = UserService.Login(user);
         if(userid==-1)
@@ -35,6 +38,8 @@ public class RegisterAndLoginController {
         else
         {
             user.setUserID(userid);
+            modelMap.addAttribute("S_UserID",user.getUserID());
+            modelMap.addAttribute("S_Username",user.getPhoneNum());
             return  "redirect:/index/viewIndex.do";
         }
     }
