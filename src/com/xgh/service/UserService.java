@@ -148,4 +148,33 @@ public class UserService {
         }
         return true;
     }
+
+    public static User GetUserByUserID(int UserID)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select UserID,PhoneNum,Name,ID,Email\n" +
+                "from 94train.user\n" +
+                "where user.UserID = ?";
+        PreparedStatement pstmt;
+        User user = new User();
+        user.setUserID(UserID);
+        try {
+            pstmt = (PreparedStatement)conn.prepareStatement(sql);
+            pstmt.setInt(1, UserID);
+            ResultSet rs = pstmt.executeQuery();
+            //这才是开头...
+            if(rs.next())
+            {
+                user.setPhoneNum(rs.getString("PhoneNum"));
+                user.setName(rs.getString("Name"));
+                user.setID(rs.getString("ID"));
+                user.setEmail(rs.getString("Email"));
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
