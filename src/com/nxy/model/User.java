@@ -61,6 +61,11 @@ public class User {
         //自己Set方法加...
     }
 
+    public User(int id,String name){
+        this.UserID = id;
+        this.Name = name;
+    }
+
 
 
 

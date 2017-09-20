@@ -49,13 +49,13 @@ public class TicketServiceImpl implements TicketService{
         List<TrainTable> list = new ArrayList<>() ;
 
         Connection conn = ConnectionGenerator.GetConnetct();
-        String sql = "SELECT * \n" +
+        String sql = "SELECT *\n" +
                 "FROM (SELECT *\n" +
-                "from 94train.section \n" +
+                "from 94train.section\n" +
                 "where section.StationID =(SELECT StationID FROM 94train.station where 94train.station.StationName=?)) as s  join (SELECT *\n" +
-                "from 94train.section \n" +
+                "from 94train.section\n" +
                 "where section.StationID =(SELECT StationID FROM 94train.station where 94train.station.StationName=?)) as e on s.TrainID = e.TrainID\n" +
-                "where s.index < e.index";
+                "where s.index < e.index;";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
