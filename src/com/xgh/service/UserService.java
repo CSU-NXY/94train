@@ -89,4 +89,60 @@ public class UserService {
         }
         return true;
     }
+
+    public static boolean IsContainPhoneNum(String PhoneNum)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select count(*) as count from 94train.user where PhoneNum = ?";
+
+        PreparedStatement pstmt=null;
+        int i = -1;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, PhoneNum);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                i = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean IsContainEmail(String Emial)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select count(*) as count from 94train.user where Email = ?";
+
+        PreparedStatement pstmt=null;
+        int i = -1;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, Emial);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                i = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
 }
