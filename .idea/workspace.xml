@@ -7,14 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8254cd81-3a05-45ea-94ca-2377697bc4a6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/default.jsp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/94train.iml" afterPath="$PROJECT_DIR$/94train.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nxy/controller/RegisterAndLoginController.java" afterPath="$PROJECT_DIR$/src/com/nxy/controller/RegisterAndLoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nxy/model/User.java" afterPath="$PROJECT_DIR$/src/com/nxy/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xgh/service/UserService.java" afterPath="$PROJECT_DIR$/src/com/xgh/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/Login.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/Login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xgh/service/TicketService.java" afterPath="$PROJECT_DIR$/src/com/xgh/service/TicketService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,13 +20,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="RegisterAndLoginController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RegisterAndLoginController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nxy/controller/RegisterAndLoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+            <state relative-caret-position="345">
+              <caret line="20" column="72" lean-forward="true" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TicketService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/xgh/service/TicketService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="170" column="5" lean-forward="false" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
+              <folding>
+                <element signature="method#SearchByID#0;class#TicketService#0" expanded="false" />
+                <element signature="method#SearchByStation#0;class#TicketService#0" expanded="false" />
+                <element signature="method#CalSumAndTicketCount#0;class#TicketService#0" expanded="false" />
+                <element signature="method#GetStationNameByID#0;class#TicketService#0" expanded="false" />
+                <element signature="method#BuyTicket#0;class#TicketService#0" expanded="false" />
+                <marker date="1505907504826" expanded="true" signature="414:559" ph="Select * \nF... section" />
+                <marker date="1505907504826" expanded="true" signature="1716:2195" ph="SELECT * \nF... *" />
+                <marker date="1505907504826" expanded="true" signature="1754:1929" ph="SELECT *\nfr... section" />
+                <marker date="1505907504826" expanded="true" signature="1855:1928" ph="SELECT Stati... station" />
+                <marker date="1505907504826" expanded="true" signature="1943:2118" ph="SELECT *\nfr... section" />
+                <marker date="1505907504826" expanded="true" signature="2044:2117" ph="SELECT Stati... station" />
+                <marker date="1505907504826" expanded="true" signature="3313:3489" ph="SELECT sum(P... section" />
+                <marker date="1505907504826" expanded="true" signature="4210:4313" ph="SELECT Stati... station" />
+                <marker date="1505907504826" expanded="true" signature="5405:5613" ph="INSERT INTO `94train`.`order`... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/xgh/service/OrderService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="481">
+              <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+              <folding>
+                <marker date="1505464176604" expanded="true" signature="415:460" ph="SELECT * FRO... order" />
+                <marker date="1505464176604" expanded="true" signature="1753:1843" ph="UPDATE 94tra... " />
               </folding>
             </state>
           </provider>
@@ -64,6 +96,7 @@
         <option value="$PROJECT_DIR$/src/com/nxy/model/User.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/Login.jsp" />
         <option value="$PROJECT_DIR$/src/com/nxy/controller/RegisterAndLoginController.java" />
+        <option value="$PROJECT_DIR$/src/com/xgh/service/TicketService.java" />
       </list>
     </option>
   </component>
@@ -133,6 +166,19 @@
               <item name="94train" type="b2602c69:ProjectViewProjectNode" />
               <item name="94train" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="94train" type="b2602c69:ProjectViewProjectNode" />
+              <item name="94train" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="94train" type="b2602c69:ProjectViewProjectNode" />
+              <item name="94train" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="OrderService" type="1a9f42e2:ClassTreeNode" />
             </path>
           </expand>
           <select />
@@ -335,7 +381,7 @@
       <updated>1505867824114</updated>
       <workItem from="1505867827076" duration="6016000" />
       <workItem from="1505890088876" duration="9898000" />
-      <workItem from="1505903929310" duration="80000" />
+      <workItem from="1505903929310" duration="998000" />
     </task>
     <task id="LOCAL-00001" summary="Is Contain Same Phonenumber Or Email~~">
       <created>1505873302289</created>
@@ -351,14 +397,22 @@
       <option name="project" value="LOCAL" />
       <updated>1505873341137</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Login">
+      <created>1505904039043</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1505904039043</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15994000" />
+    <option name="totallyTimeSpent" value="16912000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -375,7 +429,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24195279" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24195279" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -435,11 +489,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="none" />
     <MESSAGE value="Is Contain Same Phonenumber Or Email~~" />
-    <option name="LAST_COMMIT_MESSAGE" value="Is Contain Same Phonenumber Or Email~~" />
+    <MESSAGE value="Login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -527,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xgh/service/OrderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xgh/service/ConnectionGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -545,6 +593,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="224" column="22" lean-forward="false" selection-start-line="224" selection-start-column="22" selection-end-line="224" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -617,13 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xgh/service/TicketService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -643,6 +685,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -650,6 +693,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
           <caret line="29" column="14" lean-forward="true" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -662,10 +706,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nxy/controller/RegisterAndLoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+        <state relative-caret-position="345">
+          <caret line="20" column="72" lean-forward="true" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xgh/service/TicketService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="170" column="5" lean-forward="false" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
+          <folding>
+            <element signature="method#SearchByID#0;class#TicketService#0" expanded="false" />
+            <element signature="method#SearchByStation#0;class#TicketService#0" expanded="false" />
+            <element signature="method#CalSumAndTicketCount#0;class#TicketService#0" expanded="false" />
+            <element signature="method#GetStationNameByID#0;class#TicketService#0" expanded="false" />
+            <element signature="method#BuyTicket#0;class#TicketService#0" expanded="false" />
+            <marker date="1505907504826" expanded="true" signature="414:559" ph="Select * \nF... section" />
+            <marker date="1505907504826" expanded="true" signature="1716:2195" ph="SELECT * \nF... *" />
+            <marker date="1505907504826" expanded="true" signature="1754:1929" ph="SELECT *\nfr... section" />
+            <marker date="1505907504826" expanded="true" signature="1855:1928" ph="SELECT Stati... station" />
+            <marker date="1505907504826" expanded="true" signature="1943:2118" ph="SELECT *\nfr... section" />
+            <marker date="1505907504826" expanded="true" signature="2044:2117" ph="SELECT Stati... station" />
+            <marker date="1505907504826" expanded="true" signature="3313:3489" ph="SELECT sum(P... section" />
+            <marker date="1505907504826" expanded="true" signature="4210:4313" ph="SELECT Stati... station" />
+            <marker date="1505907504826" expanded="true" signature="5405:5613" ph="INSERT INTO `94train`.`order`... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xgh/service/OrderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+          <folding>
+            <marker date="1505464176604" expanded="true" signature="415:460" ph="SELECT * FRO... order" />
+            <marker date="1505464176604" expanded="true" signature="1753:1843" ph="UPDATE 94tra... " />
           </folding>
         </state>
       </provider>
