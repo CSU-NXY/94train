@@ -9,7 +9,8 @@ import java.sql.SQLException;
 
 public class UserService {
     //
-    public  static  boolean Register(User user){
+    public  static  boolean Register(User user)
+    {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "INSERT INTO `94train`.`user` (`PhoneNum`, `Password`, `Name`, `ID`, `Email`) VALUES (?, ?, ?, ?, ?);";
 
@@ -36,7 +37,8 @@ public class UserService {
         return true;
     }
 
-    public static int Login(User user){
+    public static int Login(User user)
+    {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "select * from 94train.user where PhoneNum = ? and Password = ?";
         PreparedStatement pstmt;
@@ -65,7 +67,7 @@ public class UserService {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "UPDATE `94train`.`user` \n" +
                 "SET `PhoneNum`=?, `Password`=?, `Name`=?, `ID`=?, `Email`=? \n" +
-                "WHERE `UserID`='1';";
+                "WHERE `UserID`=?;";
 
         PreparedStatement pstmt=null;
         int i;
@@ -76,6 +78,7 @@ public class UserService {
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getID());
             pstmt.setString(5, user.getEmail());
+            pstmt.setInt(6,user.getUserID());
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
