@@ -14,10 +14,9 @@
 <%--<title>确认订单/支付</title>--%>
 <%--</head>--%>
 <%--<body>--%>
-<div id="order" align="center">
-    <div id="orderContent">
-        <table width=400px>
-            <th colspan="3" bgcolor="lightcoral">请确认您的订单信息！</th>
+<div class="container" id="order">
+    <table class="table table-bordered table-striped">
+        <th colspan="3" bgcolor="#563d7c"><h4 align="center" style="color: #ffffff;">请确认您的订单信息！</h4></th>
             <tr>
                 <td>订&nbsp;&nbsp;单&nbsp;&nbsp;号：</td>
                 <td><!--这里用于从数据库获取订单编号--></td>
@@ -63,10 +62,9 @@
                 <td><label><input type="radio" name="pay">蚂蚁花呗</label></td>
             </tr>
             <tr align="right">
-                <td colspan="3"><input type="button" name="check" value="我已确认订单，去支付"></td>
+                <td colspan="3"><a href="/index/viewIndex.do" class="btn btn-primary">我已确认订单，去支付</a></td>
             </tr>
         </table>
-    </div>
 </div>
 
 

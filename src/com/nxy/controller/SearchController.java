@@ -1,7 +1,6 @@
 package com.nxy.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -9,6 +8,6 @@ import org.springframework.web.bind.annotation.*;
 public class SearchController {
     @RequestMapping(value = "/viewSearch.do", method = RequestMethod.GET)
     public String viewSearch() {
-        return "search";
+        return "Search";
     }
 }
