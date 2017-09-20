@@ -6,25 +6,45 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<jsp:include page="common/IncludeTop.jsp"/>
 
+
+<jsp:include page="common/IncludeTop.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
     <div class="row">
         <div class="col-xs-4" ></div>
+
         <div class="col-xs-4" >
-            <form class="form-group" action="" method="get">
+
+
+            <%
+                String msg = (String) request.getAttribute("Msg");
+                if(msg!=null)
+                {
+            %>
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                        ${Msg}
+                </div>
+            <%
+                }
+            %>
+
+
+
+            <form class="form-group" action="\registerAndLogin\Login.do" method="post">
                 <h2>Please sign in</h2>
-                <label for="inputEmail">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputPassword">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="PhoneNum">Email address</label>
+                <input type="number" name = "PhoneNum" id="PhoneNum" class="form-control" placeholder="Phone Number" required autofocus>
+                <label for="Password">Password</label>
+                <input type="password"  name="Password" id="Password" class="form-control" placeholder="Password" required>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
-                <a class="btn btn-lg btn-primary btn-block" type="submit" href="\index\viewIndex.do">Sign in</a>
+                <<input class="btn btn-lg btn-primary btn-block" type="submit">Sign in</form>
             </form>
         </div>
     </div> <!-- /container -->

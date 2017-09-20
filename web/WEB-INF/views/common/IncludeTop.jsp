@@ -57,10 +57,23 @@
             </div>
 
             <div class="col-xs-3">
-                <div >
-                    <a class="btn btn-link" href="/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
-                    <a class="btn btn-link" href="/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
+                <%
+                    if(session.getAttribute("S_UserID")!=null)
+                    {
+                %>
+                <div>
+                    Hi,<a>${sessionScope.get("S_Username")}</a>
                 </div>
+                <%
+                    }
+                    else {
+                %>
+                <div >
+                    <a class="btn btn-link" href = "/registerAndLogin/viewLogin.do" ><h3 > 登录 </h3 ></a >
+                    <a class="btn btn-link" href = "/registerAndLogin/viewRegister.do" ><h3 > 注册 </h3 ></a >
+                </div >
+                   <% }
+                %>
                 <div style="display: none">
                     <h3 class="white">Hi,<a class="btn btn-link" href="/user/viewUserInfo.do">xxx</a>&nbsp;<a class="btn btn-link">退出登录</a></h3>
                 </div>

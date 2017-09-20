@@ -9,7 +9,8 @@ import java.sql.SQLException;
 
 public class UserService {
     //
-    public  static  boolean Register(User user){
+    public  static  boolean Register(User user)
+    {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "INSERT INTO `94train`.`user` (`PhoneNum`, `Password`, `Name`, `ID`, `Email`) VALUES (?, ?, ?, ?, ?);";
 
@@ -36,7 +37,8 @@ public class UserService {
         return true;
     }
 
-    public static int Login(User user){
+    public static int Login(User user)
+    {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "select * from 94train.user where PhoneNum = ? and Password = ?";
         PreparedStatement pstmt;
@@ -65,7 +67,7 @@ public class UserService {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "UPDATE `94train`.`user` \n" +
                 "SET `PhoneNum`=?, `Password`=?, `Name`=?, `ID`=?, `Email`=? \n" +
-                "WHERE `UserID`='1';";
+                "WHERE `UserID`=?;";
 
         PreparedStatement pstmt=null;
         int i;
@@ -76,6 +78,7 @@ public class UserService {
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getID());
             pstmt.setString(5, user.getEmail());
+            pstmt.setInt(6,user.getUserID());
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -88,5 +91,90 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    public static boolean IsContainPhoneNum(String PhoneNum)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select count(*) as count from 94train.user where PhoneNum = ?";
+
+        PreparedStatement pstmt=null;
+        int i = -1;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, PhoneNum);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                i = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean IsContainEmail(String Emial)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select count(*) as count from 94train.user where Email = ?";
+
+        PreparedStatement pstmt=null;
+        int i = -1;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, Emial);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                i = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static User GetUserByUserID(int UserID)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select UserID,PhoneNum,Name,ID,Email\n" +
+                "from 94train.user\n" +
+                "where user.UserID = ?";
+        PreparedStatement pstmt;
+        User user = new User();
+        user.setUserID(UserID);
+        try {
+            pstmt = (PreparedStatement)conn.prepareStatement(sql);
+            pstmt.setInt(1, UserID);
+            ResultSet rs = pstmt.executeQuery();
+            //这才是开头...
+            if(rs.next())
+            {
+                user.setPhoneNum(rs.getString("PhoneNum"));
+                user.setName(rs.getString("Name"));
+                user.setID(rs.getString("ID"));
+                user.setEmail(rs.getString("Email"));
+            }
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }
