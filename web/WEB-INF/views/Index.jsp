@@ -65,7 +65,7 @@
             </div>
 
             <div class="input_control">
-                <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询</button>
+                <a class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%" href="Search.jsp">查询</a>
             </div>
             <br>
         </div>

@@ -2,6 +2,7 @@ package com.nxy.model;
 
 import java.sql.Time;
 
+// 两个站点间某辆列车数据
 public class TrainTable {
     private String StrainID;
     private String StartStation;
