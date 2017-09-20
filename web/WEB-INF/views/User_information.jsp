@@ -30,7 +30,6 @@
                 <li><a href="#order" data-toggle="tab">我的订单</a></li>
             </ul>
         </div>
-
         <div class="col-xs-11 con">
             <div id="myTabContent" class="tab-content">
 
@@ -301,7 +300,6 @@
             });
     });
 </script>
-
 
 <jsp:include page="common/IncludeBottom.jsp"/>
 

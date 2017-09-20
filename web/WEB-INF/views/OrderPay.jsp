@@ -6,6 +6,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="common/IncludeTop.jsp"/>
 
+
+<hr>
+
 <%--<html>--%>
 <%--<head>--%>
 <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>

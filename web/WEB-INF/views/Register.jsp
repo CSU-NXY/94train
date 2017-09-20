@@ -148,22 +148,22 @@
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp;&nbsp;&nbsp;&nbsp;<small style="color:red;">*</small>手机号:<label>&nbsp;&nbsp;&nbsp;<input class="form_input" type="text"/></label><a class="btn btn_vcode"  href="#">短信验证</a></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp手机号:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"/></label><a class="btn btn_vcode"  href="#">短信验证</a></h4>
                                 <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp;&nbsp;&nbsp;&nbsp;验证码:&nbsp;&nbsp;&nbsp;<label><input class="form_input" type="text"/></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp验证码:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"/></label></h4>
                                 <p class="form_tips">激活手机后将收到验证短信，请回填短信中的6位验证码字母、数字或者英文符号，最短8位，区分大小写</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small style="color:red;">*</small>密码:&nbsp;&nbsp;&nbsp;<label><input class="form_input" type="password"/></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp密码:&nbsp&nbsp&nbsp<label><input class="form_input" type="password"/></label></h4>
                                 <p class="form_tips">字母、数字或者英文符号，最短8位，区分大小写</p>
                             </div>
 
                             <div class="information">
-                                <h4><small style="color:red;">*</small>确认密码:&nbsp;&nbsp;&nbsp;<label><input class="form_input" type="password"></label></h4>
+                                <h4>确认密码:&nbsp&nbsp&nbsp<label><input class="form_input" type="password"></label></h4>
                                 <p class="form_tips">请再次输入密码</p>
                             </div>
 
@@ -191,12 +191,12 @@
                     <div class="spage">
                         <div class="col-md-6 col-md-offset-3 small">
                             <div class="information">
-                                <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名:&nbsp;&nbsp;&nbsp;<label><input class="form_input" type="text"></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"></label></h4>
                                 <p class="form_tips">请填写你的真实姓名</p>
                             </div>
 
                             <div class="information">
-                                <h4>身份证号:&nbsp;&nbsp;&nbsp;<label><input class="form_input" type="text"></label></h4>
+                                <h4>身份证号:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"></label></h4>
                                 <p class="form_tips">请确认你的身份证号准确无误</p>
                             </div>
 

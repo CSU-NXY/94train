@@ -30,8 +30,8 @@
 
         .white:hover{
             color: #cdbcf3;
-        }
 
+}
         .bac-color{
             background-color: #563d7c;
         }
@@ -58,6 +58,7 @@
     </head>
 
 <body>
+<<<<<<< HEAD
 <div class="bac-color top">
     <div class="container">
         <div class="row">
@@ -82,12 +83,46 @@
                         <li class="active" style="margin-top: 10px;"><a href="/index/viewIndex.do">我要买票</a></li>
                         <li style="margin-top: 10px;"><button class="btn btn-link" onclick="unload()">退出登录</button></li>
                     </ul>
+=======
+<div class="bac-color">
+    <div class="container">
+        <div class="row" >
+            <div class="col-xs-3">
+                <a href="/index/viewIndex.do"><img src="${pageContext.request.contextPath}/static/images/tomas.jpg" class="img-thumbnail"></a>
+            </div>
+
+            <div class="col-xs-6 text-center">
+
+            </div>
+
+            <div class="col-xs-3">
+                <%
+                    if(session.getAttribute("S_UserID")!=null)
+                    {
+                %>
+                <div>
+                    Hi,<a>${sessionScope.get("S_Username")}</a>
+                </div>
+                <%
+                    }
+                    else {
+                %>
+                <div >
+                    <a class="btn btn-link" href = "/registerAndLogin/viewLogin.do" ><h3 > 登录 </h3 ></a >
+                    <a class="btn btn-link" href = "/registerAndLogin/viewRegister.do" ><h3 > 注册 </h3 ></a >
+                </div >
+                   <% }
+                %>
+                <div style="display: none">
+                    <h3 class="white">Hi,<a class="btn btn-link" href="/user/viewUserInfo.do">xxx</a>&nbsp;<a class="btn btn-link">退出登录</a></h3>
+>>>>>>> 8a2ea1bd01ea53c7a868aeb35cb9f334a8379de1
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript">
     function unload() {
         var unload = document.getElementById("unload")
@@ -98,3 +133,6 @@
 </script>
 
 <div class="main">
+=======
+<div class="main" >
+>>>>>>> 8a2ea1bd01ea53c7a868aeb35cb9f334a8379de1
