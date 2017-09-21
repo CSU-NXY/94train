@@ -146,90 +146,45 @@
                 <br>
             </div>
 
-            <div class="col-xs-7 col-xs-offset-1 result">
-                <table class="table table-bordered table-striped">
-                    <caption>车次信息</caption>
-                    <thead>
-                    <tr>
-                        <th>车次</th>
-                        <th>出发站</th>
-                        <th>到达站</th>
-                        <th>发车时间</th>
-                        <th>到达时间</th>
-                        <th>历时</th>
-                        <th>票价</th>
-                        <th>票量</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>k12</td>
-                        <td>长沙</td>
-                        <td>武汉</td>
-                        <td>10:16</td>
-                        <td>12:18</td>
-                        <td>2小时02分</td>
-                        <td>20元</td>
-                        <td>充足</td>
-                        <td>
-                            <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>G2633</td>
-                        <td>长沙</td>
-                        <td>武汉</td>
-                        <td>2:23</td>
-                        <td>3:06</td>
-                        <td>43分</td>
-                        <td>65元</td>
-                        <td>15张</td>
-                        <td>
-                            <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>G2506</td>
-                        <td>长沙</td>
-                        <td>武汉</td>
-                        <td>15:37</td>
-                        <td>16:14</td>
-                        <td>37分</td>
-                        <td>65元</td>
-                        <td>20张</td>
-                        <td>
-                            <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>G2506</td>
-                        <td>长沙</td>
-                        <td>武汉</td>
-                        <td>15:37</td>
-                        <td>16:14</td>
-                        <td>37分</td>
-                        <td>65元</td>
-                        <td>20张</td>
-                        <td>
-                            <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>G2506</td>
-                        <td>长沙</td>
-                        <td>武汉</td>
-                        <td>15:37</td>
-                        <td>16:14</td>
-                        <td>37分</td>
-                        <td>65元</td>
-                        <td>20张</td>
-                        <td>
-                            <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <div class="col-xs-7 col-xs-offset-1 result">
+            <div class="panel panel-primary" style="margin-top: 65px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>车次</th>
+                            <th>出发站</th>
+                            <th>到达站</th>
+                            <th>发车时间</th>
+                            <th>到达时间</th>
+                            <th>历时</th>
+                            <th>票价</th>
+                            <th>票量</th>
+                            <th style="width:15%;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="template" style="display:none;">
+                        <tr>
+                            <th class="_StrainID"></th>
+                            <td class="_StartStation"></td>
+                            <td class="_EndStation"></td>
+                            <td class="_DepartureTime"></td>
+                            <td class="_ArrivalTime"></td>
+                            <td class="_TimeSpent"></td>
+                            <td class="_CountLeft"></td>
+                            <td class="_price"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm">购买</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tbody id="dataGrid"></tbody>
+                    </table>
+                </div>
+            </div>
                 <!--选择页数-->
                 <div class="card-footer p-0">
                     <nav aria-label="5">
@@ -272,6 +227,32 @@
     </ul>
     <!--背景结束-->
 </div>
+
+<script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var searchForm = $("#searchForm");
+        var dataGrid = $("#dataGrid");
+        var template = $("#template").children();
+        searchForm.submit(function () {
+            $.get(
+                "/search/searchTrains.do",
+                searchForm.serializeArray(),
+                function (data) {
+                    dataGrid.empty();
+                    $.each(data, function (index, row) {
+                        var tr = template.clone();
+                        dataGrid.append(tr);
+                        $.each(row, function (name, value) {
+                            tr.find("._" + name).text(value);
+                            tr.find("._TimeSpent").text("2小时03分");
+                        })
+                    });
+                }, "json");
+            return false;
+        });
+    });
+</script>
 
 <script type="text/javascript">
     <!--背景切换开始-->
