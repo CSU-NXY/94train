@@ -234,7 +234,7 @@
 
 
 <script type="text/javascript">
-    jQuery(function(a){
+    $(function(a){
         var b;
         a(".nrbf").eq(0).show(),
             b=location.href,
