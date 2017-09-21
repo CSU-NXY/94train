@@ -98,6 +98,7 @@
     }
 
     .btn-outline-inverse {
+        background-color: #563d7c;
         border-color: #ffffff;
         color: #ffffff;
     }
@@ -110,7 +111,7 @@
     }
 
 </style>
-<div class="container" style="border: 1px solid red;width: 100%;position: relative;height: 80%;">
+<div class="home">
     <!--背景开始-->
     <div class="carousel-inner" style="height: 100%;">
         <!-- 包含图片的容器 -->
@@ -125,106 +126,114 @@
         <%--<div class="item"><img src="../../static/images/bg3.jpg"></div>--%>
         <%--<div class="item"><img src="../../static/images/bg4.jpg"></div>--%>
         <%--<div class="item"><img src="../../static/images/bg5.jpg"></div>--%>
-        <div class="row" style="position: absolute;z-index:3;top: 0px; left: 15%;border: 1px solid white; width: 70%; height: 100%;">
-            <div class="col-md-3 form-group search">
-                <br>
-                <div class="input_control">
-                    <h4><strong>出发地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
+        <div class="container" style="padding-top: 100px;padding-bottom: 100px;">
+            <div class="row"style="position: absolute;z-index:3;top: 100px; left: 15%; width: 80%; height: 100%;">
+                <div class="col-md-3 form-group search">
+                    <form id="searchForm">
+
+                        <div class="input_control">
+                            <h4><strong>出发地</strong></h4>
+                            <label><input type="text" class="form-control" placeholder="请填写汉字"></label>
+                        </div>
+
+                        <div class="input_control">
+                            <h4><strong>目的地</strong></h4>
+                            <label><input type="text" class="form-control" placeholder="请填写汉字"></label>
+                        </div>
+
+                        <div class="input_control">
+                            <h4><strong>日期</strong></h4>
+                            <label><input id='mydatepicker' class="form-control" placeholder="点击以选择日期" type="text"/></label>
+                        </div>
+
+                        <div class="input_control" id="search">
+                            <span class="input-group-btn" >
+                                <button class="btn btn-outline-inverse btn-search" type="submit" value="search" onclick="fun(this)" style="position: relative;left: 30%">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="input_control">
-                    <h4><strong>目的地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
-                </div>
+                <div class="col-xs-7 col-xs-offset-1">
+                    <div class="result" style="display: none" id="show">
+                        <table class="table table-bordered table-striped">
+                            <caption>车次信息</caption>
+                            <thead>
+                            <tr>
+                                <th>车次</th>
+                                <th>出发站</th>
+                                <th>到达站</th>
+                                <th>发车时间</th>
+                                <th>到达时间</th>
+                                <th>历时</th>
+                                <th>票价</th>
+                                <th>票量</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="template">
+                            <tr>
+                                <td>k12</td>
+                                <td>长沙</td>
+                                <td>武汉</td>
+                                <td>10:16</td>
+                                <td>12:18</td>
+                                <td>2小时02分</td>
+                                <td>20元</td>
+                                <td>充足</td>
+                                <td>
+                                    <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
+                                </td>
+                            </tr>
 
-                <div class="input_control">
-                    <h4><strong>日期</strong></h4><input id='mydatepicker' class="form-control" placeholder="点击以选择日期" type="text"/>
-                </div>
+                            </tbody>
+                            <tbody style="display: none">
+                            <tr>
+                                <th scope="row" class="_rowNumber"></th>
+                                <td class="_title"></td>
+                                <td class="_content"></td>
+                                <td class="_gmtCreate"></td>
+                                <td>
+                                    <a class="btn btn-xs btn-primary btn-outline-inverse" href="/user/viewBuyTickets.do">购买</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody id="datagrid">
 
-                <div class="input_control">
-                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询</button>
-                </div>
-                <br>
-            </div>
-
-                    <div class="col-xs-7 col-xs-offset-1 result">
-            <div class="panel panel-primary" style="margin-top: 65px;">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>车次</th>
-                            <th>出发站</th>
-                            <th>到达站</th>
-                            <th>发车时间</th>
-                            <th>到达时间</th>
-                            <th>历时</th>
-                            <th>票价</th>
-                            <th>票量</th>
-                            <th style="width:15%;">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody id="template" style="display:none;">
-                        <tr>
-                            <th class="_StrainID"></th>
-                            <td class="_StartStation"></td>
-                            <td class="_EndStation"></td>
-                            <td class="_DepartureTime"></td>
-                            <td class="_ArrivalTime"></td>
-                            <td class="_TimeSpent"></td>
-                            <td class="_CountLeft"></td>
-                            <td class="_price"></td>
-                            <td>
-                                <button type="button" class="btn btn-primary btn-sm">购买</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tbody id="dataGrid"></tbody>
-                    </table>
-                </div>
-            </div>
-                <!--选择页数-->
-                <div class="card-footer p-0">
-                    <nav aria-label="5">
-                        <ul class="pagination justify-content-end mt-3 mr-3 pull-right">
-                            <li class="page-item disabled">
-                                <span class="page-link">&laquo;Previous</span>
-                            </li>
-
-                            <li class="page-item active">
-                                <span class="page-link">1<span class="sr-only">(current)</span></span>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next&raquo;</a>
-                            </li>
-                        </ul>
-                    </nav>
+                            </tbody>
+                        </table>
+                        <!--选择页数-->
+                        <div style="text-align: center">
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <!-- 图片左右方来回滚动图片的左右箭头-->
         <a href="#" class="carousel-control prev"><span style="z-index: 3"><</span></a>
         <a href="#" class="carousel-control next"><span style="z-index: 3">></span></a>
     </div>
     <!-- 图片下方的指示圆圈-->
-    <ul class="carousel-indicators" style="z-index: 3;">
-        <li id='pic1'></li>
-        <li id='pic2'></li>
-        <li id='pic3'></li>
-        <li id='pic4'></li>
-        <li id='pic5'></li>
-        <%--<li id='pic5'>●</li>--%>
-    </ul>
+    <%--<ul class="carousel-indicators" style="z-index: 3;">--%>
+    <%--<li id='pic1'></li>--%>
+    <%--<li id='pic2'></li>--%>
+    <%--<li id='pic3'></li>--%>
+    <%--<li id='pic4'></li>--%>
+    <%--<li id='pic5'></li>--%>
+    <%--&lt;%&ndash;<li id='pic5'>●</li>&ndash;%&gt;--%>
+    <%--</ul>--%>
     <!--背景结束-->
 </div>
 
@@ -253,8 +262,15 @@
         });
     });
 </script>
-
 <script type="text/javascript">
+    $('#mydatepicker').dcalendarpicker({
+    format: 'yyyy-mm-dd'
+    });
+
+    function fun(obj) {
+        var show = document.getElementById("show");
+        show.style.display = "block";
+    }
     <!--背景切换开始-->
     window.onload = function() {
         //轮播初始化
@@ -362,10 +378,5 @@
         }
     }
     <!--背景切换结束-->
-
-    $('#mydatepicker').dcalendarpicker({
-        format: 'yyyy-mm-dd'
-    });
 </script>
-
 <jsp:include page="common/IncludeBottom.jsp"/>
