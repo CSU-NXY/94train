@@ -1,4 +1,4 @@
-package com.xgh.service.Impl;
+package com.xgh.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class ConnectionGenerator {
     private final  static String driver = "com.mysql.jdbc.Driver";
     //URL指向要访问的数据库名mydata
-    private final static String url = "jdbc:mysql://localhost:3306/94train?useUnicode=true&characterEncoding=utf-8";
+    private final static String url = "jdbc:mysql://localhost:3306/94train";
     //MySQL配置时的用户名
     private final static String user = "root";
     //MySQL配置时的密码
