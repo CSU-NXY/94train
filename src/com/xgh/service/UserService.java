@@ -1,11 +1,9 @@
 package com.xgh.service;
 import com.nxy.model.User;
-import com.xgh.service.ConnectionGenerator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserService {
     //
@@ -27,8 +25,7 @@ public class UserService {
             pstmt.close();
             conn.close();
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException("surprise m****** f***");
         }
         if(i==0)
         {
