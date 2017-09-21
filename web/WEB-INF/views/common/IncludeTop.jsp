@@ -3,7 +3,7 @@
         时间：2017-09-09
         描述：页面顶部--开始
         -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -62,7 +62,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3">
-                <label><a href="/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-plane" style="color: #ffffff"></span>94购票网</h1></a></label>
+                <label><a href="${pageContext.request.contextPath}/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-plane" style="color: #ffffff"></span>94购票网</h1></a></label>
             </div>
 
             <div class="col-xs-5">
@@ -76,8 +76,8 @@
                     {
                 %>
                 <div>
-                    <a class="btn btn-link navbar-btn" href="/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
-                    <a class="btn btn-link navbar-btn" href="/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
+                    <a class="btn btn-link navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
+                    <a class="btn btn-link navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
                 </div>
                 <%
                 }
@@ -86,9 +86,9 @@
                 %>
                 <div>
                     <ul class="nav nav-pills">
-                        <li><label><h3 class="white">Hi,<a href="/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
+                        <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
-                        <li class="active" style="margin-top: 10px;"><a href="/index/viewIndex.do">我要买票</a></li>
+                        <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
                         <li style="margin-top: 10px;"><button class="btn btn-link" onclick="unload()">退出登录</button></li>
                     </ul>
                    <% }

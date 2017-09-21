@@ -10,76 +10,87 @@
 <jsp:include page="common/IncludeTop.jsp"/>
 
 <style type="text/css">
-    <!--主页背景自动切换样式开始-->
-    #container{
+    <!--
+    主页背景自动切换样式开始-- >
+    #container {
         width: 100%;
-        height:500px;
+        height: 500px;
         position: relative;
     }
-    .carousel-inner{
+
+    .carousel-inner {
         position: relative;
         width: 100%;
         overflow: hidden;
-        height:500px;
+        height: 500px;
     }
-    .carousel-inner>.item>img{
+
+    .carousel-inner > .item > img {
         display: block;
         line-height: 1;
         z-index: 1;
     }
-    .carousel-indicators{
+
+    .carousel-indicators {
         position: absolute;
-        bottom:10px;
-        left:45%;
+        bottom: 10px;
+        left: 45%;
         z-index: 2;
         list-style-type: none;
     }
-    .carousel-indicators li{
-        display:inline-block;
+
+    .carousel-indicators li {
+        display: inline-block;
         padding: 0 15px;
         font-size: 24px;
-        color:#999;
+        color: #999;
         cursor: pointer;
         z-index: 2;
     }
-    .active1{
+
+    .active1 {
         font-size: 28px;
-        color:#fff;
+        color: #fff;
     }
-    .carousel-control{
+
+    .carousel-control {
         position: absolute;
-        text-decoration:none;
+        text-decoration: none;
         color: #999;
         font-weight: bold;
         opacity: .5;
         font-size: 40px;
         z-index: 3;
     }
-    .carousel-control:hover{
-        color:#fff;
+
+    .carousel-control:hover {
+        color: #fff;
         text-decoration: none;
         opacity: .9;
         outline: none;
         font-size: 42px;
     }
-    .prev{
+
+    .prev {
         top: 30%;
-        left:20px;
+        left: 20px;
     }
-    .next{
-        top:30%;
+
+    .next {
+        top: 30%;
         right: 20px;
     }
-    <!--主页背景自动切换样式结束-->
 
-    .search{
+    <!--
+    主页背景自动切换样式结束-- >
+    .search {
         background-color: #563d7c;
         margin-left: -100px;
         color: #ffffff;
         margin-bottom: 0px;
     }
 
-    .result{
+    .result {
         background-color: #f3f3f3;
         margin-bottom: 0px;
     }
@@ -89,7 +100,7 @@
         margin: 20px auto;
     }
 
-    .btn-search{
+    .btn-search {
         background-color: inherit;
         width: auto;
         margin: 20px 5px 20px 0;
@@ -125,66 +136,71 @@
         <%--<div class="item"><img src="../../static/images/bg3.jpg"></div>--%>
         <%--<div class="item"><img src="../../static/images/bg4.jpg"></div>--%>
         <%--<div class="item"><img src="../../static/images/bg5.jpg"></div>--%>
-        <div class="row" style="position: absolute;z-index:3;top: 0px; left: 15%;border: 1px solid white; width: 70%; height: 100%;">
+        <div class="row"
+             style="position: absolute;z-index:3;top: 0; left: 15%;border: 1px solid white; width: 70%; height: 100%;">
             <div class="col-md-3 form-group search">
                 <br>
-                <div class="input_control">
-                    <h4><strong>出发地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
-                </div>
+                <form id="searchForm">
+                    <div class="input_control">
+                        <h4><strong>出发地</strong></h4><input class="form-control" placeholder="请填写汉字" name="departure">
+                    </div>
 
-                <div class="input_control">
-                    <h4><strong>目的地</strong></h4><input type="text" class="form-control" placeholder="请填写汉字">
-                </div>
+                    <div class="input_control">
+                        <h4><strong>目的地</strong></h4><input class="form-control" placeholder="请填写汉字" name="destination">
+                    </div>
 
-                <div class="input_control">
-                    <h4><strong>日期</strong></h4><input id='mydatepicker' class="form-control" placeholder="点击以选择日期" type="text"/>
-                </div>
+                    <div class="input_control">
+                        <h4><strong>日期</strong></h4><input id='mydatepicker' class="form-control"
+                                                           placeholder="点击以选择日期"/>
+                    </div>
 
-                <div class="input_control">
-                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询</button>
-                </div>
+                    <div class="input_control">
+                        <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 35%">查询
+                        </button>
+                    </div>
+                </form>
                 <br>
             </div>
 
-                    <div class="col-xs-7 col-xs-offset-1 result">
-            <div class="panel panel-primary" style="margin-top: 65px;">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
+            <div class="col-xs-7 col-xs-offset-1 result">
+                <div class="panel panel-primary" style="margin-top: 65px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>车次</th>
+                                <th>出发站</th>
+                                <th>到达站</th>
+                                <th>发车时间</th>
+                                <th>到达时间</th>
+                                <th>历时</th>
+                                <th>票价</th>
+                                <th>票量</th>
+                                <th style="width:15%;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="template" style="display:none;">
+                            <tr>
+                                <th class="_StrainID"></th>
+                                <td class="_StartStation"></td>
+                                <td class="_EndStation"></td>
+                                <td class="_DepartureTime"></td>
+                                <td class="_ArrivalTime"></td>
+                                <td class="_TimeSpent"></td>
+                                <td class="_CountLeft"></td>
+                                <td class="_price"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm">购买</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tbody id="dataGrid"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>车次</th>
-                            <th>出发站</th>
-                            <th>到达站</th>
-                            <th>发车时间</th>
-                            <th>到达时间</th>
-                            <th>历时</th>
-                            <th>票价</th>
-                            <th>票量</th>
-                            <th style="width:15%;">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody id="template" style="display:none;">
-                        <tr>
-                            <th class="_StrainID"></th>
-                            <td class="_StartStation"></td>
-                            <td class="_EndStation"></td>
-                            <td class="_DepartureTime"></td>
-                            <td class="_ArrivalTime"></td>
-                            <td class="_TimeSpent"></td>
-                            <td class="_CountLeft"></td>
-                            <td class="_price"></td>
-                            <td>
-                                <button type="button" class="btn btn-primary btn-sm">购买</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tbody id="dataGrid"></tbody>
-                    </table>
-                </div>
-            </div>
                 <!--选择页数-->
                 <div class="card-footer p-0">
                     <nav aria-label="5">
@@ -255,8 +271,9 @@
 </script>
 
 <script type="text/javascript">
-    <!--背景切换开始-->
-    window.onload = function() {
+    <!--
+    背景切换开始-->
+    window.onload = function () {
         //轮播初始化
         var lunbo = document.getElementById('content');
         var imgs = lunbo.getElementsByTagName('img');
@@ -270,7 +287,7 @@
         //自动轮播.使用pic_time记录播放，可以随时使用clearInterval()清除掉。
         var pic_time = setInterval(autobofang, 3000);
         //手动轮播
-        for(var i = 0; i < lis.length; i++) {
+        for (var i = 0; i < lis.length; i++) {
             lis[i].addEventListener("mouseover", change, false);
         }
 
@@ -278,16 +295,17 @@
             var event = event || window.event;
             var target = event.target || event.srcElement;
             var children = target.parentNode.children;
-            for(var i = 0; i < children.length; i++) {
-                if(target == children[i]) {
+            for (var i = 0; i < children.length; i++) {
+                if (target == children[i]) {
                     picChange(i);
                 }
             }
         }
+
         //图片切换函数
         function picChange(i) {
             //让所有图片都不显示，所有圆圈都为普通样式
-            for(var j = 0; j < imgs.length; j++) {
+            for (var j = 0; j < imgs.length; j++) {
                 imgs[j].style.display = 'none';
                 lis[j].style.fontSize = '24px';
                 lis[j].style.color = '#999';
@@ -297,14 +315,16 @@
             lis[i].style.fontSize = '26px';
             lis[i].style.color = '#fff';
         }
+
         //自动播放的事件处理
         function autobofang() {
-            if(pic_index >= lis.length) {
+            if (pic_index >= lis.length) {
                 pic_index = 0;
             }
             change1(pic_index);
             pic_index++;
         }
+
         //自动播放的图片转化中的事件
         function change1(index) {
             picChange(index);
@@ -313,11 +333,12 @@
             //鼠标移出ul标签，自动播放图片继续
             uls[0].addEventListener("mouseout", go, false);
         }
+
         //自动播放暂停函数
         function pause(event) {
             var event = event || window.event;
             var target = event.target || event.srcElement;
-            switch(target.id) {
+            switch (target.id) {
                 case "pic1":
                     clearInterval(pic_time);
                     break;
@@ -335,11 +356,12 @@
                     break;
             }
         }
+
         //自动播放图片继续函数
         function go(event) {
             var event = event || window.event;
             var target = event.target || event.srcElement;
-            switch(target.id) {
+            switch (target.id) {
                 case "pic1":
                     pic_index = 1;
                     pic_time = setInterval(autobofang, 3000);
@@ -360,7 +382,7 @@
                     break;
             }
         }
-    }
+    };
     <!--背景切换结束-->
 
     $('#mydatepicker').dcalendarpicker({
