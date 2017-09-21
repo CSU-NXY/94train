@@ -1,7 +1,6 @@
 package com.xgh.service;
 
 import com.nxy.model.*;
-import com.xgh.service.*;
 
 import java.sql.*;
 import java.util.ArrayList;
