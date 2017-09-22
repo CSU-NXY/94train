@@ -10,43 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>94Train购票网</title>
 
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <link rel="icon" href="/static/images/favicon.ico">
-        <link rel="stylesheet" href="/static/css/dcalendar.picker.css">
-
-
-        <style type="text/css">
-        .white{
-            color: #ffffff;
-        }
-
-        .white:hover{
-            color: #cdbcf3;
-
-}
-        .bac-color{
-            background-color: #563d7c;
-        }
-
-        .btn-link{
-            color: #cdbcf3;
-        }
-
-        .btn-link:hover, .btn-link:focus, .btn-link:active{
-            color: #ffffff;
-        }
-
-        .main {
-            height: 80%;
-            position: relative;
-        }
-
-        .top,.bottom{
-            height: 10%;
-            position: relative;
-        }
-
-        </style>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+        <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dcalendar.picker.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/includeTop.css">
     </head>
 
 <body>
