@@ -18,14 +18,6 @@ public class SearchController {
      * @author 聂欣雨
      * 储存出发地与目的地以供AJAX使用，并跳转到Search.jsp
      */
-    @RequestMapping(value = "/viewSearch.do", method = RequestMethod.GET)
-    public String viewSearch(@RequestParam("departure")String departure, @RequestParam("destination")String destination, Model model) {
-        if (departure.isEmpty() || destination.isEmpty())
-            return null;
-        model.addAttribute("departure", departure);
-        model.addAttribute("destination", destination);
-        return "Search";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/searchTrains.do", method = RequestMethod.GET)
