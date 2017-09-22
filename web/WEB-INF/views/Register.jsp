@@ -70,9 +70,6 @@
         height: auto;
     }
 
-    .reg{
-    }
-    ;
     .form_input{
         width:100%;
         background-color:transparent;
