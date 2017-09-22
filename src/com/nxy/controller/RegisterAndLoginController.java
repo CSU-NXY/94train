@@ -38,6 +38,7 @@ public class RegisterAndLoginController {
             return "redirect:/index/viewIndex.do";
         }
     }
+
     User tempUser = null;
     @RequestMapping(value = "/noJump.do",method = RequestMethod.POST)
     public void Register(@ModelAttribute("User")User user){

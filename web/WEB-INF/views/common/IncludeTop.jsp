@@ -9,18 +9,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>94Train购票网</title>
-        <!-- Hi，如果你要在自己的网站上引入bootstrap样式文件的话，请使用当前最新版本v3.0.3的CDN链接，页面加载速度会更快！-->
-        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
-        <link rel="icon" href="../../../static/images/favicon.ico">
-        <link rel="stylesheet" href="../../../static/css/dcalendar.picker.css">
-        <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
 
-        <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-        <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../../../static/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../../../static/js/jquery.min.js"></script>
-        <script type="text/javascript" src="../../../static/js/scrollable.js"></script>
-        <script type="text/javascript" src="../../../static/js/dcalendar.picker.js"></script>
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="icon" href="/static/images/favicon.ico">
+        <link rel="stylesheet" href="/static/css/dcalendar.picker.css">
 
 
         <style type="text/css">
@@ -62,7 +54,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3">
-                <label><a href="${pageContext.request.contextPath}/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-plane" style="color: #ffffff"></span>94购票网</h1></a></label>
+                <label><a href="${pageContext.request.contextPath}/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-bed" style="color: #ffffff"></span>94购票网</h1></a></label>
             </div>
 
             <div class="col-xs-5">
