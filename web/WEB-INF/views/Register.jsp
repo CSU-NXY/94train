@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Monarch
@@ -69,9 +70,6 @@
         height: auto;
     }
 
-    .reg{
-    }
-;
     .form_input{
         width:100%;
         background-color:transparent;
@@ -125,12 +123,36 @@
     }
 
 </style>
+<script>
+    function PostData() {
+        alert($("#registerForm1").serialize());
+        $.ajax({
+            type: "POST",
+            url: "/registerAndLogin/noJump.do",
+            data : $("#registerForm1").serialize(),
+            success: function(msg) {
+            }
+        });
+        return false;
+    }
+
+    function PostData2() {
+        alert($("#registerForm2").serialize());
+        $.ajax({
+            type: "POST",
+            url: "/registerAndLogin/noJump2.do",
+            data : $("#registerForm2").serialize(),
+            success: function(msg) {
+            }
+        });
+        return false;
+    }
+</script>
 
 <div class="container">
     <div class="row">
-        <form>
-            <div id="wizard">
-                <div class="row text-center">
+        <div id="wizard">
+            <div class="row text-center">
                     <ul id="status" class="list-unstyled">
                         <li class="col-xs-offset-1 col-xs-2 active"><h4>1 基本信息</h4></li>
 
@@ -140,35 +162,37 @@
                     </ul>
                 </div>
 
-                <div class="items text-left">
-                    <div class="page">
-                        <div class="col-md-6 col-md-offset-2">
+            <div class="items text-left">
+                <div class="page">
+                    <div class="col-md-6 col-md-offset-2">
+                        <form id="registerForm1" onsubmit="return PostData()">
                             <div class="information">
                                 <p>每个手机号仅能申请一次帐号！</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp手机号:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"/></label><a class="btn btn_vcode"  href="#">短信验证</a></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp手机号:&nbsp&nbsp&nbsp<label><input class="form_input" name="PhoneNum" type="text"/></label><a class="btn btn_vcode"  href="#">短信验证</a></h4>
                                 <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp验证码:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"/></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp验证码:&nbsp&nbsp&nbsp<label><input class="form_input" name="checkcode" type="text"/></label></h4>
                                 <p class="form_tips">激活手机后将收到验证短信，请回填短信中的6位验证码字母、数字或者英文符号，最短8位，区分大小写</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp密码:&nbsp&nbsp&nbsp<label><input class="form_input" type="password"/></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp密码:&nbsp&nbsp&nbsp<label><input class="form_input" name="Password" type="password"/></label></h4>
                                 <p class="form_tips">字母、数字或者英文符号，最短8位，区分大小写</p>
                             </div>
 
+                            <!--ajax-->
                             <div class="information">
                                 <h4>确认密码:&nbsp&nbsp&nbsp<label><input class="form_input" type="password"></label></h4>
                                 <p class="form_tips">请再次输入密码</p>
                             </div>
 
                             <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp邮箱:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp邮箱:&nbsp&nbsp&nbsp<label><input class="form_input" name="Email" type="text"></label></h4>
                                 <p class="form_tips">绑定邮箱可用于密码找回</p>
                             </div>
 
@@ -179,24 +203,26 @@
                             </div>
 
                             <div class="information">
-                                <input type="button" class="btn btn-primary next right" style="position: relative;left: 35%" value="注册&raquo;" />
+                                <input type="submit" class="btn btn-primary next right" style="position: relative;left: 35%" value="注册&raquo;" />
                             </div>
-                        </div>
-
-                        <div>
-                            <p>已有账号，立刻<a href="/registerAndLogin/viewLogin.do"><strong>登录</strong></a>!</p>
-                        </div>
+                        </form>
                     </div>
 
-                    <div class="spage">
+                    <div>
+                            <p>已有账号，立刻<a href="/registerAndLogin/viewLogin.do"><strong>登录</strong></a>!</p>
+                        </div>
+                </div>
+
+                <div class="spage">
+                    <form:form id="registerForm2" onsubmit="return PostData2()">
                         <div class="col-md-6 col-md-offset-3 small">
                             <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"></label></h4>
+                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名:&nbsp&nbsp&nbsp<label><input class="form_input" name="Name" type="text"></label></h4>
                                 <p class="form_tips">请填写你的真实姓名</p>
                             </div>
 
                             <div class="information">
-                                <h4>身份证号:&nbsp&nbsp&nbsp<label><input class="form_input" type="text"></label></h4>
+                                <h4>身份证号:&nbsp&nbsp&nbsp<label><input class="form_input" name="ID" type="text"></label></h4>
                                 <p class="form_tips">请确认你的身份证号准确无误</p>
                             </div>
 
@@ -205,13 +231,14 @@
                                     <input type="button" class="btn btn-primary prev" style="float:left" value="&laquo;上一步" />
                                 </div>
                                 <div class="col-xs-1 col-xs-offset-6">
-                                    <input type="button" class="btn btn-primary next right" value="下一步&raquo;" />
+                                    <input type="submit" class="btn btn-primary next right" value="下一步&raquo;" />
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form:form>
+                </div>
 
-                    <div class="spage">
+                <div class="spage">
                         <div class="col-md-offset-2 small">
                             <div class="information">
                                 <h1>恭喜你注册成功！成功开启你的购票之旅</h1>
@@ -229,9 +256,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </form>
+        </div>
         <%--javascript 的学习,理解该段代码的意思--%>
         <script type="text/javascript">
             $(function(){

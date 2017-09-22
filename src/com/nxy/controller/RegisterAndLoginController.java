@@ -22,32 +22,40 @@ public class RegisterAndLoginController {
     }
 
     @RequestMapping(value = "/viewLogin.do", method = RequestMethod.GET)
-    public String viewLogin(ModelMap model) {
+    public String viewLogin() {
         return "Login";
     }
 
     @RequestMapping(value = "/Login.do",method = RequestMethod.POST)
-    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model,ModelMap modelMap)
-    {
-        int userid  = UserService.Login(user);
-        if(userid==-1)
-        {
-            model.addFlashAttribute("Msg","登录失败!");
+    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model,ModelMap modelMap) {
+        int userid = UserService.Login(user);
+        if (userid == -1) {
+            model.addFlashAttribute("Msg", "登录失败!");
             return "redirect:/registerAndLogin/viewLogin.do";
-        }
-        else
-        {
+        } else {
             user.setUserID(userid);
-            modelMap.addAttribute("S_UserID",user.getUserID());
-            modelMap.addAttribute("S_Username",user.getPhoneNum());
-            return  "redirect:/index/viewIndex.do";
+            modelMap.addAttribute("S_UserID", user.getUserID());
+            modelMap.addAttribute("S_Username", user.getPhoneNum());
+            return "redirect:/index/viewIndex.do";
         }
     }
+
+    User tempUser = null;
+    @RequestMapping(value = "/noJump.do",method = RequestMethod.POST)
+    public void Register(@ModelAttribute("User")User user){
+        tempUser = user;
+    }
+
+    @RequestMapping(value = "/noJump2.do",method = RequestMethod.POST)
+    public void Register2(@ModelAttribute("User")User user2){
+        User user = new User(tempUser,user2);
+        UserService.Register(user);
 
     @RequestMapping(value = "/LogOut.do",method = RequestMethod.POST)
     public  String LogOut(SessionStatus sessionStatus)
     {
         sessionStatus.setComplete();
         return "redirect:/index/viewIndex.do";
+
     }
 }
