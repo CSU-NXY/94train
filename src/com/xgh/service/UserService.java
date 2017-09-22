@@ -66,7 +66,7 @@ public class UserService {
     {
         Connection conn = ConnectionGenerator.GetConnetct();
         String sql = "UPDATE `94train`.`user` \n" +
-                "SET `PhoneNum`=?, `Password`=?, `Name`=?, `ID`=?, `Email`=? \n" +
+                "SET `PhoneNum`=?,`Name`=?, `ID`=?, `Email`=? \n" +
                 "WHERE `UserID`=?;";
 
         PreparedStatement pstmt=null;
@@ -74,11 +74,64 @@ public class UserService {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, user.getPhoneNum());
-            pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getID());
             pstmt.setString(5, user.getEmail());
             pstmt.setInt(6,user.getUserID());
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean ChangePassword(int UserID,String password,String oldPassword)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "UPDATE `94train`.`user` \n" +
+                "SET `Password`=?" +
+                "WHERE `UserID`=? and `Password` =?;";
+
+        PreparedStatement pstmt=null;
+        int i;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, password);
+            pstmt.setInt(2,UserID);
+            pstmt.setString(3,oldPassword);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        if(i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean ChangeEmail(int UserID,String email)
+    {
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "UPDATE `94train`.`user` \n" +
+                "SET `Email`=?" +
+                "WHERE `UserID`=?;";
+        PreparedStatement pstmt=null;
+        int i;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, email);
+            pstmt.setInt(2,UserID);
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
