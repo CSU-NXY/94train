@@ -14,7 +14,7 @@ public class BuyTicketsController {
         return "BuyTickets";
     }
 
-    @RequestMapping("/buyTickets.do")
+    @RequestMapping(value = "/buyTickets.do")
     public String BuyTickets(@RequestParam("strainID") String strainID, @RequestParam("startStation") String startStation,
                            @RequestParam("endStation") String endStation, @RequestParam("departureTime") String departureTime,
                            @RequestParam("arrivalTime") String arrivalTime, @RequestParam("timeSpent") String timeSpent,

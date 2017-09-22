@@ -10,8 +10,7 @@
 <jsp:include page="common/IncludeTop.jsp"/>
 
 <style type="text/css">
-    <!--
-    主页背景自动切换样式开始-- >
+    /*主页背景自动切换样式开始*/
     #container {
         width: 100%;
         height: 500px;
@@ -294,23 +293,33 @@
                         var timeSpent = item.find("._TimeSpent").html();
                         var countLeft = item.find("._CountLeft").html();
                         var price = item.find("._price").html();
-//                        var data = JSON.stringify({"strainID":strainID,
-//                            "startStation":startStation,
-//                            "endStation":endStation,
-//                            "departureTime":departureTime,
-//                            "arrivalTime":arrivalTime,
-//                            "timeSpent":timeSpent,
-//                            "countLeft":countLeft,
-//                            "price":price});
-                        var data = [{"name":"strainID","value":strainID},
-                            {"name":"startStation","value":startStation},
-                            {"name":"endStation","value":endStation},
-                            {"name":"departureTime","value":departureTime},
-                            {"name":"arrivalTime","value":arrivalTime},
-                            {"name":"timeSpent","value":timeSpent},
-                            {"name":"countLeft","value":countLeft},
-                            {"name":"price","value":price}];
+                        var params = {"strainID":strainID,
+                                      "startStation":startStation,
+                                      "endStation":endStation,
+                                      "departureTime":departureTime,
+                                      "arrivalTime":arrivalTime,
+                                      "timeSpent":timeSpent,
+                                      "countLeft":countLeft,
+                                      "price":price};
                         $.get("/buyTickets/buyTickets.do",data);
+                        var form = document.createElement("form");
+                        form.setAttribute("method", "get");
+                        form.setAttribute("action", "/buyTickets/buyTickets.do");
+
+                        for(var key in params) {
+                            if(params.hasOwnProperty(key)) {
+                                var hiddenField = document.createElement("input");
+                                hiddenField.setAttribute("type", "hidden");
+                                hiddenField.setAttribute("name", key);
+                                hiddenField.setAttribute("value", params[key]);
+
+                                form.appendChild(hiddenField);
+                            }
+                        }
+
+                        document.body.appendChild(form);
+                        form.submit();
+
                     });
                 }, "json");
             return false;
