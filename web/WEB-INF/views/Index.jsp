@@ -220,12 +220,13 @@
                             <td class="_CountLeft"></td>
                             <td class="_price"></td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">购买</button>
+                                <button type="button" class="btn btn-primary btn-sm get-train">购买</button>
                             </td>
                         </tr>
                         </tbody>
                         <tbody id="dataGrid"></tbody>
                     </table>
+
                 </div>
             </div>
             <!--选择页数-->
@@ -262,7 +263,7 @@
 </div>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
-<%--<script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>--%>
+
 <script type="text/javascript">
     $(function () {
         var searchForm = $("#searchForm");
@@ -281,6 +282,35 @@
                             tr.find("._" + name).text(value);
                             tr.find("._TimeSpent").text("2小时03分");
                         })
+                    });
+
+                    $(".get-train").click(function () {
+                        var item = $(this).parent().parent();
+                        var strainID = item.find("._StrainID").html();
+                        var startStation = item.find("._StartStation").html();
+                        var endStation = item.find("._EndStation").html();
+                        var departureTime = item.find("._DepartureTime").html();
+                        var arrivalTime = item.find("._ArrivalTime").html();
+                        var timeSpent = item.find("._TimeSpent").html();
+                        var countLeft = item.find("._CountLeft").html();
+                        var price = item.find("._price").html();
+//                        var data = JSON.stringify({"strainID":strainID,
+//                            "startStation":startStation,
+//                            "endStation":endStation,
+//                            "departureTime":departureTime,
+//                            "arrivalTime":arrivalTime,
+//                            "timeSpent":timeSpent,
+//                            "countLeft":countLeft,
+//                            "price":price});
+                        var data = [{"name":"strainID","value":strainID},
+                            {"name":"startStation","value":startStation},
+                            {"name":"endStation","value":endStation},
+                            {"name":"departureTime","value":departureTime},
+                            {"name":"arrivalTime","value":arrivalTime},
+                            {"name":"timeSpent","value":timeSpent},
+                            {"name":"countLeft","value":countLeft},
+                            {"name":"price","value":price}];
+                        $.get("/buyTickets/buyTickets.do",data);
                     });
                 }, "json");
             return false;

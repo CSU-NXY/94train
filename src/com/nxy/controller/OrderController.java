@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(value = "/Order", method = RequestMethod.GET)
@@ -21,10 +22,10 @@ public class OrderController {
     public List<Order> Search(@RequestParam("type")String type, HttpSession session)
     {
         List<Order> ls = OrderService.FindOrder((int)session.getAttribute("S_UserID"));
-        if(type=="ALL") {
+        if(Objects.equals(type, "ALL")) {
             return ls;
         }
-        else if(type=="NotEnd")
+        else if(Objects.equals(type, "NotEnd"))
         {
             List<Order> temp = new ArrayList<Order>();
             for(int i =0;i<ls.size();i++)
@@ -34,7 +35,7 @@ public class OrderController {
             }
             return temp;
         }
-        else if(type=="NotPay")
+        else if(Objects.equals(type, "NotPay"))
         {
             List<Order> temp = new ArrayList<Order>();
             for(int i =0;i<ls.size();i++)

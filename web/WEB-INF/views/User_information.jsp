@@ -323,17 +323,21 @@
     </div>
 </div>
 
+
+
+<jsp:include page="common/IncludeBottom.jsp"/>
+
 <script>
     $(function() {
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                // Get the name of active tab
-                var activeTab = $(e.target).text();
-                // Get the name of previous tab
-                var previousTab = $(e.relatedTarget).text();
-                $(".active-tab span").html(activeTab);
-                $(".previous-tab span").html(previousTab);
-            });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // Get the name of active tab
+            var activeTab = $(e.target).text();
+            // Get the name of previous tab
+            var previousTab = $(e.relatedTarget).text();
+            $(".active-tab span").html(activeTab);
+            $(".previous-tab span").html(previousTab);
         });
+    });
 </script>
 <script type="text/javascript">
     $(function(a){
@@ -342,14 +346,14 @@
             b=location.href,
             b=b.substring(b.indexOf(".htm?")+5),
             1==b?(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(0).show().siblings().hide())
-            :2==b?(a(".dev ul li").eq(1).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(1).show().siblings().hide())
-            :3==b?(a(".dev ul li").eq(2).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(2).show().siblings().hide())
-            :(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),
-            a(".nrbf").eq(0).show().siblings().hide()),
+                :2==b?(a(".dev ul li").eq(1).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(1).show().siblings().hide())
+                :3==b?(a(".dev ul li").eq(2).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(2).show().siblings().hide())
+                    :(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),
+                        a(".nrbf").eq(0).show().siblings().hide()),
             a(".dev ul li").click(function(){
                 var b=a(this).index();
                 a(this).addClass("on").siblings().removeClass("on"),
-                a(".nrbf").eq(b).show().siblings().hide()
+                    a(".nrbf").eq(b).show().siblings().hide()
             })
     });
 </script>
@@ -368,6 +372,3 @@
         });
     });
 </script>
-
-<jsp:include page="common/IncludeBottom.jsp"/>
-

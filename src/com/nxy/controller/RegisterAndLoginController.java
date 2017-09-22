@@ -47,9 +47,10 @@ public class RegisterAndLoginController {
     }
 
     @RequestMapping(value = "/noJump2.do",method = RequestMethod.POST)
-    public void Register2(@ModelAttribute("User")User user2){
-        User user = new User(tempUser,user2);
+    public void Register2(@ModelAttribute("User")User user2) {
+        User user = new User(tempUser, user2);
         UserService.Register(user);
+    }
 
     @RequestMapping(value = "/LogOut.do",method = RequestMethod.POST)
     public  String LogOut(SessionStatus sessionStatus)
