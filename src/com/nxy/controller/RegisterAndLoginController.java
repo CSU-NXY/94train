@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 
@@ -49,5 +50,12 @@ public class RegisterAndLoginController {
     public void Register2(@ModelAttribute("User")User user2){
         User user = new User(tempUser,user2);
         UserService.Register(user);
+
+    @RequestMapping(value = "/LogOut.do",method = RequestMethod.POST)
+    public  String LogOut(SessionStatus sessionStatus)
+    {
+        sessionStatus.setComplete();
+        return "redirect:/index/viewIndex.do";
+
     }
 }
