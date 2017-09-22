@@ -22,6 +22,30 @@
 
 <div class="container" style="width: 80%">
     <div class="row">
+        <%
+            String msg = (String) request.getAttribute("Msg_S");
+            if(msg!=null)
+            {
+        %>
+        <div class="alert alert-success" role="alert">${Msg_S}</div>
+        <%
+            }
+        %>
+    </div>
+
+    <div class="row">
+        <%
+            String msg2 = (String) request.getAttribute("Msg_F");
+            if(msg2!=null)
+            {
+        %>
+        <div class="alert alert-danger" role="alert">${Msg_F}</div>
+        <%
+            }
+        %>
+    </div>
+
+    <div class="row">
         <div class="col-xs-1 dev">
             <p class="personalInfo">个人信息</p>
             <ul id="myInfo" >
@@ -37,19 +61,19 @@
                     <table class="table table-bordered table-striped table-hover">
                         <tr>
                             <th>用户编号</th>
-                            <th>007</th>
+                            <th>${UserID}</th>
                         </tr>
                         <tr>
                             <td>手机号</td>
-                            <td>98989898</td>
+                            <td>${PhoneNum}</td>
                         </tr>
                         <tr>
                             <td>真实姓名</td>
-                            <td>无敌真寂寞</td>
+                            <td>${Name}</td>
                         </tr>
                         <tr>
                             <td>邮箱</td>
-                            <td>monarch@666.com</td>
+                            <td>${Email}</td>
                         </tr>
                     </table>
                 </div>
@@ -61,31 +85,56 @@
                                 <th>编辑个人信息</th>
                                 <tr>
                                     <td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
-                                    <td><input type="text" id="name" placeholder="请填写你的姓名" value="张三"/></td>
+                                    <td><input type="text" id="Name" disabled="disabled" placeholder="请填写你的姓名" value="${Name}"/></td>
                                 </tr>
                                 <tr>
                                     <td>身&nbsp;&nbsp;份&nbsp;&nbsp;证：</td>
-                                    <td><input type="text" id="IDnum" placeholder="请填写身份证号" value="12343534523145432"/><a href>点击验证</a></td>
-                                </tr>
-                                <tr>
-                                    <td>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</td>
-                                    <td><input type="text" id="Email" placeholder="请填写邮箱" value="1232342@qq.com"/><a href>邮箱验证</a></td>
+                                    <td><input type="text" id="ID" disabled="disabled" placeholder="请填写身份证号" value="${ID}"/></td>
                                 </tr>
                                 <tr>
                                     <td>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</td>
-                                    <td><input type="text" id="telnum" placeholder="请填写手机号" value="24123414314"/><a href>发送验证码</a></td>
+                                    <td><input type="text" disabled="disabled" id="PhoneNum" placeholder="请填写手机号" value="${PhoneNum}"/></td>
                                 </tr>
-                                <tr>
-                                    <td>验&nbsp;&nbsp;证&nbsp;&nbsp;码：</td>
-                                    <td><input type="text" id="securityCode" placeholder="请填写手机验证码"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center"><button class="btn btn-primary">确认修改</button></td>
-                                </tr>
+                                <form action="/user/ChangeEmail.do" method="post">
+                                    <tr>
+                                        <td>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</td>
+                                        <td><input type="text" name="Email" id="Email" placeholder="请填写邮箱" value="${Email}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center"><input type="submit" class="btn btn-primary"/></td>
+                                    </tr>
+                                    <tr/>
+                                    <tr/>
+                                    <tr/>
+                                </form>
+                                <form action="/user/ChangePassword.do" method="post">
+                                    <tr>
+                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td><input type="password"  name="OldPassword" id="OldPassword" placeholder="请填写旧密码"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td><input type="password" name="NewPassword" id="NewPassword" placeholder="请填写新密码"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td><input type="password" name="RepeatPassword" id="RepeatPassword" placeholder="请确认新密码"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center"><input type="submit" class="btn btn-primary"/></td>
+                                    </tr>
+                                </form>
                             </table>
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
 
                 <div class="tab-pane fade" id="order">
 
@@ -275,21 +324,7 @@
 </div>
 
 <script>
-    $(function(){
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            // Get the name of active tab
-            var activeTab = $(e.target).text();
-            // Get the name of previous tab
-            var previousTab = $(e.relatedTarget).text();
-            $(".active-tab span").html(activeTab);
-            $(".previous-tab span").html(previousTab);
-        });
-    });
-</script>
-
-<script>
-    $(function () {
-        $(function(){
+    $(function() {
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 // Get the name of active tab
                 var activeTab = $(e.target).text();
@@ -298,6 +333,39 @@
                 $(".active-tab span").html(activeTab);
                 $(".previous-tab span").html(previousTab);
             });
+        });
+</script>
+<script type="text/javascript">
+    $(function(a){
+        var b;
+        a(".nrbf").eq(0).show(),
+            b=location.href,
+            b=b.substring(b.indexOf(".htm?")+5),
+            1==b?(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(0).show().siblings().hide())
+            :2==b?(a(".dev ul li").eq(1).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(1).show().siblings().hide())
+            :3==b?(a(".dev ul li").eq(2).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(2).show().siblings().hide())
+            :(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),
+            a(".nrbf").eq(0).show().siblings().hide()),
+            a(".dev ul li").click(function(){
+                var b=a(this).index();
+                a(this).addClass("on").siblings().removeClass("on"),
+                a(".nrbf").eq(b).show().siblings().hide()
+            })
+    });
+</script>
+
+<script>
+    $(function () {
+        $(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                // Get the name of active tab
+                var activeTab = $(e.target).text();
+                // Get the name of previous tab
+                var previousTab = $(e.relatedTarget).text();
+                $(".active-tab span").html(activeTab);
+                $(".previous-tab span").html(previousTab);
+            });
+        });
     });
 </script>
 

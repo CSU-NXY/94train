@@ -66,7 +66,7 @@
 
                 <tr>
                     <td><a href>返回上一页</a></td>
-                    <td><a href="/user/viewOrderPay.do" class="btn btn-primary">确认订单</a></td>
+                    <td><a href="${pageContext.request.contextPath}/user/viewOrderPay.do" class="btn btn-primary">确认订单</a></td>
                 </tr>
             </table>
         </div>
