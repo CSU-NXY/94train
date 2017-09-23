@@ -1,0 +1,168 @@
+.white{
+    color: #ffffff;
+}
+
+.white:hover{
+    color: #cdbcf3;
+
+}
+.bac-color{
+    background-color: #563d7c;
+}
+
+.btn-link{
+    color: #cdbcf3;
+}
+
+.btn-link:hover, .btn-link:focus, .btn-link:active{
+    color: #ffffff;
+}
+
+.main {
+    height: 80%;
+    position: relative;
+}
+
+.top,.bottom{
+    height: 10%;
+    position: relative;
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 500px;
+}
+
+.carousel-inner > .item > img {
+    display: block;
+    line-height: 1;
+    z-index: 1;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    z-index: 2;
+    list-style-type: none;
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.active1 {
+    font-size: 28px;
+    color: #fff;
+}
+
+.carousel-control {
+    position: absolute;
+    text-decoration: none;
+    color: #999;
+    font-weight: bold;
+    opacity: .5;
+    font-size: 40px;
+    z-index: 3;
+}
+
+.carousel-control:hover {
+    color: #fff;
+    text-decoration: none;
+    opacity: .9;
+    outline: none;
+    font-size: 42px;
+}
+
+.prev {
+    top: 30%;
+    left: 20px;
+}
+
+.next {
+    top: 30%;
+    right: 20px;
+}
+
+.btn-search {
+    background-color: inherit;
+    width: auto;
+    margin: 20px 5px 20px 0;
+    padding: 18px 24px;
+    font-size: 21px;
+}
+
+.btn-outline-inverse {
+    background-color: #3371b7;
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.btn-outline-inverse:hover, .btn-outline-inverse:focus, .btn-outline-inverse:active {
+    color: #3371b7;
+    text-shadow: none;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+/*搜索框半透明*/
+.alpha60 {
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(255, 255, 255);
+    /* RGBa with 0.6 opacity, 如果要更改透明度,修改第四个参数 */
+    background-color: rgba(255, 255, 255, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+
+#wizard {
+    font-size: 12px;
+    height: 700px;
+    margin: 10px auto;
+    overflow: hidden;
+    position: relative;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+#wizard .items {
+    width: 10000px;
+    clear: both;
+    position: absolute;
+}
+
+#wizard #status {
+    padding-left: 25px !important;
+}
+
+#status li {
+    float: left;
+    color: #fff;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+#status li.active {
+    background-color: #cdbcf3;
+    font-weight: normal;
+}
+
+.page {
+    width: 1000px;
+    float: left;
+    min-height: 500px;
+}
+
+.form_tips {
+    padding: 0px 100px 0px 150px;
+    color: #8d8d8d
+}
