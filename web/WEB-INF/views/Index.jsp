@@ -203,8 +203,8 @@
                             <th>发车时间</th>
                             <th>到达时间</th>
                             <th>历时</th>
-                            <th>票价</th>
                             <th>票量</th>
+                            <th>票价</th>
                             <th style="width:15%;">操作</th>
                         </tr>
                         </thead>
@@ -279,7 +279,6 @@
                         dataGrid.append(tr);
                         $.each(row, function (name, value) {
                             tr.find("._" + name).text(value);
-                            tr.find("._TimeSpent").text("2小时03分");
                         })
                     });
 
