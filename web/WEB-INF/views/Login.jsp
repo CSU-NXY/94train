@@ -38,7 +38,7 @@
                         <input type="checkbox" value="remember-me"> 记住密码 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">忘记密码</a>
                     </label>
                 </div>
-                <input class="btn btn-lg btn-primary btn-block" type="submit">登录</input>
+                <input class="btn btn-lg btn-primary btn-block" type="submit"></input>
             </form>
         </div>
     </div> <!-- /container -->

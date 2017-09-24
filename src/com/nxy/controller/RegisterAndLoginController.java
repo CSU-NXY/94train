@@ -36,6 +36,10 @@ public class RegisterAndLoginController {
             user.setUserID(userid);
             modelMap.addAttribute("S_UserID", user.getUserID());
             modelMap.addAttribute("S_Username", user.getPhoneNum());
+            if(user.getUserID()==1)
+            {
+                return "redirect:/Admin/Change.do";
+            }
             return "redirect:/index/viewIndex.do";
         }
     }
