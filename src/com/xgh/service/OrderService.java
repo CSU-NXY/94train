@@ -16,7 +16,7 @@ public class OrderService {
 
 
         Connection conn = ConnectionGenerator.GetConnetct();
-        String sql = "SELECT * FROM 94train.order WHERE OrderID = ?";
+        String sql = "SELECT * FROM 94train.order WHERE UserID = ?";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -33,7 +33,7 @@ public class OrderService {
                 temp.setDepartureTime(rs.getTime("DepartureTime"));
                 temp.setArrivalTime(rs.getTime("ArrivalTime"));
                 temp.setType(rs.getInt("Type"));
-                temp.setStatus(rs.getInt("Statua"));
+                temp.setStatus(rs.getInt("Status"));
                 temp.setPrice(rs.getDouble("Price"));
                 temp.setOrderDate(rs.getDate("OrderDate"));
                 list.add(temp);
@@ -65,6 +65,27 @@ public class OrderService {
         }
         if(i==1)
             return true;
+        return false;
+    }
+
+    public static boolean DeleteOrder(int orderID){
+        int count = 0;
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "delete from 94train.order where 94train.order.OrderId = ?";
+        PreparedStatement pstmt;
+
+        try{
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setInt(1,orderID);
+            count = pstmt.executeUpdate();
+
+        }catch (Exception e){
+            throw new RuntimeException("emmmm");
+        }
+
+        if(count == 1)
+            return true;
+
         return false;
     }
 }
