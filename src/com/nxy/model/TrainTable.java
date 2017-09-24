@@ -44,7 +44,7 @@ public class TrainTable {
 
     public void setDepartureTime(Time departureTime) {
         DepartureTime = departureTime;
-        if (ArrivalTime != null) {
+        if (ArrivalTime != null&&DepartureTime!=null) {
             int arrivalHours = ArrivalTime.getHours();
             int arrivalMinutes = ArrivalTime.getMinutes();
             int arrivalSeconds = ArrivalTime.getSeconds();

@@ -395,7 +395,7 @@
 
         if(window.event.returnValue == true){
             $.ajax({
-                url:"/order/deleteOrder.do",
+                url:"/Order/deleteOrder.do",
                 type:"post",
                 data:params,
                 dataType:"json",

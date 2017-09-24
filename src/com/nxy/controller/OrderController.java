@@ -71,12 +71,6 @@ public class OrderController {
         return "index";
     }
 
-import javax.servlet.http.HttpServletRequest;
-
-@Controller
-@RequestMapping(value = "/order", method = RequestMethod.GET)
-public class OrderController {
-
     @ResponseBody
     @RequestMapping(value = "/deleteOrder.do",method = RequestMethod.POST)
     public void deleteOrder(int id){
