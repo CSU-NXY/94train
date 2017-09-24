@@ -1,15 +1,21 @@
 package com.nxy.controller;
 
+
 import com.nxy.model.Order;
 import com.nxy.model.TrainTable;
 import com.xgh.service.OrderService;
 import com.xgh.service.TicketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+
+import com.xgh.service.OrderService;
+import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -65,4 +71,15 @@ public class OrderController {
         return "index";
     }
 
+import javax.servlet.http.HttpServletRequest;
+
+@Controller
+@RequestMapping(value = "/order", method = RequestMethod.GET)
+public class OrderController {
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteOrder.do",method = RequestMethod.POST)
+    public void deleteOrder(int id){
+        OrderService.DeleteOrder(id);
+    }
 }
