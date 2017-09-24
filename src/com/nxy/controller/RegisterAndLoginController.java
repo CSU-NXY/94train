@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 
 @Controller
-@SessionAttributes({"S_UserID","S_Username"})
+@SessionAttributes({"S_UserID","S_Username", "S_ID", "S_Name"})
 
 @RequestMapping(value = "/registerAndLogin", method = RequestMethod.GET)
 public class RegisterAndLoginController {
@@ -33,9 +33,12 @@ public class RegisterAndLoginController {
             model.addFlashAttribute("Msg", "登录失败!");
             return "redirect:/registerAndLogin/viewLogin.do";
         } else {
-            user.setUserID(userid);
+//            user.setUserID(userid);
+            user = UserService.GetUserByUserID(userid);
             modelMap.addAttribute("S_UserID", user.getUserID());
             modelMap.addAttribute("S_Username", user.getPhoneNum());
+            modelMap.addAttribute("S_ID", user.getID());
+            modelMap.addAttribute("S_Name", user.getName());
             return "redirect:/index/viewIndex.do";
         }
     }

@@ -1,8 +1,11 @@
 package com.nxy.controller;
 
 import com.nxy.model.Order;
+import com.nxy.model.TrainTable;
 import com.xgh.service.OrderService;
+import com.xgh.service.TicketService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,4 +50,19 @@ public class OrderController {
         }
         return ls;
     }
+
+    @RequestMapping("/confirmOrder.do")
+    public String ConfirmOrder(HttpSession session, @RequestParam("checkVal")String checkVal) {
+        TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
+        session.setAttribute("checkVal", checkVal);
+        int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
+        TicketService.BuyTicket(UserID, trainTable);
+        return "OrderPay";
+    }
+
+    @RequestMapping("/noPay.do")
+    public String NoPay() {
+        return "index";
+    }
+
 }

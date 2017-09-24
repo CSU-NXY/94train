@@ -108,30 +108,6 @@
                     </table>
 
                 </div>
-                <%--<div class="panel-footer">--%>
-                    <%--<nav aria-label="5">--%>
-                        <%--<ul class="pagination justify-content-end mt-3 mr-3 pull-right">--%>
-                            <%--<li class="page-item disabled">--%>
-                                <%--<span class="page-link">&laquo;Previous</span>--%>
-                            <%--</li>--%>
-
-                            <%--<li class="page-item active">--%>
-                                <%--<span class="page-link">1<span class="sr-only">(current)</span></span>--%>
-                            <%--</li>--%>
-
-                            <%--<li class="page-item">--%>
-                                <%--<a class="page-link" href="#">2</a>--%>
-                            <%--</li>--%>
-
-                            <%--<li class="page-item">--%>
-                                <%--<a class="page-link" href="#">3</a>--%>
-                            <%--</li>--%>
-                            <%--<li class="page-item">--%>
-                                <%--<a class="page-link" href="#">Next&raquo;</a>--%>
-                            <%--</li>--%>
-                        <%--</ul>--%>
-                    <%--</nav>--%>
-                <%--</div>--%>
             </div>
         </div>
     </div>
@@ -172,6 +148,13 @@
                     $("#trainTable").DataTable();
 
                     $(".get-train").click(function () {
+                        // 验证是否登录
+                        var S_ID = '<%=session.getAttribute("S_ID")%>';
+                        if (S_ID.toString() === "null" || S_ID === "") {
+                            alert("请先登录");
+                            return false;
+                        }
+
                         var item = $(this).parent().parent();
                         var strainID = item.find("._StrainID").html();
                         var startStation = item.find("._StartStation").html();
@@ -189,7 +172,7 @@
                                       "timeSpent":timeSpent,
                                       "countLeft":countLeft,
                                       "price":price};
-                        $.get("/buyTickets/buyTickets.do",data);
+                        //$.get("/buyTickets/buyTickets.do",data);
                         var form = document.createElement("form");
                         form.setAttribute("method", "get");
                         form.setAttribute("action", "/buyTickets/buyTickets.do");

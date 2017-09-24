@@ -26,7 +26,7 @@
                 }
             %>
 
-            <form class="form-group" role="form" action="\registerAndLogin\Login.do" method="post">
+            <form class="form-group" role="form" action="/registerAndLogin/Login.do" method="post">
                 <div class="form-group">
                     <h2>欢迎登录</h2>
                 </div>

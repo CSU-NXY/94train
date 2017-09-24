@@ -3,7 +3,7 @@
 时间：2017-09-09
 描述：页面底部--开始
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 </div>
 <div class="bac-color bottom" id="footer" align="center" style="border: #d58512">
