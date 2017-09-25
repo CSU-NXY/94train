@@ -26,8 +26,10 @@
                     var mark = $('#Mark');
                     var temp = demo.clone();
                     temp.find("[name='index']").html(Number(mark.children().last().find("[name='index']").html())+1);
-                    temp.find("[name='TrainID']").html("<input name=\"Station\" type=\"text\">");
-                    temp.find("[name='Seats']").html("<input name=\"Station\" type=\"text\">");
+                    temp.find("[name='TrainID']").html("<input name=\"Station\" type=\"text\" value=\"车次号_"+temp.find("[name='index']").html()+ "\"\>");
+                    temp.find("[name='TrainID']").children().first().blur(CheckName);
+                    temp.find("[name='Seats']").html("<input name=\"Station\" type=\"text\" value=\"120\">");
+                    temp.find("[name='Seats']").children().first().blur(CheckCount);
                     temp.find("[name='Sections']").html(0);
                     var a = temp.find("[name='Action']").children("a").first();
                     a.html("确认");
@@ -67,9 +69,47 @@
                         a.attr("href",a.attr("href")+item["trainID"]+"&seats="+item["seats"]);
                         var b = temp.find("[name='Action']").children("a").last();
                         b.attr("href",b.attr("href")+item["trainID"]);
+                        b.click(function () {
+                            if(confirm('确定要执行删除操作吗?'))
+                            {
+                                return true;
+                            }
+                            return false;
+                        })
                         mark.append(temp);
                     });
                 });
+        }
+
+        function CheckCount() {
+            var num = $(this).val();
+            var regTime = /^\d+$/;
+            if(!regTime.test(num)||parseInt(num)<0)
+            {
+                $(this).val("120");
+                alert("数字不符合规范");
+                $(this).focus();
+                return;
+            }
+        }
+
+        function CheckName() {
+            var i = $(this);
+            var name = $(this).val();
+            if(name=="") {
+                $(this).val("车次名");
+                alert("车次名不为空!");
+                $(this).focus();
+            }
+            $("#Mark").children().each(function(index,item){
+                if(name == $(item).find("[name='TrainID']").html())
+                {
+                    i.val("_"+name);
+                    alert("车次号不可重复!");
+                    $(this).focus();
+                    return;
+                }
+            })
         }
     </script>
 </head>
@@ -168,7 +208,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <button type="button" class="btn btn-default" id="Add">添加</button>
+            <button type="button" class="btn-lg btn-default" id="Add">添加</button>
         </div>
         <div class="col-md-1"></div>
     </div>
