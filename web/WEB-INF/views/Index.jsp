@@ -46,17 +46,17 @@
                 <form id="searchForm">
                 <div class="form-group">
                     <h4><strong>出发地</strong></h4>
-                    <label><input type="text" class="form-control" placeholder="请填写汉字"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="departure"></label>
                 </div>
 
                 <div class="form-group">
                     <h4><strong>目的地</strong></h4>
-                    <label><input type="text" class="form-control" placeholder="请填写汉字"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="destination"></label>
                 </div>
 
                 <div class="form-group">
                     <h4><strong>日期</strong></h4>
-                    <label><input id='mydatepicker' class="form-control" placeholder="点击以选择日期" type="text"/></label>
+                    <label><input id='mydatepicker' class="form-control" placeholder="点击以选择日期"/></label>
                 </div>
 
                 <div class="form-group">
@@ -75,7 +75,7 @@
                     <h3 class="panel-title"><i class="glyphicon glyphicon-volume-down"></i> 车次信息</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered alpha60">
+                    <table id="trainTable" class="table table-bordered alpha60">
                         <thead>
                         <tr>
                             <th>车次</th>
@@ -84,27 +84,12 @@
                             <th>发车时间</th>
                             <th>到达时间</th>
                             <th>历时</th>
+                            <th>票量</th>
                             <th>票价</th>
-                            <th>剩余票量</th>
                             <th style="width:15%;">操作</th>
                         </tr>
                         </thead>
-                        <tbody id="template">
-                        <tr>
-                            <td>k12</td>
-                            <td>长沙</td>
-                            <td>武汉</td>
-                            <td>10:16</td>
-                            <td>12:18</td>
-                            <td>2小时02分</td>
-                            <td>20元</td>
-                            <td>120</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary btn-outline-inverse" href="${pageContext.request.contextPath}/user/viewBuyTickets.do">购买</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tbody id="dataGrid" style="display: none;">
+                        <tbody id="template" style="display: none;">
                             <tr>
                                 <th class="_StrainID"></th>
                                 <td class="_StartStation"></td>
@@ -115,35 +100,13 @@
                                 <td class="_CountLeft"></td>
                                 <td class="_price"></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm">购买</button>
+                                    <button type="button" class="btn btn-primary btn-sm get-train">购买</button>
                                 </td>
                             </tr>
                         </tbody>
+                        <tbody id="dataGrid"></tbody>
                     </table>
-                </div>
-                <div class="panel-footer">
-                    <nav aria-label="5">
-                        <ul class="pagination justify-content-end mt-3 mr-3 pull-right">
-                            <li class="page-item disabled">
-                                <span class="page-link">&laquo;Previous</span>
-                            </li>
 
-                            <li class="page-item active">
-                                <span class="page-link">1<span class="sr-only">(current)</span></span>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next&raquo;</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -155,7 +118,7 @@
 </div>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
-<%--<script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>--%>
+
 <script type="text/javascript">
     $('#mydatepicker').dcalendarpicker({
         format: 'yyyy-mm-dd'
@@ -179,8 +142,55 @@
                         dataGrid.append(tr);
                         $.each(row, function (name, value) {
                             tr.find("._" + name).text(value);
-                            tr.find("._TimeSpent").text("2小时03分");
                         })
+                    });
+
+                    $("#trainTable").DataTable();
+
+                    $(".get-train").click(function () {
+                        // 验证是否登录
+                        var S_ID = '<%=session.getAttribute("S_ID")%>';
+                        if (S_ID.toString() === "null" || S_ID === "") {
+                            alert("请先登录");
+                            return false;
+                        }
+
+                        var item = $(this).parent().parent();
+                        var strainID = item.find("._StrainID").html();
+                        var startStation = item.find("._StartStation").html();
+                        var endStation = item.find("._EndStation").html();
+                        var departureTime = item.find("._DepartureTime").html();
+                        var arrivalTime = item.find("._ArrivalTime").html();
+                        var timeSpent = item.find("._TimeSpent").html();
+                        var countLeft = item.find("._CountLeft").html();
+                        var price = item.find("._price").html();
+                        var params = {"strainID":strainID,
+                                      "startStation":startStation,
+                                      "endStation":endStation,
+                                      "departureTime":departureTime,
+                                      "arrivalTime":arrivalTime,
+                                      "timeSpent":timeSpent,
+                                      "countLeft":countLeft,
+                                      "price":price};
+                        //$.get("/buyTickets/buyTickets.do",data);
+                        var form = document.createElement("form");
+                        form.setAttribute("method", "get");
+                        form.setAttribute("action", "/buyTickets/buyTickets.do");
+
+                        for(var key in params) {
+                            if(params.hasOwnProperty(key)) {
+                                var hiddenField = document.createElement("input");
+                                hiddenField.setAttribute("type", "hidden");
+                                hiddenField.setAttribute("name", key);
+                                hiddenField.setAttribute("value", params[key]);
+
+                                form.appendChild(hiddenField);
+                            }
+                        }
+
+                        document.body.appendChild(form);
+                        form.submit();
+
                     });
                 }, "json");
             return false;

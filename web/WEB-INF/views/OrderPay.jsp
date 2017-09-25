@@ -22,39 +22,39 @@
         </th>
         <tr>
             <td align="center" style="width: 27%">订&nbsp;&nbsp;单&nbsp;&nbsp;号：</td>
-            <td colspan="2" align="left"><!--这里用于从数据库获取订单编号--></td>
+            <td colspan="2" align="left">123<!--这里用于从数据库获取订单编号--></td>
         </tr>
         <tr>
-            <td align="center">出发日期：</td>
-            <td colspan="2" align="left"><!--这里用于从数据库获取列车出发日期（XX年XX月XX日）--></td>
+            <td align="center">订单日期：</td>
+            <td colspan="2" align="left"><%=new java.util.Date().toString()%></td>
         </tr>
         <tr>
             <td align="center">乘&nbsp;&nbsp;车&nbsp;&nbsp;人：</td>
-            <td colspan="2" align="left"><!--用于获取姓名-->乘车人姓名</td>
+            <td colspan="2" align="left"><!--用于获取姓名-->${sessionScope.get("S_Name")}</td>
         </tr>
         <tr>
             <td align="center">身份证号：</td>
-            <td colspan="2" align="left"><!--用于获取乘车人身份证号-->123456789098765432</td>
+            <td colspan="2" align="left"><!--用于获取乘车人身份证号-->${sessionScope.get("S_ID")}</td>
         </tr>
         <tr align="center" bgcolor="#669999">
             <td colspan="3" style="color: #ffffff;">车票信息</td>
         </tr>
         <tr align="center">
-            <td><!--这里用于获取出发站名称-->长沙南</td>
-            <td style="width: 27%"><!--这里用于获取列车号-->G1234</td>
-            <td style="width: 27%"><!--这里用于获取目的地名称-->怀化南</td>
+            <td><!--这里用于获取出发站名称-->${sessionScope.get("startStation")}</td>
+            <td style="width: 27%"><!--这里用于获取列车号-->${sessionScope.get("strainID")}</td>
+            <td style="width: 27%"><!--这里用于获取目的地名称-->${sessionScope.get("endStation")}</td>
             <!--表格中只显示获取到的信息，后面的字需要删掉-->
         </tr>
         <tr align="center">
-            <td><!--这里用于获取出发时间-->出发时间</td>
+            <td><!--这里用于获取出发时间-->${sessionScope.get("departureTime")}</td>
             <td>开往</td>
             <td><!--这里用于获取座位（直接显示座位号）-->座位号</td>
             <!--表格中只显示获取到的信息，后面的字需要删掉-->
         </tr>
         <tr align="center">
             <td>票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</td>
-            <td>¥20.0<!--用于获取票价作为数字部分的显示-->元</td>
-            <td>学生票<!--用于获取票的类别作为文字部分的显示--></td>
+            <td>${sessionScope.get("price")}<!--用于获取票价作为数字部分的显示-->元</td>
+            <td>${sessionScope.get("checkVal")}<!--用于获取票的类别作为文字部分的显示--></td>
         </tr>
         <tr align="center" bgcolor="#669999">
             <td colspan="3" style="color: #ffffff;">请选择支付方式</td>
@@ -69,10 +69,10 @@
                 <a href="/user/viewBuyTickets.do" class="btn btn-warning">返回上一步</a>
             </td>
             <td>
-                <a href="/index/viewIndex.do" class="btn btn-default">暂不付款并加入我的订单</a>
+                <%--<a href="/Order/noPay.do" class="btn btn-default">暂不付款并加入我的订单</a>--%>
             </td>
             <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">付款</button>
+                <a href="/index/viewIndex.do" class="btn btn-primary">付款</a>
             </td>
         </tr>
     </table>
