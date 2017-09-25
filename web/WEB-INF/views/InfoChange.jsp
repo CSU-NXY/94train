@@ -24,6 +24,11 @@
                 $("#Add").click(function () {
                     var mark = $('#Mark');
                     var copy =$('#template2 table tbody tr').clone();
+                    copy.children().eq(2).children().first().blur(CheckTime);
+                    copy.children().eq(3).children().first().blur(CheckTime);
+                    copy.children().eq(1).children().first().blur(CheckName);
+                    copy.children().eq(4).children().first().blur(CheckPrice);
+                    copy.children().eq(5).children().first().blur(CheckCount);
                     mark.append(copy);
                     var th = $("#table > tbody > tr > th");
                     th.each(function(index,element) {
@@ -32,45 +37,45 @@
                     var a = copy.find("[name='Action']").children("a").first();
                     a.click(save);
                     var b = copy.find("[name='Action']").children("a").last();
-                    b.click(function () {
-                        $(this).parent().parent().remove();
-                        var th = $("#table > tbody > tr > th");
-
-                        th.each(function(index,element) {
-                            $(element).html(index+1);
-                        });
-                    })
-                });
+                    b.click(del);
+                    });
                 $("#Save").click(ajax_save);
             }
 
         );
 
         function ajax_save() {
+            if($("#Mark").children().length<2)
+            {
+                alert("车站数至少为2!");
+                return;
+            }
             $.post("/Admin/SaveTrainList.do",
                 {"json":GetData(),"trainid":'${requestScope.get("TrainID")}',"index":$("#Mark").children().length,"seats":'${requestScope.get("seats")}'},
                 function (response) {
-                    var obj = window.open("about:blank","_blank");
-                    obj.document.write(response);
+                    window.location.replace("/Admin/Change.do");
                 })
         }
 
         function GetData()
         {
             var body = $("#Mark");
-            var json=new Array();;
-            alert(body.children().length);
+            var json=new Array();
             for(var i=0;i<body.children().length;i++)
             {
                 var temp = body.children().eq(i);
                 var dic = {};
                 for(var j = 1;j<6;j++)
                 {
-                    dic[temp.children().eq(j).attr("name")] = temp.children().eq(j).html();
+                    var key = temp.children().eq(j).attr("name");
+                    var value = temp.children().eq(j).html();
+                    if(value=="---")
+                        value = null;
+                    dic[key] = value;
                 }
                 json.push(dic);
             }
-            alert(JSON.stringify(json));
+            alert("JSON数据为:"+JSON.stringify(json));
             return JSON.stringify(json);
         }
 
@@ -90,7 +95,6 @@
                         temp.find("[name='DepartureTime']").html(item["departureTime"]);
                         temp.find("[name='Price']").html(item["price"]);
                         temp.find("[name='Count']").html(item["countLeft"]);
-
                         var a = temp.find("[name='Action']").children("a").first();
                         a.attr("href",a.attr("href")+item["trainID"]);
                         var b = temp.find("[name='Action']").children("a").last();
@@ -98,17 +102,13 @@
                         
                         a.click(change);
 
-                        b.click(function()
-                        {
-                            $(this).parent().parent().remove();
-                            var th = $("#table > tbody > tr > th");
-
-                            th.each(function(index,element) {
-                                $(element).html(index+1);
-                            });
-                        });
+                        b.click(del);
                         mark.append(temp);
                     });
+                    mark.children().first().find("[name='ArrivalTime']").html("---");
+                    mark.children().last().find("[name='DepartureTime']").html("---");
+                    mark.children().last().find("[name='Price']").html("---");
+                    mark.children().last().find("[name='Count']").html("---");
                 });
         }
 
@@ -119,6 +119,14 @@
             {
                 d.children().eq(i).children().first().attr("value",c.children().eq(i).html());
                 c.children().eq(i).html(d.children().eq(i).html());
+                if(i==1)
+                    c.children().eq(i).children().first().blur(CheckName);
+                else if(i==2||i==3)
+                    c.children().eq(i).children().first().blur(CheckTime);
+                else if(i==4)
+                    c.children().eq(i).children().first().blur(CheckPrice);
+                else if(i==5)
+                    c.children().eq(i).children().first().blur(CheckCount);
             }
             $(this).unbind();
             $(this).click(save)
@@ -136,6 +144,74 @@
             $(this).click(change);
             $(this).html("修改");
             return false;
+        }
+
+        function del() {
+            if(confirm('确定要执行删除操作吗?'))
+            {
+                $(this).parent().parent().remove();
+                var th = $("#table > tbody > tr > th");
+
+                th.each(function(index,element) {
+                    $(element).html(index+1);
+                });
+            }
+            return false;
+        }
+
+        function CheckTime() {
+            var time = $(this).val();
+            var regTime = /^([0-2][0-9]):([0-5][0-9]):([0-5][0-9])$/;
+            var result = false;
+            if (regTime.test(time)) {
+                if ((parseInt(RegExp.$1) < 24) && (parseInt(RegExp.$2) < 60) && (parseInt(RegExp.$3) < 60)) {
+                    result = true;
+                }
+            }
+            if(time=="---")
+                result = true;
+            if(!result)
+            {
+                alert("时间格式错误!");
+                $(this).val("---");
+            }
+        }
+
+        function CheckPrice() {
+            var num = $(this).val();
+            if(num=="---")
+                return;
+            var regTime = /^\d+(\.\d+)?$/;
+            if(!regTime.test(num)||parseInt(num)<0)
+            {
+                $(this).val("20");
+                alert("数字不符合规范");
+                $(this).focus();
+                return;
+            }
+        }
+
+        function CheckCount() {
+            var num = $(this).val();
+            if(num=="---")
+                return;
+            var regTime = /^\d+$/;
+            if(!regTime.test(num)||parseInt(num)<0)
+            {
+                $(this).val(${requestScope.get("seats")});
+                alert("数字不符合规范");
+                $(this).focus();
+                return;
+            }
+        }
+
+        function CheckName() {
+            var name = $(this).val();
+            if(name=="") {
+                $(this).val("车站名");
+                alert("车站名不为空!");
+                $(this).focus();
+            }
         }
     </script>
 </head>
@@ -208,19 +284,19 @@
         <tr>
             <th scope="row" name="index">1</th>
             <td name="Station">
-                <input name="Station" type="text">
+                <input name="Station" type="text" value="车站名">
             </td>
             <td name="ArrivalTime">
-                <input name="ArrivalTime" type="text">
+                <input name="ArrivalTime" type="text" value="---">
             </td>
             <td name="DepartureTime">
-                <input name="DepartureTime" type="text">
+                <input name="DepartureTime" type="text" value="---">
             </td>
             <td name="Price">
-                <input name="Price" type="text">
+                <input name="Price" type="text" value="20">
             </td>
             <td name="Count">
-                <input name="Count" type="text">
+                <input name="Count" type="text" value="${requestScope.get("seats")}">
             </td>
             <td name="Action">
                 <a class="btn btn-link" href="#">保存</a>
@@ -232,6 +308,9 @@
 
 </div>
 <div class="container">
+    <div class="row">
+        <h1 class="page-header">车次号:${requestScope.get("TrainID")}</h1>
+    </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
