@@ -1,6 +1,7 @@
 package com.nxy.controller;
 
 import com.nxy.model.User;
+import com.xgh.service.SendCodeService;
 import com.xgh.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 
 @Controller
@@ -46,6 +50,32 @@ public class RegisterAndLoginController {
             return "redirect:/index/viewIndex.do";
         }
     }
+
+    String checkCode = null;
+
+    @ResponseBody
+    @RequestMapping(value = "/getWord.do",method = RequestMethod.POST)
+    public void getWord(String id){
+        checkCode = SendCodeService.SendCode(id);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/checkWord.do",method = RequestMethod.POST)
+    public void checkWord(String id,HttpServletResponse response) throws Exception{
+        PrintWriter writer = response.getWriter();
+        if(checkCode.equals(id)){
+            writer.write("true");
+        }else{
+            writer.write("false");
+        }
+
+        writer.flush();
+        writer.close();
+    }
+
+
+
 
     User tempUser = null;
     @RequestMapping(value = "/noJump.do",method = RequestMethod.POST)
