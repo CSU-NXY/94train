@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,9 +59,20 @@ public class OrderController {
     }
 
     @RequestMapping("/confirmOrder.do")
-    public String ConfirmOrder(HttpSession session, @RequestParam("checkVal")String checkVal) {
+    public String ConfirmOrder(HttpSession session, @RequestParam("checkVal")String checkVal, ModelMap modelMap) {
         TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
         session.setAttribute("checkVal", checkVal);
+        String price = (String) session.getAttribute("price");
+        int Iprice = Integer.valueOf(price);
+        switch (checkVal){
+            case "学生票": Iprice /= 2;
+                break;
+            case "军人票": Iprice /= 2;
+                break;
+            case "残疾票": Iprice /= 4;
+                break;
+        }
+        modelMap.addAttribute("price", String.valueOf(Iprice));
         int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
         TicketService.BuyTicket(UserID, trainTable);
         return "OrderPay";
