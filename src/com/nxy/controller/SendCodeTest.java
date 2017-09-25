@@ -27,7 +27,7 @@ public class SendCodeTest {
     //短信模板ID
     private static final String TEMPLATEID="3078062";
     //手机号
-    private static final String MOBILE="18932449487";
+    private static final String MOBILE="18373158992";
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="4";
 
@@ -68,6 +68,6 @@ public class SendCodeTest {
          * 2.具体的code有问题的可以参考官网的Code状态表
          */
         System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
-
+        System.out.println(checkSum);
     }
 }

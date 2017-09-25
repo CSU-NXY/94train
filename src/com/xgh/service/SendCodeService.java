@@ -20,8 +20,7 @@ public class SendCodeService {
      * @return  验证码
      */
     public static String SendCode(String MOBILE) {
-        final String
-                SERVER_URL="https://api.netease.im/sms/sendcode.action";
+        final String SERVER_URL="https://api.netease.im/sms/sendcode.action";
         //网易云信分配的账号，请替换你在管理后台应用下申请的Appkey
         final String
                 APP_KEY="e63eb9ef151353620955f6931a685477";
