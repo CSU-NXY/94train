@@ -1,4 +1,4 @@
-package com.nxy.controller;
+package com.xgh.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,25 +13,26 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-public class SendCode {
-    //发送验证码的请求路径URL
-    private static final String
-            SERVER_URL="https://api.netease.im/sms/sendcode.action";
-    //网易云信分配的账号，请替换你在管理后台应用下申请的Appkey
-    private static final String
-            APP_KEY="e63eb9ef151353620955f6931a685477";
-    //网易云信分配的密钥，请替换你在管理后台应用下申请的appSecret
-    private static final String APP_SECRET="1f5ae41e1f8e";
-    //随机数
-    private static final String NONCE="123456";
-    //短信模板ID
-    private static final String TEMPLATEID="3078062";
-    //手机号
-    private static final String MOBILE="18932449487";
-    //验证码长度，范围4～10，默认为4
-    private static final String CODELEN="4";
+public class SendCodeService {
 
-    public static void main(String[] args) throws Exception {
+    /**生成验证码发送到目标手机，并返回此验证码
+     * @param MOBILE 手机号
+     * @return  验证码
+     */
+    public static String SendCode(String MOBILE) {
+        final String
+                SERVER_URL="https://api.netease.im/sms/sendcode.action";
+        //网易云信分配的账号，请替换你在管理后台应用下申请的Appkey
+        final String
+                APP_KEY="e63eb9ef151353620955f6931a685477";
+        //网易云信分配的密钥，请替换你在管理后台应用下申请的appSecret
+        final String APP_SECRET="1f5ae41e1f8e";
+        //随机数
+        final String NONCE="123456";
+        //短信模板ID
+        final String TEMPLATEID="3078062";
+        //验证码长度，范围4～10，默认为4
+        final String CODELEN="4";
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(SERVER_URL);
@@ -59,15 +60,15 @@ public class SendCode {
         nvps.add(new BasicNameValuePair("mobile", MOBILE));
         nvps.add(new BasicNameValuePair("codeLen", CODELEN));
 
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
 
-        // 执行请求
-        HttpResponse response = httpClient.execute(httpPost);
-        /*
-         * 1.打印执行结果，打印结果一般会200、315、403、404、413、414、500
-         * 2.具体的code有问题的可以参考官网的Code状态表
-         */
-        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
-
+            // 执行请求
+            HttpResponse response = httpClient.execute(httpPost);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return checkSum;
     }
 }
+

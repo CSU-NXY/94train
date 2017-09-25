@@ -31,7 +31,7 @@
                             <p><h4>每个手机只能注册一个账号</h4></p>
                             <div class="form-group">
                                 <label class="col-xs-3"><h4>手机号</h4></label>
-                                <div class="col-xs-7"><input type="text" class="form-control" name="PhoneNum" placeholder="手机号"></div>
+                                <div class="col-xs-7"><input class="form-control" name="PhoneNum" placeholder="手机号"></div>
                                 <div class="col-xs-2"><a class="btn btn_vcode" href="#">短信验证</a></div>
                                 <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
                             </div>
