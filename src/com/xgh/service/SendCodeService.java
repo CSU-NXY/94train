@@ -8,16 +8,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class SendCodeService {
     /**
@@ -29,17 +27,6 @@ public class SendCodeService {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return formatter.format(currentTime);
-    }
-
-    private static String buildCheckSum() {
-        //随机数
-        final String NONCE = "123456";
-        //网易云信分配的密钥，这里用于生成验证码
-        final String APP_SECRET = "1f5ae41e1f8e";
-
-        String curTime = String.valueOf((new Date()).getTime() / 1000L);
-
-        return CheckSumBuilder.getCheckSum(APP_SECRET, NONCE, curTime);
     }
 
     /**
@@ -54,6 +41,8 @@ public class SendCodeService {
         //网易云信分配的账号，请替换你在管理后台应用下申请的Appkey
         final String
                 APP_KEY = "e63eb9ef151353620955f6931a685477";
+        //网易云信分配的密钥，这里用于生成验证码
+        final String APP_SECRET = "1f5ae41e1f8e";
         //随机数
         final String NONCE = "123456";
         //短信模板ID
@@ -67,7 +56,7 @@ public class SendCodeService {
         /*
          * 参考计算CheckSum的java代码，在上述文档的参数列表中，有CheckSum的计算文档示例
          */
-        String checkSum = buildCheckSum();
+        String checkSum = CheckSumBuilder.getCheckSum(APP_SECRET, NONCE, curTime);
 
         // 设置请求的header
         httpPost.addHeader("AppKey", APP_KEY);
@@ -87,21 +76,25 @@ public class SendCodeService {
         nvps.add(new BasicNameValuePair("mobile", MOBILE));
         nvps.add(new BasicNameValuePair("codeLen", CODELEN));
 
+        String varifyCode = "init";
+
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
 
             // 执行请求
             HttpResponse response = httpClient.execute(httpPost);
+
+            varifyCode = EntityUtils.toString(response.getEntity(), "utf-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return checkSum;
+        return varifyCode.substring(31,35);
     }
 
-    public static void sendMail(String targetAddress) {
+    public static String sendMail(String targetAddress) {
         Properties props = new Properties();
 
-        String checkSum = buildCheckSum();
+        String varifyCode = String.valueOf(new Random().nextInt());
 
         // 开启debug调试
         props.setProperty("mail.debug", "true");
@@ -128,7 +121,7 @@ public class SendCodeService {
             msg.setSubject("94train");
             // 编辑内容
             String builder = "您的验证码是\n" +
-                    checkSum + "\n" +
+                    varifyCode + "\n" +
                     "请及时输入。" +
                     "\n时间 " + getStringDate();
             // 设置内容
@@ -145,6 +138,7 @@ public class SendCodeService {
         }catch (Exception e) {
             e.printStackTrace();
         }
+        return varifyCode;
     }
 }
 

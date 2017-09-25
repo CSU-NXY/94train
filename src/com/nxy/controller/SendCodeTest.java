@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.nxy.model.CheckSumBuilder;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -67,7 +70,8 @@ public class SendCodeTest {
          * 1.打印执行结果，打印结果一般会200、315、403、404、413、414、500
          * 2.具体的code有问题的可以参考官网的Code状态表
          */
-        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
-
+//        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+        String a = EntityUtils.toString(response.getEntity(), "utf-8");
+        System.out.println(a.substring(31,35));
     }
 }
