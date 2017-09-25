@@ -239,7 +239,7 @@ public class AdminService {
     }
 
     public static java.sql.Time strToTime(String strDate) {
-        if(strDate=="")
+        if(strDate==null||strDate=="")
             return null;
         String str = strDate;
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
