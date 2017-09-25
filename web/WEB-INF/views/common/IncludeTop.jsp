@@ -10,43 +10,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>94Train购票网</title>
 
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <link rel="icon" href="/static/images/favicon.ico">
-        <link rel="stylesheet" href="/static/css/dcalendar.picker.css">
-
-
-        <style type="text/css">
-        .white{
-            color: #ffffff;
-        }
-
-        .white:hover{
-            color: #cdbcf3;
-
-}
-        .bac-color{
-            background-color: #563d7c;
-        }
-
-        .btn-link{
-            color: #cdbcf3;
-        }
-
-        .btn-link:hover, .btn-link:focus, .btn-link:active{
-            color: #ffffff;
-        }
-
-        .main {
-            height: 80%;
-            position: relative;
-        }
-
-        .top,.bottom{
-            height: 10%;
-            position: relative;
-        }
-
-        </style>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+        <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dcalendar.picker.css">
+        <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/includeTop.css">--%>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/train.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dataTables.bootstrap.min.css">
     </head>
 
 <body>
@@ -54,12 +23,10 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3">
-                <label><a href="${pageContext.request.contextPath}/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-bed" style="color: #ffffff"></span>94购票网</h1></a></label>
+                <label><h1 style="color: #cdbcf3"><a href="${pageContext.request.contextPath}/index/viewIndex.do"><span class="glyphicon glyphicon-bed" style="color: #ffffff">&nbsp;94购票网</span></a></h1></label>
             </div>
 
-            <div class="col-xs-5">
-
-            </div>
+            <div class="col-xs-5"></div>
 
             <div class="col-xs-4">
 
@@ -80,12 +47,16 @@
                     <ul class="nav nav-pills">
                         <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
+
                         <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
-                        <li style="margin-top: 10px;"><button class="btn btn-link" onclick="unload()">退出登录</button></li>
+                        <li style="margin-top: 10px;"><form method="post" action="/registerAndLogin/LogOut.do"><input type="submit" class="btn btn-warning" value="退出登录"></form></li>
+
                     </ul>
-                   <% }
-                %>
                 </div>
+                <%
+                    }
+                %>
+
             </div>
         </div>
     </div>

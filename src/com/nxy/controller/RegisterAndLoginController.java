@@ -6,11 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 
 @Controller
-@SessionAttributes({"S_UserID","S_Username"})
+@SessionAttributes({"S_UserID","S_Username", "S_ID", "S_Name"})
 
 @RequestMapping(value = "/registerAndLogin", method = RequestMethod.GET)
 public class RegisterAndLoginController {
@@ -32,9 +33,16 @@ public class RegisterAndLoginController {
             model.addFlashAttribute("Msg", "登录失败!");
             return "redirect:/registerAndLogin/viewLogin.do";
         } else {
-            user.setUserID(userid);
+//            user.setUserID(userid);
+            user = UserService.GetUserByUserID(userid);
             modelMap.addAttribute("S_UserID", user.getUserID());
             modelMap.addAttribute("S_Username", user.getPhoneNum());
+            modelMap.addAttribute("S_ID", user.getID());
+            modelMap.addAttribute("S_Name", user.getName());
+            if(user.getUserID()==1)
+            {
+                return "redirect:/Admin/Change.do";
+            }
             return "redirect:/index/viewIndex.do";
         }
     }
@@ -46,8 +54,16 @@ public class RegisterAndLoginController {
     }
 
     @RequestMapping(value = "/noJump2.do",method = RequestMethod.POST)
-    public void Register2(@ModelAttribute("User")User user2){
-        User user = new User(tempUser,user2);
+    public void Register2(@ModelAttribute("User")User user2) {
+        User user = new User(tempUser, user2);
         UserService.Register(user);
+    }
+
+    @RequestMapping(value = "/LogOut.do",method = RequestMethod.POST)
+    public  String LogOut(SessionStatus sessionStatus)
+    {
+        sessionStatus.setComplete();
+        return "redirect:/index/viewIndex.do";
+
     }
 }

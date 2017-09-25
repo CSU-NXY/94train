@@ -3,7 +3,7 @@
 时间：2017-09-09
 描述：页面底部--开始
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 </div>
 <div class="bac-color bottom" id="footer" align="center" style="border: #d58512">
@@ -19,3 +19,5 @@
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/scrollable.js"></script>
 <script type="text/javascript" src="/static/js/dcalendar.picker.js"></script>
+<script type="text/javascript" src="/static/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/js/dataTables.bootstrap.min.js"></script>
