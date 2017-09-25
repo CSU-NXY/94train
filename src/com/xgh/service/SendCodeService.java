@@ -94,10 +94,10 @@ public class SendCodeService {
     public static String sendMail(String targetAddress) {
         Properties props = new Properties();
 
-        String varifyCode = String.valueOf(new Random().nextInt());
+        String varifyCode = String.valueOf(Math.abs((new Random().nextInt())) % 10000);
 
         // 开启debug调试
-        props.setProperty("mail.debug", "true");
+//        props.setProperty("mail.debug", "true");
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
