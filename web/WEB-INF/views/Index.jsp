@@ -46,12 +46,12 @@
                 <form id="searchForm">
                 <div class="form-group">
                     <h4><strong>出发地</strong></h4>
-                    <label><input class="form-control" placeholder="请填写汉字" name="departure"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="departure" id="departure"></label>
                 </div>
 
                 <div class="form-group">
                     <h4><strong>目的地</strong></h4>
-                    <label><input class="form-control" placeholder="请填写汉字" name="destination"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="destination" id="destination"></label>
                 </div>
 
                 <div class="form-group">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%"><i class="glyphicon glyphicon-search"></i>查询
+                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%" ><i class="glyphicon glyphicon-search"></i>查询
                     </button>
                 </div>
             </form>

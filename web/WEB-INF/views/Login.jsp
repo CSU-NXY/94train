@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="PhoneNum">用户名/手机号</label>
+                    <label for="PhoneNum">手机号</label>
                     <input type="number" id="PhoneNum" name="PhoneNum" class="form-control" placeholder="用户名/手机号" value="<%=username%>" autofocus>
                 </div>
 
