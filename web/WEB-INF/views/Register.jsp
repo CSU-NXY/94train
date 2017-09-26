@@ -11,119 +11,189 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<style type="text/css">
-    #wizard {
-        font-size:12px;
-        height:700px;
-        margin:10px auto;
-        overflow:hidden;
-        position:relative;
-        -moz-border-radius:5px;
-        -webkit-border-radius:5px;
-    }
+<div class="container">
+    <div class="row">
+        <div id="wizard">
+            <div class="row bac-color">
+                    <ul id="status" class="list-unstyled">
+                        <li class="col-xs-offset-1 col-xs-2 active"><h4>1 基本信息</h4></li>
 
-    #wizard .items{
-        width:10000px;
-        clear:both;
-        position:absolute;
-    }
+                        <li class="col-xs-2 col-xs-offset-2"><h4>2 实名认证</h4></li>
 
-    #wizard #status{
-        padding-left:25px !important;
-    }
+                        <li class="col-xs-2 col-xs-offset-2"><h4>3 完成注册</h4></li>
+                    </ul>
+                </div>
 
-    #wizard .row{
-        background-color: #563d7c;
-    }
+            <div class="items text-left">
+                <div class="page">
+                    <div class="col-md-6 col-md-offset-2">
+                        <form id="registerForm1" onsubmit="return PostData()">
+                            <p><h4>每个手机只能注册一个账号</h4></p>
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>手机号</h4></label>
+                                <div class="col-xs-7"><input class="form-control" name="PhoneNum" id="PhoneNum" placeholder="手机号"></div>
+                                <div class="col-xs-2"><a class="btn btn_vcode" onclick="sendWord()">短信验证</a></div>
+                                <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
+                            </div>
 
-    #status li{
-        float:left;
-        color:#fff;
-        padding:10px 30px;
-    }
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>验证码</h4></label>
+                                <div class="col-xs-7"><input type="text" class="form-control" name="CheckCode" placeholder="验证码" onblur="checkWord()"></div>
+                                <p class="form_tips">激活手机后将收到验证短信，请回填短信中的6位验证码字母、数字或者英文符号，最短8位，区分大小写</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>密码</h4></label>
+                                <div class="col-xs-7"><input type="password" class="form-control" name="Password" placeholder="密码"></div>
+                                <p class="form_tips">字母、数字或者英文符号，最短8位，区分大小写</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>确认密码</h4></label>
+                                <div class="col-xs-7"><input type="password" class="form-control" name="password" placeholder="确认密码" onblur="checkPwd()"></div>
+                                <div class="col-xs-2"><span name="checkPwd" id="checkPwd">aaa</span></div>
+                                <p class="form_tips">请再次输入密码</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>邮箱</h4></label>
+                                <div class="col-xs-7"><input type="text" class="form-control" name="Email" placeholder="邮箱"></div>
+                                <p class="form_tips">请再次输入密码</p>
+                            </div>
+                            <div class="checkbox">
+                                <label class="form_tips">
+                                <label><input type="checkbox" name="Agree" checked="checked"></label>我已阅读并同意
+                                <a href="Protocol.html" target="_blank">《94购票网服务协议》</a>
+                            </label>
+                            </div>
+                            <input type="submit" class="btn btn-primary" onclick="checkMsg()" value="注册&raquo;"/>
 
-    #status li h4{
-        color: #ffffff;
-    }
+                    </form>
+                    </div>
 
-    #status li.active{
-        background-color: #cdbcf3;
-        font-weight:normal;
-    }
+                    <div>
+                            <p>已有账号，立刻<a href="/registerAndLogin/viewLogin.do"><strong>登录</strong></a>!</p>
+                        </div>
+                </div>
 
-    .page{
-        padding:20px 30px;
-        width:1200px;
-        float:left;
-        min-height: 500px;
-    }
+                <div class="page">
+                    <form id="registerForm2" onsubmit="return PostData2()">
+                        <div class="col-md-6 col-md-offset-3" style="margin-top: 100px;">
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>姓名</h4></label>
+                                <div class="col-xs-7"><input type="text" class="form-control" name="Name" placeholder="姓名"></div>
+                                <p class="form_tips">请填写你的真实姓名</p>
+                            </div>
 
-    .spage{
-        padding:50px 20px 50px 20px;
-        width:1200px;
-        float:left;
-        min-height: 500px;
-    }
+                            <div class="form-group">
+                                <label class="col-xs-3"><h4>身份证号</h4></label>
+                                <div class="col-xs-7"><input type="password" class="form-control" name="ID" placeholder="身份证号"></div>
+                                <p class="form_tips">请确认你的身份证号准确无误</p>
+                            </div>
 
-    .information{
-        padding:10px 0px 0px 20px;
-        height: auto;
-    }
+                            <div class="row" style="background-color: #ffffff">
+                                <div class="col-xs-1 col-xs-offset-2">
+                                    <input type="button" class="btn btn-primary" onclick="prePage()" style="float:left" value="&laquo;上一步" />
+                                </div>
+                                <div class="col-xs-1 col-xs-offset-6">
+                                    <input type="submit" class="btn btn-primary" onclick="nextPage()" value="下一步&raquo;" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-    .form_input{
-        width:100%;
-        background-color:transparent;
-        border:0;outline:0;
-        height:22px;
-        *line-height:22px;
-        margin:4px 0;
-    }
+                <div class="page">
+                        <div class="col-xs-offset-2" style="margin-top: 100px;">
+                            <div>
+                                <h1>恭喜你注册成功！成功开启你的购票之旅</h1>
+                            </div>
 
-    .form_tips{
-        padding:0px 150px 0px 100px;
-        color:#8d8d8d
-    }
+                            <div class="col-xs-offset-3">
+                                <h2>10秒后界面自动跳转</h2>
+                            </div>
 
-    .form_input_box{
-        display:inline-block;
-        position:relative;
-        height:30px;
-        line-height:30px;
-        vertical-align:middle;
-        width:278px;
-        font-size:14px;
-        padding:0 10px;
-        border:1px solid #e7e7eb;
-        box-shadow:none;
-        -moz-box-shadow:none;
-        -webkit-box-shadow:none;
-        border-radius:0;
-        -moz-border-radius:0;
-        -webkit-border-radius:0;
-        background-color:#fff
-    }
+                            <div class="space">
+                            </div>
 
-    .btn_vcode{
-        padding:0;
-        width:110px;
-        margin-left:5px
-    }
+                            <div class="col-md-offset-4">
+                                <a href="/index/viewIndex.do"><input type="button" class="btn btn-primary btn-lg" value="确认"/></a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    .small{
-        padding: 50px 30px 50px 30px;
-    }
+<jsp:include page="common/IncludeBottom.jsp"/>
 
-    .space{
-        height: 150px;
-        width: inherit;
-    }
-
-    .end{
-
-    }
-
-</style>
 <script>
+
+    function checkPwd() {
+        var fpwd = $("input[name='Password']").val();
+        var lpwd = $("input[name='password']").val();
+
+        if(fpwd==lpwd){
+            $("#checkPwd").html("密码正确");
+            return true;
+        }else{
+            $("#checkPwd").html("密码错误");
+            return false;
+        }
+    }
+
+    function checkMsg() {
+        var checkword = {}
+        checkword.id = $("input[name='CheckCode']").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/registerAndLogin/checkWord.do",
+            data : checkword,
+            success: function(msg) {
+                alert(msg);
+                if(msg.equal("true")){
+                    if(checkPwd() == true){
+                        nextPage();
+                    }else {
+                        alert("请重新确认密码");
+                    }
+
+                }else {
+                    alert("短信验证码错误,请重新验证")
+                }
+            }
+        });
+        return false;
+    }
+    
+    function prePage() {
+        var scrollable=$("#wizard").scrollable();
+        scrollable.prev(100,function () {
+            return true;
+        })
+    }
+
+    function nextPage() {
+        var scrollable=$("#wizard").scrollable();
+        scrollable.next(300,function () {
+            return true;
+        })
+    }
+
+    function sendWord() {
+        var check = $("input[name='PhoneNum']").val();
+        var num = {}
+        num.id = check;
+
+        $.ajax({
+            type: "POST",
+            url: "/registerAndLogin/getWord.do",
+            data : num,
+            success: function(msg) {
+            }
+        });
+        return false;
+    }
+
     function PostData() {
         alert($("#registerForm1").serialize());
         $.ajax({
@@ -149,135 +219,20 @@
     }
 </script>
 
-<div class="container">
-    <div class="row">
-        <div id="wizard">
-            <div class="row text-center">
-                    <ul id="status" class="list-unstyled">
-                        <li class="col-xs-offset-1 col-xs-2 active"><h4>1 基本信息</h4></li>
+<script type="text/javascript">
+    $(function(){
+        $("#wizard").scrollable({
+            onSeek: function(event,i){
+                $("#wizard #status li").removeClass("active").eq(i).addClass("active");
+            },
 
-                        <li class="col-xs-2 col-xs-offset-2"><h4>2 实名认证</h4></li>
-
-                        <li class="col-xs-2 col-xs-offset-2"><h4>3 完成注册</h4></li>
-                    </ul>
-                </div>
-
-            <div class="items text-left">
-                <div class="page">
-                    <div class="col-md-6 col-md-offset-2">
-                        <form id="registerForm1" onsubmit="return PostData()">
-                            <div class="information">
-                                <p>每个手机号仅能申请一次帐号！</p>
-                            </div>
-
-                            <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp手机号:&nbsp&nbsp&nbsp<label><input class="form_input" name="PhoneNum" type="text"/></label><a class="btn btn_vcode"  href="#">短信验证</a></h4>
-                                <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
-                            </div>
-
-                            <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp验证码:&nbsp&nbsp&nbsp<label><input class="form_input" name="checkcode" type="text"/></label></h4>
-                                <p class="form_tips">激活手机后将收到验证短信，请回填短信中的6位验证码字母、数字或者英文符号，最短8位，区分大小写</p>
-                            </div>
-
-                            <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp密码:&nbsp&nbsp&nbsp<label><input class="form_input" name="Password" type="password"/></label></h4>
-                                <p class="form_tips">字母、数字或者英文符号，最短8位，区分大小写</p>
-                            </div>
-
-                            <!--ajax-->
-                            <div class="information">
-                                <h4>确认密码:&nbsp&nbsp&nbsp<label><input class="form_input" type="password"></label></h4>
-                                <p class="form_tips">请再次输入密码</p>
-                            </div>
-
-                            <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp邮箱:&nbsp&nbsp&nbsp<label><input class="form_input" name="Email" type="text"></label></h4>
-                                <p class="form_tips">绑定邮箱可用于密码找回</p>
-                            </div>
-
-                            <div  class="information">
-                                <label class="form_tips">
-                                    <input type="checkbox">我同意并遵守<a href="/protocol/viewProtocol.do" target="_blank">《94购票网服务协议》</a>
-                                </label>
-                            </div>
-
-                            <div class="information">
-                                <input type="submit" class="btn btn-primary next right" style="position: relative;left: 35%" value="注册&raquo;" />
-                            </div>
-                        </form>
-                    </div>
-
-                    <div>
-                            <p>已有账号，立刻<a href="/registerAndLogin/viewLogin.do"><strong>登录</strong></a>!</p>
-                        </div>
-                </div>
-
-                <div class="spage">
-                    <form:form id="registerForm2" onsubmit="return PostData2()">
-                        <div class="col-md-6 col-md-offset-3 small">
-                            <div class="information">
-                                <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp姓名:&nbsp&nbsp&nbsp<label><input class="form_input" name="Name" type="text"></label></h4>
-                                <p class="form_tips">请填写你的真实姓名</p>
-                            </div>
-
-                            <div class="information">
-                                <h4>身份证号:&nbsp&nbsp&nbsp<label><input class="form_input" name="ID" type="text"></label></h4>
-                                <p class="form_tips">请确认你的身份证号准确无误</p>
-                            </div>
-
-                            <div class="row" style="background-color: #ffffff">
-                                <div class="col-xs-1 col-xs-offset-2">
-                                    <input type="button" class="btn btn-primary prev" style="float:left" value="&laquo;上一步" />
-                                </div>
-                                <div class="col-xs-1 col-xs-offset-6">
-                                    <input type="submit" class="btn btn-primary next right" value="下一步&raquo;" />
-                                </div>
-                            </div>
-                        </div>
-                    </form:form>
-                </div>
-
-                <div class="spage">
-                        <div class="col-md-offset-2 small">
-                            <div class="information">
-                                <h1>恭喜你注册成功！成功开启你的购票之旅</h1>
-                            </div>
-
-                            <div class="col-md-offset-3 information">
-                                <h2>10秒后界面自动跳转</h2>
-                            </div>
-
-                            <div class="space">
-                            </div>
-
-                            <div class="col-md-offset-4 information">
-                                <a href="/index/viewIndex.do"><input type="button" class="btn btn-primary btn-lg" value="确认"/></a>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <%--javascript 的学习,理解该段代码的意思--%>
-        <script type="text/javascript">
-            $(function(){
-                $("#wizard").scrollable({
-                    onSeek: function(event,i){
-                        $("#wizard #status li").removeClass("active").eq(i).addClass("active");
-                    },
-
-                    onBeforeSeek:function(event,i){
-                        //表单验证的代码写在这
-                    }
-                });
-                $(".end").click(function(){
-                    var data = $("form").serialize();
-                    alert(data);
-                });
-            });
-        </script>
-
-    </div>
-</div>
-
-<jsp:include page="common/IncludeBottom.jsp"/>
+            onBeforeSeek:function(event,i){
+                //表单验证的代码写在这
+            }
+        });
+        $(".end").click(function(){
+            var data = $("form").serialize();
+            alert(data);
+        });
+    });
+</script>

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.nxy.model.CheckSumBuilder;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,7 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-public class SendCode {
+public class SendCodeTest {
     //发送验证码的请求路径URL
     private static final String
             SERVER_URL="https://api.netease.im/sms/sendcode.action";
@@ -27,7 +30,7 @@ public class SendCode {
     //短信模板ID
     private static final String TEMPLATEID="3078062";
     //手机号
-    private static final String MOBILE="18932449487";
+    private static final String MOBILE="18373158992";
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="4";
 
@@ -67,7 +70,8 @@ public class SendCode {
          * 1.打印执行结果，打印结果一般会200、315、403、404、413、414、500
          * 2.具体的code有问题的可以参考官网的Code状态表
          */
-        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
-
+//        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+        String a = EntityUtils.toString(response.getEntity(), "utf-8");
+        System.out.println(a.substring(31,35));
     }
 }

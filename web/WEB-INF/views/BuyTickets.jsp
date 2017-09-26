@@ -7,66 +7,71 @@
 <jsp:include page="common/IncludeTop.jsp"/>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style type="text/css">
+    .table{
+        border:1px solid #dddddd;
+        width:100%;
+        margin-bottom: 20px;
+        background-color: #f3f3f3;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-2"></div>
-        <div class="col-xs-8">
-            <table class="table table-bordered table-striped text-center">
-                <tr align="center" bgcolor="#563d7c">
+        <div class="col-xs-8" style="margin-top: 5%;width: 80%; margin-left: 10%">
+            <table class="table table-bordered table-striped text-center" align="center">
+                <tr align="center" style="background-color: #669999">
                     <td colspan="5" style="color: #ffffff">车次信息</td>
                 </tr>
 
                 <tr align="center">
-                    <td>G1234<!--直接获取列车号显示--></td>
-                    <td>长沙南<!--直接获取出发地显示--></td>
+                    <td>${sessionScope.get("strainID")}<!--直接获取列车号显示--></td>
+                    <td>${sessionScope.get("startStation")}<!--直接获取出发地显示--></td>
                     <td>开往</td>
-                    <td>湘潭北<!--直接获取目的地显示--></td>
+                    <td>${sessionScope.get("endStation")}<!--直接获取目的地显示--></td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr align="center">
                     <td>2017年9月14日<!--直接获取出发日期--></td>
-                    <td>15:24<!--获取出发时间--></td>
-                    <td>1小时0分钟<!--获取途经时间--></td>
-                    <td>16:24<!--获取到达时间--></td>
-                    <td>¥20.0<!--获取票价-->元</td>
+                    <td>${sessionScope.get("departureTime")}<!--获取出发时间--></td>
+                    <td>${sessionScope.get("timeSpent")}<!--获取途经时间--></td>
+                    <td>${sessionScope.get("arrivalTime")}<!--获取到达时间--></td>
+                    <td>${sessionScope.get("price")}<!--获取票价-->元</td>
                 </tr>
-
                 <tr>
                     <td>选择车票类型</td>
                     <td colspan="4">
-                        <label style="padding:0px 10px 0px 10px;"><input type="radio" name="type">学生票</label>
-                        <label style="padding:0px 10px 0px 10px;"><input type="radio" name="type">成人票</label>
-                        <label style="padding:0px 10px 0px 10px;"><input type="radio" name="type">军人票</label>
-                        <label style="padding:0px 10px 0px 10px;"><input type="radio" name="type">残疾票</label>
+                        <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="学生票">学生票</label>
+                        <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="成人票">成人票</label>
+                        <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="军人票">军人票</label>
+                        <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="残疾票">残疾票</label>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
-                    <td colspan="2"><input type="text" id="pName" placeholder="请输入乘车人姓名"/></td>
+                    <td><label for="pName">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label></td>
+                    <td colspan="4" align="left"><label id="pName">${sessionScope.get("S_Username")}</label></td>
                 </tr>
 
                 <tr>
-                    <td>身份证号：</td>
-                    <td colspan="2"><input type="text" id="IDnum" placeholder="请输入身份证号"/></td>
+                    <td><label for="IDnum">身份证号：</label></td>
+                    <td colspan="4" align="left"><label id="IDnum">${sessionScope.get("S_ID")}</label></td>
                 </tr>
 
-                <tr>
-                    <td><input type="button" id="add" value="添加乘客"/></td>
-                </tr>
-
-                <tr align="center" bgcolor="#563d7c">
+                <tr align="center" style="background-color: #669999">
                     <td colspan="5" style="color: #ffffff">同意条款</td>
                 </tr>
 
                 <tr>
-                    <td colspan="5"><input type="checkbox" name="Agree">我已阅读并同意<a href>用户购票须知</a></td>
+                    <td colspan="5" align="left"><input type="checkbox" id="Agree">我已阅读并同意<a href>《用户购票须知》</a></td>
                 </tr>
 
                 <tr>
-                    <td><a href>返回上一页</a></td>
-                    <td><a href="${pageContext.request.contextPath}/user/viewOrderPay.do" class="btn btn-primary">确认订单</a></td>
+                    <td><a href="${pageContext.request.contextPath}/index/viewIndex.do" class="btn btn-warning">返回上一页</a></td>
+                    <td colspan="3"></td>
+                    <td><button id="confirm_btn" class="btn btn-success">确认订单</button></td>
                 </tr>
             </table>
         </div>
@@ -75,3 +80,72 @@
 
 
 <jsp:include page="common/IncludeBottom.jsp"/>
+
+<script type="text/javascript">
+    $(function () {
+        $("#confirm_btn").click(function () {
+           // 检查表单
+           var radio = document.getElementsByName("type");
+           var isCheckRadio = false;
+           var checkVal;
+           for (var i = 0; i < radio.length; i++) {
+               if (radio[i].checked) {
+                   isCheckRadio = true;
+                   checkVal = radio[i].value;
+                   break;
+               }
+           }
+           if(isCheckRadio === false) {
+               alert("请选择车票类型");
+               return false;
+           }
+
+           var pName = document.getElementById("pName").innerHTML;
+           var IDnum = document.getElementById("IDnum").innerHTML;
+           if (pName === null || "" === pName) {
+               alert("请输入乘车人姓名");
+               return false;
+           }
+           if (IDnum === null || "" === IDnum) {
+               alert("请输入乘车人姓名");
+               return false;
+           }
+           var Agree = document.getElementById("Agree");
+           if (Agree.checked === false) {
+               alert("您没有同意用户协议");
+               return false;
+           }
+
+           var params = {"checkVal":checkVal};
+            var form = document.createElement("form");
+            form.setAttribute("method", "get");
+            form.setAttribute("action", "/Order/confirmOrder.do");
+
+            for(var key in params) {
+                if(params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+
+
+//            var params = {"strainID":strainID,
+//                "startStation":startStation,
+//                "endStation":endStation,
+//                "departureTime":departureTime,
+//                "arrivalTime":arrivalTime,
+//                "timeSpent":timeSpent,
+//                "countLeft":countLeft,
+//                "price":price};
+//            $.get("/buyTickets/buyTickets.do",data);
+
+        });
+    });
+</script>

@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.nxy.model.Order" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Monarch
   Date: 2017/9/14
@@ -19,6 +21,7 @@
     .on{background-image: url(xx.png); background-repeat: no-repeat; background-position: 15px 13px;font-weight: bold;}
     .nrbf{width:inherit;float: left; display: none; padding-left: 20px; color: #464646;letter-spacing:1px; font-size: 16px;line-height: 1.5; padding-top: 5px;}
 </style>
+
 
 <div class="container" style="width: 80%">
     <div class="row">
@@ -49,9 +52,9 @@
         <div class="col-xs-1 dev">
             <p class="personalInfo">个人信息</p>
             <ul id="myInfo" >
-                <li class="active"><a href="#base" data-toggle="tab">基本信息</a></li>
-                <li><a href="#change" data-toggle="tab">修改信息</a></li>
-                <li><a href="#order" data-toggle="tab">我的订单</a></li>
+                <a href="#base" data-toggle="tab"><li class="active">基本信息</li></a>
+                <a href="#change" data-toggle="tab"><li>修改信息</li></a>
+                <a href="#order" data-toggle="tab"> <li>我的订单</li></a><!--xj-->
             </ul>
         </div>
         <div class="col-xs-11 con">
@@ -149,7 +152,7 @@
                         <span><label>日期</label></span>
                         <span>
                                 <input type="text" id="StartDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>
-                                -<input type="text" id="EndDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>
+                                <input type="text" id="EndDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>
                             <!--这里需要点击输入框显示一个日历的div，用于选择时间-->
                             </span>
                         <span>
@@ -168,9 +171,12 @@
                         </div>
                     </div>
 
+
+
                     <div id="myOrderContent" class="tab-content">
                         <div class="tab-pane fade in active" id="all">
                             <table class="table table-bordered table-striped table-hover" id="orderInfoALL">
+
                                 <tr align="center">
                                     <td>序号</td>
                                     <td>订单号</td>
@@ -185,60 +191,35 @@
                                     <td>订单状态</td>
                                     <td>操作<td>
                                 </tr>
+                                <tbody id="ordershow" style="display: none">
                                 <tr>
-                                    <td>1</td>
-                                    <td>324124214</td>
-                                    <td>k243</td>
-                                    <td>张三</td>
-                                    <td>20</td>
-                                    <td>2017-9-10</td>
-                                    <td>2017-9-12 10：24</td>
-                                    <td>2017-9-12 10；59</td>
-                                    <td>长沙</td>
-                                    <td>娄底</td>
-                                    <td>已完成</td>
-                                    <td>
-                                        <button type="button" class="btn btn-dange btn-xs">删除</button>
-                                        <button type="button" disabled="disabled" class="btn btn-warning btn-xs">退订</button>
-                                        <button type="button" disabled="disabled" class="btn btn-success btn-xs">付款</button>
+                                    <td class="_id"></td>
+                                    <td class="_orderID"></td>
+
+                                    <td class="_trainID"></td>
+                                    <td class="_userID"></td>
+                                    <td class="_Price"></td>
+
+                                    <td class="_OrderDate"></td>
+                                    <td class="_DepartureTime"></td>
+                                    <td class="_ArrivalTime"></td>
+
+                                    <td class="_StartStation"></td>
+                                    <td class="_EndStation"></td>
+
+                                    <td class="_Status"></td>
+
+                                    <td class="_operation">
+                                        <button type="button" onclick="acs(this)" class="btn btn-dange btn-xs" >删除</button>
+                                        <button type="button" class="btn btn-warning btn-xs" >退订</button>
+                                        <button type="button" class="btn btn-success btn-xs" >付款</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>324124214</td>
-                                    <td>k243</td>
-                                    <td>张三</td>
-                                    <td>20</td>
-                                    <td>2017-9-20</td>
-                                    <td>2017-9-23 10：24</td>
-                                    <td>2017-9-23 10；59</td>
-                                    <td>长沙</td>
-                                    <td>娄底</td>
-                                    <td>未付款</td>
-                                    <td>
-                                        <button type="button" disabled="disabled" class="btn btn-dange btn-xs">删除</button>
-                                        <button type="button" disabled="disabled" class="btn btn-warning btn-xs">退订</button>
-                                        <button type="button" class="btn btn-success btn-xs">付款</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>324124214</td>
-                                    <td>k243</td>
-                                    <td>张三</td>
-                                    <td>20</td>
-                                    <td>2017-9-20</td>
-                                    <td>2017-9-22 10：24</td>
-                                    <td>2017-9-22 10；59</td>
-                                    <td>长沙</td>
-                                    <td>娄底</td>
-                                    <td>未出行</td>
-                                    <td>
-                                        <button type="button" disabled="disabled" class="btn btn-dange btn-xs">删除</button>
-                                        <button type="button" class="btn btn-warning btn-xs">退订</button>
-                                        <button type="button" disabled="disabled" class="btn btn-success btn-xs">付款</button>
-                                    </td>
-                                </tr>
+                                </tbody>
+                                <tbody id="ordersall">
+
+                                </tbody>
+
                             </table>
                         </div>
 
@@ -258,24 +239,9 @@
                                     <td>订单状态</td>
                                     <td>操作</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>324124214</td>
-                                    <td>k243</td>
-                                    <td>张三</td>
-                                    <td>20</td>
-                                    <td>2017-9-20</td>
-                                    <td>2017-9-22 10：24</td>
-                                    <td>2017-9-22 10；59</td>
-                                    <td>长沙</td>
-                                    <td>娄底</td>
-                                    <td>未出行</td>
-                                    <td>
-                                        <button type="button" disabled="disabled" class="btn btn-dange btn-xs">删除</button>
-                                        <button type="button" class="btn btn-warning btn-xs">退订</button>
-                                        <button type="button" disabled="disabled" class="btn btn-success btn-xs">付款</button>
-                                    </td>
-                                </tr>
+                                <tbody id="ordersNoend">
+
+                                </tbody>
                             </table>
                         </div>
 
@@ -295,46 +261,36 @@
                                     <td>车票状态</td>
                                     <td>操作</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>324124214</td>
-                                    <td>k243</td>
-                                    <td>张三</td>
-                                    <td>20</td>
-                                    <td>2017-9-20</td>
-                                    <td>2017-9-23 10：24</td>
-                                    <td>2017-9-23 10；59</td>
-                                    <td>长沙</td>
-                                    <td>娄底</td>
-                                    <td>未付款</td>
-                                    <td>
-                                        <button type="button" disabled="disabled" class="btn btn-dange btn-xs">删除</button>
-                                        <button type="button" disabled="disabled" class="btn btn-warning btn-xs">退订</button>
-                                        <button type="button" class="btn btn-success btn-xs">付款</button>
-                                    </td>
-                                </tr>
+                                <tbody id="ordersNopay">
+
+                                </tbody>
                             </table>
                         </div>
 
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+<jsp:include page="common/IncludeBottom.jsp"/>
+
 <script>
     $(function() {
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                // Get the name of active tab
-                var activeTab = $(e.target).text();
-                // Get the name of previous tab
-                var previousTab = $(e.relatedTarget).text();
-                $(".active-tab span").html(activeTab);
-                $(".previous-tab span").html(previousTab);
-            });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // Get the name of active tab
+            var activeTab = $(e.target).text();
+            // Get the name of previous tab
+            var previousTab = $(e.relatedTarget).text();
+            $(".active-tab span").html(activeTab);
+            $(".previous-tab span").html(previousTab);
         });
+    });
 </script>
+
 <script type="text/javascript">
     $(function(a){
         var b;
@@ -342,32 +298,103 @@
             b=location.href,
             b=b.substring(b.indexOf(".htm?")+5),
             1==b?(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(0).show().siblings().hide())
-            :2==b?(a(".dev ul li").eq(1).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(1).show().siblings().hide())
-            :3==b?(a(".dev ul li").eq(2).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(2).show().siblings().hide())
-            :(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),
-            a(".nrbf").eq(0).show().siblings().hide()),
+                :2==b?(a(".dev ul li").eq(1).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(1).show().siblings().hide())
+                :3==b?(a(".dev ul li").eq(2).addClass("on").siblings().removeClass("on"),a(".nrbf").eq(2).show().siblings().hide())
+                    :(a(".dev ul li").eq(0).addClass("on").siblings().removeClass("on"),
+                        a(".nrbf").eq(0).show().siblings().hide()),
             a(".dev ul li").click(function(){
                 var b=a(this).index();
                 a(this).addClass("on").siblings().removeClass("on"),
-                a(".nrbf").eq(b).show().siblings().hide()
+                    a(".nrbf").eq(b).show().siblings().hide()
             })
     });
 </script>
 
-<script>
+<script type="text/javascript">
+    var order = $("#ordershow").children();
+    var dataGrid = $("#ordersall");
+    var noEnd = $("#ordersNoend");
+    var noPay = $("#ordersNopay");
     $(function () {
-        $(function () {
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                // Get the name of active tab
-                var activeTab = $(e.target).text();
-                // Get the name of previous tab
-                var previousTab = $(e.relatedTarget).text();
-                $(".active-tab span").html(activeTab);
-                $(".previous-tab span").html(previousTab);
-            });
-        });
+        PostID();
     });
+    function PostID() {
+        $("#ordershow").hidden;
+        $.ajax({
+            type: "POST",
+            url: "/user/viewOrder.do",
+            data : ${sessionScope.S_UserID},
+            success: function(data) {
+                dataGrid.empty();
+                noEnd.empty();
+                noPay.empty();
+                $.each(data, function (index, row) {
+                    var tr = order.clone();
+                    var tr2;
+                    var tr3;
+                    dataGrid.append(tr);
+                    $.each(row, function (name, value) {
+
+                            tr.find("._id").text(index+1);
+                            tr.find("._" + name).text(value);
+                            if(name=="status"){
+                                if(value==1) {
+                                    tr.find("._status").text("已完成");
+                                    alert(tr.children().last().children().eq(2).attr("disabled","disabled"));
+
+                                }
+                                if(value==0){
+                                    tr.find("._status").text("未完成");
+
+                                    tr2 = tr.clone();
+                                }
+                                if(value==-1){
+                                    tr.find("._status").text("未支付");
+                                    alert(tr.children().last().children().eq(1).attr("disabled","disabled"));
+                                    tr3 = tr.clone();
+                                }
+                            }
+                    })
+                    if(tr2!=null){
+                        noEnd.append(tr2);
+                    }
+                    if(tr3!=null){
+                        noPay.append(tr3);
+                    }
+                });
+            }
+        },"json");
+
+        return false;
+    }
+
+    function acs(obj) {
+        var params = {}
+        var $td= $(obj).parents('tr').children('td').eq(1).text();
+
+        params.id = $td;
+
+        if(confirm("确定要删除此订单码？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+
+        if(window.event.returnValue == true){
+            $.ajax({
+                url:"/Order/deleteOrder.do",
+                type:"post",
+                data:params,
+                dataType:"json",
+                success:function (data) {
+                    alert("a");
+                },
+                error:function () {
+                    alert("gsxgh");
+                    PostID();
+                }
+            })
+        }
+        return false;
+    }
 </script>
-
-<jsp:include page="common/IncludeBottom.jsp"/>
-

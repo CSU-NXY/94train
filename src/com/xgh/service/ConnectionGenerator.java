@@ -11,7 +11,7 @@ public class ConnectionGenerator {
     private final static String user = "root";
     //MySQL配置时的密码
     //不同自己改!!!
-    private static String password = "Ezio1234";
+    private static String password = "1234";
 
     public static Connection GetConnetct(){
         //加载驱动程序

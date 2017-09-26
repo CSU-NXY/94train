@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
         <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dcalendar.picker.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/includeTop.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/train.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dataTables.bootstrap.min.css">
     </head>
 
 <body>
@@ -21,12 +22,10 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3">
-                <label><a href="${pageContext.request.contextPath}/index/viewIndex.do"><h1 style="color: #cdbcf3"><span class="glyphicon glyphicon-bed" style="color: #ffffff"></span>94购票网</h1></a></label>
+                <label><h1 style="color: #cdbcf3"><a href="${pageContext.request.contextPath}/index/viewIndex.do"><span class="glyphicon glyphicon-bed" style="color: #ffffff">&nbsp;94购票网</span></a></h1></label>
             </div>
 
-            <div class="col-xs-5">
-
-            </div>
+            <div class="col-xs-5"></div>
 
             <div class="col-xs-4">
 
@@ -48,13 +47,15 @@
                         <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
 
-                        <li class="active" style="margin-top: 10px;"><a href="/index/viewIndex.do">我要买票</a></li>
+                        <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
                         <li style="margin-top: 10px;"><form method="post" action="/registerAndLogin/LogOut.do"><input type="submit" class="btn btn-warning" value="退出登录"></form></li>
 
                     </ul>
-                   <% }
-                %>
                 </div>
+                <%
+                    }
+                %>
+
             </div>
         </div>
     </div>
