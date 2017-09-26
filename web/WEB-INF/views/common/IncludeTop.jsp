@@ -34,8 +34,8 @@
                     {
                 %>
                 <div>
-                    <a class="btn btn-link navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
-                    <a class="btn btn-link navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
+                    <a class="btn btn-lin navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewLogin.do"><h3>登录</h3></a>
+                    <a class="btn btn-lin navbar-btn" href="${pageContext.request.contextPath}/registerAndLogin/viewRegister.do"><h3>注册</h3></a>
                 </div>
                 <%
                 }
@@ -44,7 +44,7 @@
                 %>
                 <div>
                     <ul class="nav nav-pills">
-                        <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
+                        <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Name")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
 
                         <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do" class="btn btn-primary btn-sm">我要买票</a></li>

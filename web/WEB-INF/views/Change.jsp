@@ -43,7 +43,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="trainTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -68,7 +68,6 @@
                             <td>@mdo</td>
                             <td></td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

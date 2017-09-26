@@ -17,7 +17,17 @@
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active{
-    color: #563d7c;
+    color: #563d7c !important;
+}
+
+.btn-lin{
+    color: #cdbcf3;
+}
+
+.btn-lin:hover,
+.btn-lin:focus,
+.btn-lin:active{
+    color: white;
 }
 
 .main {
@@ -179,4 +189,13 @@ body {
 .form_tips {
     padding: 0px 100px 0px 150px;
     color: #8d8d8d
+}
+
+.personalInfo {
+    background: #563d7c;
+    padding-left: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+    color: #cdbcf3
 }
