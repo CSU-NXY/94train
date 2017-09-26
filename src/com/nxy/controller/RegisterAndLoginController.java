@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.List;
 
 
 @Controller
@@ -72,6 +73,30 @@ public class RegisterAndLoginController {
 
         writer.flush();
         writer.close();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/checkPhoneNumIsExist.do",method = RequestMethod.POST)
+    public void checkPhoneNumIsExist(String phone,HttpServletResponse response) throws Exception{
+        List<String> phones = UserService.GetUserPhones();
+        boolean check = false;
+        for (int i = 0;i < phones.size();i++){
+            if(phones.get(i).equals(phone)){
+                check = false;
+                break;
+            }
+                else
+                    check = true;
+        }
+
+        PrintWriter writer = response.getWriter();
+        if(check)
+            writer.write("true");
+        else writer.write("false");
+
+        writer.flush();
+        writer.close();
+
     }
 
 

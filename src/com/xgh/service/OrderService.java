@@ -68,6 +68,26 @@ public class OrderService {
         return false;
     }
 
+    public static boolean ChangeOrder(int orderID,int status){
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "update 94train.order set Status = ? where 94train.order.OrderID = ?";
+        PreparedStatement pstmt;
+        int i = 0;
+        try {
+            pstmt = (PreparedStatement)conn.prepareStatement(sql);
+            pstmt.setInt(1,status);
+            pstmt.setInt(2,orderID);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(i==1)
+            return true;
+        return false;
+    }
+
     public static boolean DeleteOrder(int orderID){
         int count = 0;
         Connection conn = ConnectionGenerator.GetConnetct();
