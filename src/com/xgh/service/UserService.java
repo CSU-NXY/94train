@@ -4,6 +4,8 @@ import com.nxy.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     //
@@ -13,7 +15,7 @@ public class UserService {
         String sql = "INSERT INTO `94train`.`user` (`PhoneNum`, `Password`, `Name`, `ID`, `Email`) VALUES (?, ?, ?, ?, ?);";
 
         PreparedStatement pstmt=null;
-        int i;
+        int i = 0;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, user.getPhoneNum());
@@ -25,7 +27,7 @@ public class UserService {
             pstmt.close();
             conn.close();
         } catch (Exception e) {
-            throw new RuntimeException("surprise m****** f***");
+            e.printStackTrace();
         }
         if(i==0)
         {
@@ -226,5 +228,24 @@ public class UserService {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static List<String> GetUserPhones(){
+        List<String> phones = new ArrayList();
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = "select PhoneNum from 94train.user";
+        PreparedStatement pstmt = null;
+        try{
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                phones.add(rs.getString("PhoneNum"));
+            }
+            pstmt.close();
+            conn.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return phones;
     }
 }
