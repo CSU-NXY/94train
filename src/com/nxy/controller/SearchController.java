@@ -21,4 +21,10 @@ public class SearchController {
             return null;
         return TicketService.SearchByStation(departure, destination);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAllStations.do")
+    public List<String> getAllStations() {
+        return TicketService.GetStationName();
+    }
 }

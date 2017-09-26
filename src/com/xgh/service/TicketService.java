@@ -171,4 +171,28 @@ public class TicketService {
         return false;
     }
 
+    public static List<String> GetStationName()
+    {
+
+        List<String> list = new ArrayList<>() ;
+
+        Connection conn = ConnectionGenerator.GetConnetct();
+        String sql = " SELECT StationName FROM 94train.station;";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                list.add(rs.getString(1));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

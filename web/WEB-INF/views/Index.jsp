@@ -132,7 +132,20 @@
 
 <script type="text/javascript">
     $(function () {
+        // Autocomplete部分
+        var availableTags = null;
+        $.getJSON("/search/getAllStations.do",function(result){
+            $( "#departure" ).autocomplete({
+                source: result
+            });
+            $( "#destination" ).autocomplete({
+                source: result
+            });
+        });
 
+
+
+        // 车票查询-显示部分
         var searchForm = $("#searchForm");
         var dataGrid = $("#dataGrid");
         var template = $("#template").children();
@@ -150,13 +163,8 @@
                         })
                     });
 
-                    $("#trainTable").DataTable({
-                        "lengthMenu": [ 5, 10, 15]
-                    });
-
                     $(".get-train").click(function () {
                         // 验证是否登录
-                        alert("click");
                         var S_ID = '<%=session.getAttribute("S_ID")%>';
                         if (S_ID.toString() === "null" || S_ID === "") {
                             alert("请先登录");
@@ -199,6 +207,9 @@
                         document.body.appendChild(form);
                         form.submit();
 
+                    });
+                    $("#trainTable").DataTable({
+                        "lengthMenu": [ 5, 10, 15]
                     });
                 }, "json");
             return false;

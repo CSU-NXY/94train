@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dcalendar.picker.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/train.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/dataTables.bootstrap.min.css">
-        <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/jquery-ui.css">--%>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/jquery-ui.css">
     </head>
 
 <body>
