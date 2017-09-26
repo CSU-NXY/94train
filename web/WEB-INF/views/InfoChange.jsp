@@ -50,6 +50,11 @@
                 alert("车站数至少为2!");
                 return;
             }
+            if($("#Mark input").length>0)
+            {
+                alert("请先保存之后提交!");
+                return;
+            }
             $.post("/Admin/SaveTrainList.do",
                 {"json":GetData(),"trainid":'${requestScope.get("TrainID")}',"index":$("#Mark").children().length,"seats":'${requestScope.get("seats")}'},
                 function (response) {
@@ -75,8 +80,9 @@
                 }
                 json.push(dic);
             }
-            alert("JSON数据为:"+JSON.stringify(json));
-            return JSON.stringify(json);
+            var str = JSON.stringify(json);
+            alert("JSON数据为:"+str);
+            return str;
         }
 
         function ajax_json(){
