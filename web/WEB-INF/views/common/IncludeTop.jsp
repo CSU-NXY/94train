@@ -47,8 +47,12 @@
                         <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
 
-                        <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
-                        <li style="margin-top: 10px;"><form method="post" action="/registerAndLogin/LogOut.do"><input type="submit" class="btn btn-warning" value="退出登录"></form></li>
+                        <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do" class="btn btn-primary btn-sm">我要买票</a></li>
+                        <li style="margin-top: 10px;">
+                        <%--<form method="post" action="/registerAndLogin/LogOut.do"><input type="submit" class="btn btn-warning btn-sm" value="退出登录"></form>--%>
+                        <a href="${pageContext.request.contextPath}/registerAndLogin/LogOut.do" class="btn btn-warning btn-sm">退出登录</a>
+
+                        </li>&ndash;%&gt;
 
                     </ul>
                 </div>
