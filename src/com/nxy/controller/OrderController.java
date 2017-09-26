@@ -88,4 +88,16 @@ public class OrderController {
     public void deleteOrder(int id){
         OrderService.DeleteOrder(id);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/returnTicket.do",method = RequestMethod.POST)
+    public void returnTicket(int id,int status){
+        OrderService.ChangeOrder(id,status);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/buyTicket.do",method = RequestMethod.POST)
+    public void buyTicket(int id,int status){
+        OrderService.ChangeOrder(id,status);
+    }
 }

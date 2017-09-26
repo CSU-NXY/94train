@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%"><i class="glyphicon glyphicon-search"></i>查询
+                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%" ><i class="glyphicon glyphicon-search"></i>查询
                     </button>
                 </div>
             </form>
