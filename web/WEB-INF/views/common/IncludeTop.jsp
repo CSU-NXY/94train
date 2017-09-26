@@ -44,13 +44,12 @@
                     {
                 %>
                 <div>
-                    <ul class="nav nav-pills">
+                    <ol class="nav nav-pills">
                         <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Name")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
-                        <li><a class="btn btn-success" href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
-                        <li><form method="post" action="/registerAndLogin/LogOut.do"><input  class="btn btn-warning" type="submit" value="退出登录"></form></li>
-
-                    </ul>
+                        <li><form style="margin-top: 15px"><a class="btn btn-success" href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></form></li>
+                        <li><form style="margin-top: 15px" method="post" action="/registerAndLogin/LogOut.do"><input  class="btn btn-warning" type="submit" value="退出登录"></form></li>
+                    </ol>
                 </div>
                 <%
                     }
