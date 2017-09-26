@@ -63,7 +63,7 @@ public class OrderController {
         TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
         session.setAttribute("checkVal", checkVal);
         String price = (String) session.getAttribute("price");
-        int Iprice = Integer.valueOf(price);
+        double Iprice = Double.valueOf(price);
         switch (checkVal){
             case "学生票": Iprice /= 2;
                 break;

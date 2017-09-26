@@ -41,7 +41,7 @@ public class BuyTicketsController {
             trainTable.setArrivalTime(new Time(sdf.parse(arrivalTime).getTime()));
             trainTable.setDepartureTime(new Time(sdf.parse(departureTime).getTime()));
             trainTable.setCountLeft(Integer.valueOf(countLeft));
-            trainTable.setPrice(Integer.valueOf(price));
+            trainTable.setPrice(Double.valueOf(price));
             trainTable.setStrainID(strainID);
             trainTable.setStartStation(startStation);
             trainTable.setEndStation(endStation);
