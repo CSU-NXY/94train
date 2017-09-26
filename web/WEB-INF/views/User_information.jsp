@@ -116,11 +116,11 @@
                                         <td><input type="password"  name="OldPassword" id="OldPassword" placeholder="请填写旧密码"/></td>
                                     </tr>
                                     <tr>
-                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td>新&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
                                         <td><input type="password" name="NewPassword" id="NewPassword" placeholder="请填写新密码"/></td>
                                     </tr>
                                     <tr>
-                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td>重&nbsp;&nbsp;&nbsp;&nbsp;复&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
                                         <td><input type="password" name="RepeatPassword" id="RepeatPassword" placeholder="请确认新密码"/></td>
                                     </tr>
                                     <tr>
