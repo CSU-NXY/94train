@@ -46,9 +46,8 @@
                     <ul class="nav nav-pills">
                         <li><label><h3 class="white">Hi,<a href="${pageContext.request.contextPath}/user/viewUserInfo.do" class="white">${sessionScope.get("S_Username")}</a></h3></label></li>
                         <li>&nbsp;&nbsp;</li>
-
-                        <li class="active" style="margin-top: 10px;"><a href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
-                        <li style="margin-top: 10px;"><form method="post" action="/registerAndLogin/LogOut.do"><input type="submit" class="btn btn-warning" value="退出登录"></form></li>
+                        <li><a class="btn btn-success" href="${pageContext.request.contextPath}/index/viewIndex.do">我要买票</a></li>
+                        <li><form method="post" action="/registerAndLogin/LogOut.do"><input  class="btn btn-warning" type="submit" value="退出登录"></form></li>
 
                     </ul>
                 </div>

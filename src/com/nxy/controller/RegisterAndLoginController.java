@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
@@ -31,13 +32,39 @@ public class RegisterAndLoginController {
     }
 
     @RequestMapping(value = "/Login.do",method = RequestMethod.POST)
-    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model,ModelMap modelMap) {
+    public  String Login(@ModelAttribute("User")User user,RedirectAttributesModelMap model,ModelMap modelMap,@ModelAttribute("remember") String remember,HttpServletResponse response) {
         int userid = UserService.Login(user);
         if (userid == -1) {
             model.addFlashAttribute("Msg", "登录失败!");
             return "redirect:/registerAndLogin/viewLogin.do";
         } else {
 //            user.setUserID(userid);
+            if (remember.equals("true")) {
+                //创建两个Cookie对象
+                Cookie nameCookie = new Cookie("username", user.getPhoneNum());
+                //设置Cookie的有效期为3天
+                nameCookie.setMaxAge(60 * 60 * 24 * 3);
+                Cookie pwdCookie = new Cookie("password", user.getPassword());
+                pwdCookie.setMaxAge(60 * 60 * 24 * 3);
+                Cookie CheckBoxCookie = new Cookie("remember-me", "Checked");
+                CheckBoxCookie.setMaxAge(60 * 60 * 24 * 3);
+                response.addCookie(nameCookie);
+                response.addCookie(pwdCookie);
+                response.addCookie(CheckBoxCookie);
+            }
+            else
+            {
+                Cookie nameCookie = new Cookie("username", "");
+                //设置Cookie的有效期为3天
+                nameCookie.setMaxAge(0);
+                Cookie pwdCookie = new Cookie("password", "");
+                pwdCookie.setMaxAge(0);
+                Cookie CheckBoxCookie = new Cookie("remember-me", "");
+                CheckBoxCookie.setMaxAge(0);
+                response.addCookie(nameCookie);
+                response.addCookie(pwdCookie);
+                response.addCookie(CheckBoxCookie);
+            }
             user = UserService.GetUserByUserID(userid);
             modelMap.addAttribute("S_UserID", user.getUserID());
             modelMap.addAttribute("S_Username", user.getPhoneNum());
