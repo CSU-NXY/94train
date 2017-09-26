@@ -129,7 +129,7 @@ public class TicketService {
         return name;
     }
 
-    public  static boolean BuyTicket(int UserID,TrainTable trainTable)
+    public  static boolean BuyTicket(int UserID,TrainTable trainTable, int type)
     {
         Order order = new Order();
         order.setUserID(UserID);
@@ -138,7 +138,7 @@ public class TicketService {
         order.setEndStation(trainTable.getEndStation());
         order.setDepartureTime(trainTable.getDepartureTime());
         order.setArrivalTime(trainTable.getArrivalTime());
-        order.setStatus(0);
+        order.setStatus(type);
         order.setType(0);
         order.setPrice(trainTable.getPrice());
         int i = 0;

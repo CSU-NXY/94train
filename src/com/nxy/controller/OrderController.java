@@ -5,6 +5,7 @@ import com.nxy.model.Order;
 import com.nxy.model.TrainTable;
 import com.xgh.service.OrderService;
 import com.xgh.service.TicketService;
+import org.apache.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
@@ -72,15 +73,18 @@ public class OrderController {
             case "残疾票": Iprice /= 4;
                 break;
         }
+        trainTable.setPrice(Iprice);
         modelMap.addAttribute("price", String.valueOf(Iprice));
-        int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
-        TicketService.BuyTicket(UserID, trainTable);
+//        int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
         return "OrderPay";
     }
 
     @RequestMapping("/noPay.do")
-    public String NoPay() {
-        return "index";
+    public String NoPay(HttpSession session) {
+        TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
+        int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
+        TicketService.BuyTicket(UserID, trainTable, -1);
+        return "Index";
     }
 
     @ResponseBody
@@ -99,5 +103,13 @@ public class OrderController {
     @RequestMapping(value = "/buyTicket.do",method = RequestMethod.POST)
     public void buyTicket(int id,int status){
         OrderService.ChangeOrder(id,status);
+    }
+
+    @RequestMapping(value = "/pay.do")
+    public String pay(HttpSession session) {
+        TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
+        int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
+        TicketService.BuyTicket(UserID, trainTable, 0);
+        return "Index";
     }
 }

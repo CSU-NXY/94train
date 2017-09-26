@@ -354,7 +354,7 @@
                                 }
                                 if(value==-1){
                                     tr.find("._status").text("未支付");
-                                    // alert(tr.children().last().children().eq(1).attr("disabled","disabled"));
+                                    tr.children().last().children().eq(1).attr("disabled","disabled");
                                     tr3 = tr.clone();
                                     tr3.find("._id").text(count2);
                                     count2++;
@@ -393,10 +393,10 @@
                 data:params,
                 dataType:"json",
                 success:function (data) {
-                    // alert("a");
+
                 },
                 error:function () {
-                    // alert("gsxgh");
+
                     PostID();
                 }
             })
@@ -424,10 +424,10 @@
                 data:params,
                 dataType:"json",
                 success:function (data) {
-                    // alert("a");
+
                 },
                 error:function () {
-                    // alert("gsxgh");
+
                     PostID();
                 }
             })
@@ -455,10 +455,10 @@
                 data:params,
                 dataType:"json",
                 success:function (data) {
-                    // alert("a");
+
                 },
                 error:function () {
-                    // alert("gsxgh");
+
                     PostID();
                 }
             })

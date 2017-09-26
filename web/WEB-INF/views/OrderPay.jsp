@@ -60,13 +60,14 @@
         </tr>
         <tr align="center">
             <td>
-                <a href="${pageContext.request.contextPath}/user/viewBuyTickets.do" class="btn btn-warning">返回上一步</a>
+                <%--<a href="${pageContext.request.contextPath}/user/viewBuyTickets.do" class="btn btn-warning">取消</a>--%>
+                <a id="noPay" href="${pageContext.request.contextPath}/Order/noPay.do" class="btn btn-default">暂不付款并加入我的订单</a>
             </td>
             <td>
                 <%--<a href="/Order/noPay.do" class="btn btn-default">暂不付款并加入我的订单</a>--%>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/index/viewIndex.do" class="btn btn-primary">付款</a>
+                <a id="pay" href="${pageContext.request.contextPath}/Order/pay.do" class="btn btn-primary">付款</a>
             </td>
         </tr>
     </table>
@@ -87,3 +88,16 @@
 </div>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
+
+<script type="text/javascript">
+    $(function () {
+        $("#noPay").click(function () {
+            alert("加入订单成功，请及时付款！");
+            return true;
+        });
+        $("#pay").click(function () {
+            alert("付款成功！");
+            return true;
+        });
+    });
+</script>

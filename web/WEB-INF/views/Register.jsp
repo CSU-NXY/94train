@@ -158,7 +158,8 @@
         }
         else if(!myreg.test(phone)){
             message = "请输入有效的手机号码！";
-        }else if(!checkPhoneIsExist(phone)){
+        }else if(checkPhoneIsExist(phone) == "false"){
+            alert(checkPhoneIsExist(phone));
             message = "该手机号码已经被绑定！";
         }else{
             flag = true;
@@ -173,18 +174,21 @@
     
     function checkPhoneIsExist(obj) {
         var num = {}
+        var message = "";
         num.phone = obj;
-
+        alert(num.phone);
         $.ajax({
             type: "POST",
             url: "/registerAndLogin/checkPhoneNumIsExist.do",
             data : num,
             success: function(msg) {
-                if(msg == "true")
-                    return true;
+                alert(msg);
+                message = msg;
+
             }
         });
-        return false;
+        alert(message);
+        return message;
     }
 
     function checkCode(obj) {
