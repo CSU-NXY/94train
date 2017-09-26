@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label class="col-xs-3"><h4>手机号</h4></label>
                                 <div class="col-xs-7"><input class="form-control" name="PhoneNum" id="PhoneNum" placeholder="手机号"></div>
-                                <div class="col-xs-2"><input class="btn btn_vcode" id="sendMsg" onclick="settime()" value="短信验证"></div>
+                                <div class="col-xs-2"><input class="btn btn_vcode" id="sendMsg" onclick="sendWord()" value="短信验证"></div>
                                 <p class="form_tips">作为登录帐号，请填写未被注册的手机号</p>
                             </div>
 
@@ -261,6 +261,7 @@
 
     function sendWord() {
         if(checkPhone()){
+            settime();
             var check = $("input[name='PhoneNum']").val();
             var num = {}
             num.id = check;
