@@ -363,11 +363,16 @@
 
     function acs(obj) {
         var params = {}
-        var $td= $(obj).parents('tr').children('td').eq(1).text();
+        var $td = $(obj).parents('tr').children('td').eq(1).text();
+        var $trainid = $(obj).parents('tr').children('td').eq(2).text();
+        var $start = $(obj).parents('tr').children('td').eq(8).text();
+        var $end = $(obj).parents('tr').children('td').eq(9).text();
 
         params.id = $td;
-
-        if(confirm("确定要删除此订单码？")){
+        params.trainid = $trainid;
+        params.start = $start;
+        params.end = $end;
+        if(confirm("确定要删除此订单吗？")){
             window.event.returnValue = true;
         }else{
             window.event.returnValue = false;

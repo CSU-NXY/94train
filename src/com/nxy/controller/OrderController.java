@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeSet;
 
 @Controller
 @RequestMapping(value = "/Order", method = RequestMethod.GET)
@@ -84,12 +85,19 @@ public class OrderController {
         TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
         int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
         TicketService.BuyTicket(UserID, trainTable, -1);
+        TicketService.TicketCountChange(trainTable, -1);
         return "Index";
     }
 
     @ResponseBody
     @RequestMapping(value = "/deleteOrder.do",method = RequestMethod.POST)
-    public void deleteOrder(int id){
+    public void deleteOrder(int id,String trainid,String start,String end)
+    {
+        TrainTable trainTable = new TrainTable();
+        trainTable.setStartStation(start);
+        trainTable.setEndStation(end);
+        trainTable.setStrainID(trainid);
+        TicketService.TicketCountChange(trainTable,1);
         OrderService.DeleteOrder(id);
     }
 
@@ -110,6 +118,7 @@ public class OrderController {
         TrainTable trainTable = (TrainTable) session.getAttribute("trainTable");
         int UserID =  Integer.valueOf(session.getAttribute("S_UserID").toString());
         TicketService.BuyTicket(UserID, trainTable, 0);
+        TicketService.TicketCountChange(trainTable, -1);
         return "Index";
     }
 }

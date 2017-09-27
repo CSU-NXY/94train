@@ -144,7 +144,7 @@
             });
         });
 
-
+        var trainTable = $("#trainTable").DataTable();
 
         // 车票查询-显示部分
         var searchForm = $("#searchForm");
@@ -155,6 +155,7 @@
                 "/search/searchTrains.do",
                 searchForm.serializeArray(),
                 function (data) {
+
                     var currentDate = new Date();
                     var currentyear = currentDate.getFullYear();
                     var currentmonth = currentDate.getMonth() + 1;
@@ -166,7 +167,7 @@
                     var day = searchDate.substr(8,2).replace("0","");
 
                     if(currentyear < year){
-
+                        trainTable.destroy();
                         dataGrid.empty();
                         $.each(data, function (index, row) {
                             var tr = template.clone();
@@ -222,14 +223,14 @@
 
                         });
 
-                        $("#trainTable").DataTable({
+                        trainTable = $("#trainTable").DataTable({
                             "lengthMenu": [ 5, 10, 15]
                         });
 
                     }
                     else if(currentyear == year){
                         if(currentmonth < month){
-
+                            trainTable.destroy();
                             dataGrid.empty();
                             $.each(data, function (index, row) {
                                 var tr = template.clone();
@@ -285,12 +286,13 @@
 
                             });
 
-                            $("#trainTable").DataTable({
+                            trainTable = $("#trainTable").DataTable({
                                 "lengthMenu": [ 5, 10, 15]
                             });
                         }
                         else if(currentmonth == month){
                             if(currentdate < day){
+                                trainTable.destroy();
                                 dataGrid.empty();
                                 $.each(data, function (index, row) {
                                     var tr = template.clone();
@@ -346,7 +348,7 @@
 
                                 });
 
-                                $("#trainTable").DataTable({
+                                trainTable = $("#trainTable").DataTable({
                                     "lengthMenu": [ 5, 10, 15]
                                 });
                             }
