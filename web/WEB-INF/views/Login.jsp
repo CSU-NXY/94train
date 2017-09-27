@@ -42,6 +42,7 @@
     });
 </script>
 <div class="container">
+
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6" >
             <%
@@ -58,6 +59,7 @@
                 }
             %>
 
+
             <form class="form-group" role="form" action="/registerAndLogin/Login.do" method="post">
                 <div class="form-group">
                     <h2>欢迎登录</h2>
@@ -72,16 +74,17 @@
                     <label for="Password">密码</label>
                     <input type="password" id="Password" name="Password" class="form-control" placeholder="密码" value="<%=password%>" required>
                 </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="remember" name="remember"value="true"> 记住密码
-                    </label>
-                </div>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" value="登录"></input>
-            </form>
-        </div>
-    </div> <!-- /container -->
+                   
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> 记住密码
+                        </label>
+                    </div>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="登录">
+                </form>
+    </div>
 </div>
 
 <jsp:include page="common/IncludeBottom.jsp"/>
+
+
