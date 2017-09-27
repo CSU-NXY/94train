@@ -4,16 +4,20 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--启动包扫描功能，注册带有@Controller、@Service、@repository、@Component等注解的类成为Spring的Bean-->
     <context:component-scan base-package="com.nxy.controller"/>
-
+    <!--引入静态文件-->
     <mvc:default-servlet-handler/>
-
+    <!--使用默认的Mapping-Jackson2HttpMessageConverter-->
     <mvc:annotation-driven/>
-
+    <!--视图解析器-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!--前缀-->
         <property name="prefix" value="/WEB-INF/views/"/>
+        <!--后缀-->
         <property name="suffix" value=".jsp"/>
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     </bean>
 
 </beans>

@@ -12,17 +12,6 @@
 
 <jsp:include page="common/IncludeTop.jsp"/>
 
-<style type="text/css">
-    *{margin:0;padding:0;}
-    .dev,.con{float: left; margin-top: 20px;}
-    .personalInfo{background: #563d7c; padding-left: 15px;font-size: 16px;font-weight: bold;line-height: 40px;color:#cdbcf3 }
-    .dev ul li{font-size: 14px;padding-left: 35px;line-height: 40px;display: block;border-bottom: 1px solid #e2e2e2;cursor: pointer;}
-    .dev ul li:hover{background-color: #f7f7f7 ;}
-    .on{background-image: url(xx.png); background-repeat: no-repeat; background-position: 15px 13px;font-weight: bold;}
-    .nrbf{width:inherit;float: left; display: none; padding-left: 20px; color: #464646;letter-spacing:1px; font-size: 16px;line-height: 1.5; padding-top: 5px;}
-</style>
-
-
 <div class="container" style="width: 80%">
     <div class="row">
         <%
@@ -51,10 +40,17 @@
     <div class="row">
         <div class="col-xs-1 dev">
             <p class="personalInfo">个人信息</p>
-            <ul id="myInfo" >
-                <a href="#base" data-toggle="tab"><li class="active">基本信息</li></a>
-                <a href="#change" data-toggle="tab"><li>修改信息</li></a>
-                <a href="#order" data-toggle="tab"> <li>我的订单</li></a><!--xj-->
+            <ul id="myInfo" class="nav nav-tabs">
+
+                <li class="active">
+                    <a href="#base" data-toggle="tab">基本信息</a>
+                </li>
+                <li>
+                    <a href="#change" data-toggle="tab">修改信息</a>
+                </li>
+                <li>
+                    <a href="#order" data-toggle="tab">我的订单</a>
+                </li>
             </ul>
         </div>
         <div class="col-xs-11 con">
@@ -131,13 +127,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
 
                 <div class="tab-pane fade" id="order">
 
@@ -463,4 +452,19 @@
         }
         return false;
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        if(location.hash) {
+            $('a[href=' + location.hash + ']').tab('show');
+        }
+        $(document.body).on("click", "a[data-toggle]", function(event) {
+            location.hash = this.getAttribute("href");
+        });
+    });
+    $(window).on('popstate', function() {
+        var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+        $('a[href=' + anchor + ']').tab('show');
+    });
 </script>
