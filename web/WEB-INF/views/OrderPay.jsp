@@ -35,14 +35,14 @@
         </tr>
         <tr align="center">
             <td><!--这里用于获取出发站名称-->${sessionScope.get("startStation")}</td>
-            <td style="width: 27%"><!--这里用于获取列车号-->${sessionScope.get("strainID")}</td>
+            <td style="width: 27%"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></td>
             <td style="width: 27%"><!--这里用于获取目的地名称-->${sessionScope.get("endStation")}</td>
             <!--表格中只显示获取到的信息，后面的字需要删掉-->
         </tr>
         <tr align="center">
             <td><!--这里用于获取出发时间-->${sessionScope.get("departureTime")}</td>
-            <td>开往</td>
-            <td><!--这里用于获取座位（直接显示座位号）-->座位号</td>
+            <td>${sessionScope.get("strainID")}</td>
+            <td>${sessionScope.get("arrivalTime")}</td>
             <!--表格中只显示获取到的信息，后面的字需要删掉-->
         </tr>
         <tr align="center">

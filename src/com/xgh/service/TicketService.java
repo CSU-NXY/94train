@@ -129,6 +129,31 @@ public class TicketService {
         return name;
     }
 
+    private static int GetStationIDByName(String name){
+        Connection conn = ConnectionGenerator.GetConnetct();
+        int id = -1;
+        String sql = "SELECT StationID\n" +
+                "FROM 94train.station\n" +
+                "where StationName = ?";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                id = rs.getInt(1);
+            }
+            pstmt.close();
+            rs.close();
+            conn.close();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
     public  static boolean BuyTicket(int UserID,TrainTable trainTable, int type)
     {
         Order order = new Order();
@@ -195,4 +220,63 @@ public class TicketService {
         return list;
     }
 
+    public static boolean TicketCountChange(TrainTable trainTable,int count)
+    {
+        boolean result = false;
+        int Station_S = GetStationIDByName(trainTable.getStartStation());
+        int Station_E = GetStationIDByName(trainTable.getEndStation());
+        int S = GetSectionIndex(trainTable.getStrainID(),Station_S);
+        int E = GetSectionIndex(trainTable.getStrainID(),Station_E);
+        String TrainID = trainTable.getStrainID();
+        result = SectionCountChange(count,trainTable.getStrainID(),S,E);
+        return result;
+    }
+
+    private static boolean SectionCountChange(int count,String TrainID,int S,int E)
+    {
+        int i = -1;
+        String sql ="UPDATE `94train`.`section` SET `Count`= Count + ?  WHERE TrainID=? and section.Index between ? AND ?-1;";
+        Connection conn = ConnectionGenerator.GetConnetct();
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setInt(1,count);
+            pstmt.setString(2,TrainID);
+            pstmt.setInt(3,S);
+            pstmt.setInt(4,E);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        if(i==(E-S))
+            return true;
+        return false;
+    }
+
+    //0 ID 2Index
+    private static int GetSectionIndex(String TrainID,int StationID)
+    {
+
+        int index = -1;
+        String sql = "SELECT section.Index FROM 94train.section WHERE TrainID=? AND StationID=?;";
+        Connection conn = ConnectionGenerator.GetConnetct();
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1,TrainID);
+            pstmt.setInt(2,StationID);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            index=rs.getInt(1);
+            pstmt.close();
+            conn.close();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return index;
+    }
 }

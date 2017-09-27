@@ -6,6 +6,8 @@ import  com.xgh.service.*;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.xgh.service.TicketService.TicketCountChange;
+
 public class Test {
     public static void main(String args[]) throws SQLException, ClassNotFoundException {
         List<TrainTable> temp = TicketService.SearchByStation("金华","长沙南");
@@ -16,5 +18,6 @@ public class Test {
 //        int o = UserService.Login(user);
 //        //boolean result = UserService.Register(user);
 //        boolean result2 = TicketService.BuyTicket(user.getUserID(),temp.get(0));
+            boolean result  = TicketCountChange(temp.get(0),1);
     }
 }
