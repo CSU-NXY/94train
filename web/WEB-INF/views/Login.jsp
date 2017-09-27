@@ -67,7 +67,7 @@
 
                 <div class="form-group">
                     <label for="PhoneNum">手机号</label>
-                    <input type="number" id="PhoneNum" name="PhoneNum" class="form-control" placeholder="用户名/手机号" value="<%=username%>" autofocus>
+                    <input type="number" id="PhoneNum" name="PhoneNum" class="form-control" placeholder="手机号" value="<%=username%>" autofocus>
                 </div>
 
                 <div class="form-group">
@@ -77,7 +77,7 @@
                    
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="remember-me"> 记住密码
+                            <input type="checkbox" value="true" id="remember" name="remember"> 记住密码
                         </label>
                     </div>
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="登录">
