@@ -46,12 +46,12 @@
                 <form id="searchForm">
                 <div class="form-group">
                     <h4><strong>出发地</strong></h4>
-                    <label><input class="form-control" placeholder="请填写汉字" name="departure"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="departure" id="departure"></label>
                 </div>
 
                 <div class="form-group">
                     <h4><strong>目的地</strong></h4>
-                    <label><input class="form-control" placeholder="请填写汉字" name="destination"></label>
+                    <label><input class="form-control" placeholder="请填写汉字" name="destination" id="destination"></label>
                 </div>
 
                 <div class="form-group">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%"><i class="glyphicon glyphicon-search"></i>查询
+                    <button class="btn btn-outline-inverse btn-search" style="position: relative;left: 20%" ><i class="glyphicon glyphicon-search"></i>查询
                     </button>
                 </div>
             </form>
@@ -89,21 +89,6 @@
                             <th style="width:15%;">操作</th>
                         </tr>
                         </thead>
-                        <tbody id="template" style="display: none;">
-                            <tr>
-                                <th class="_StrainID"></th>
-                                <td class="_StartStation"></td>
-                                <td class="_EndStation"></td>
-                                <td class="_DepartureTime"></td>
-                                <td class="_ArrivalTime"></td>
-                                <td class="_TimeSpent"></td>
-                                <td class="_CountLeft"></td>
-                                <td class="_price"></td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm get-train">购买</button>
-                                </td>
-                            </tr>
-                        </tbody>
                         <tbody id="dataGrid"></tbody>
                     </table>
 
@@ -111,6 +96,25 @@
             </div>
         </div>
     </div>
+
+    <!--车票模板，不显示-->
+    <table style="display: none;">
+        <tbody id="template" style="display: none;">
+        <tr>
+            <th class="_StrainID"></th>
+            <td class="_StartStation"></td>
+            <td class="_EndStation"></td>
+            <td class="_DepartureTime"></td>
+            <td class="_ArrivalTime"></td>
+            <td class="_TimeSpent"></td>
+            <td class="_CountLeft"></td>
+            <td class="_price"></td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm get-train">购买</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <!-- 图片左右方来回滚动图片的左右箭头-->
     <a href="#myCarousel" class="carousel-control left" data-slide="prev">&lsaquo;</a>
@@ -128,6 +132,20 @@
 
 <script type="text/javascript">
     $(function () {
+        // Autocomplete部分
+        var availableTags = null;
+        $.getJSON("/search/getAllStations.do",function(result){
+            $( "#departure" ).autocomplete({
+                source: result
+            });
+            $( "#destination" ).autocomplete({
+                source: result
+            });
+        });
+
+
+
+        // 车票查询-显示部分
         var searchForm = $("#searchForm");
         var dataGrid = $("#dataGrid");
         var template = $("#template").children();
@@ -144,8 +162,6 @@
                             tr.find("._" + name).text(value);
                         })
                     });
-
-                    $("#trainTable").DataTable();
 
                     $(".get-train").click(function () {
                         // 验证是否登录
@@ -191,6 +207,9 @@
                         document.body.appendChild(form);
                         form.submit();
 
+                    });
+                    $("#trainTable").DataTable({
+                        "lengthMenu": [ 5, 10, 15]
                     });
                 }, "json");
             return false;

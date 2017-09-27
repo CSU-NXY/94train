@@ -22,31 +22,33 @@
         <div class="col-xs-8" style="margin-top: 5%;width: 80%; margin-left: 10%">
             <table class="table table-bordered table-striped text-center" align="center">
                 <tr align="center" style="background-color: #669999">
-                    <td colspan="5" style="color: #ffffff">车次信息</td>
+                    <td colspan="5" style="color: #ffffff"><label>车次信息</label></td>
                 </tr>
 
                 <tr align="center">
-                    <td>${sessionScope.get("strainID")}<!--直接获取列车号显示--></td>
-                    <td>${sessionScope.get("startStation")}<!--直接获取出发地显示--></td>
-                    <td>开往</td>
-                    <td>${sessionScope.get("endStation")}<!--直接获取目的地显示--></td>
-                    <td>&nbsp;</td>
+                    <td><label>${sessionScope.get("strainID")}<!--直接获取列车号显示--></label></td>
+                    <td><label>${sessionScope.get("startStation")}<!--直接获取出发地显示--></label></td>
+                    <td><label>开往</label></td>
+                    <td><label>${sessionScope.get("endStation")}<!--直接获取目的地显示--></label></td>
+                    <td><label>&nbsp;</label></td>
                 </tr>
 
                 <tr align="center">
-                    <td>2017年9月14日<!--直接获取出发日期--></td>
-                    <td>${sessionScope.get("departureTime")}<!--获取出发时间--></td>
-                    <td>${sessionScope.get("timeSpent")}<!--获取途经时间--></td>
-                    <td>${sessionScope.get("arrivalTime")}<!--获取到达时间--></td>
-                    <td>${sessionScope.get("price")}<!--获取票价-->元</td>
+                    <td><label>2017年9月14日<!--直接获取出发日期--></label></td>
+                    <td><label>${sessionScope.get("departureTime")}<!--获取出发时间--></label></td>
+                    <td><label>${sessionScope.get("timeSpent")}<!--获取途经时间--></label></td>
+                    <td><label>${sessionScope.get("arrivalTime")}<!--获取到达时间--></label></td>
+                    <td><label>${sessionScope.get("price")}<!--获取票价-->元</label></td>
                 </tr>
                 <tr>
-                    <td>选择车票类型</td>
+                    <td><label>选择车票类型</label></td>
                     <td colspan="4">
+                        <label>
                         <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="学生票">学生票</label>
                         <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="成人票">成人票</label>
                         <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="军人票">军人票</label>
                         <label style="padding:0 10px 0 10px;"><input type="radio" name="type" value="残疾票">残疾票</label>
+                        </label>
                     </td>
                 </tr>
 
@@ -61,11 +63,11 @@
                 </tr>
 
                 <tr align="center" style="background-color: #669999">
-                    <td colspan="5" style="color: #ffffff">同意条款</td>
+                    <td colspan="5" style="color: #ffffff"><label>同意条款</label></td>
                 </tr>
 
                 <tr>
-                    <td colspan="5" align="left"><input type="checkbox" id="Agree">我已阅读并同意<a href>《用户购票须知》</a></td>
+                    <td colspan="5" align="left"><label><input type="checkbox" id="Agree">我已阅读并同意<a href="${pageContext.request.contextPath}/protocol/viewProtocol.do" target="_blank">《用户购票须知》</a></label></td>
                 </tr>
 
                 <tr>
@@ -134,18 +136,6 @@
 
             document.body.appendChild(form);
             form.submit();
-
-
-//            var params = {"strainID":strainID,
-//                "startStation":startStation,
-//                "endStation":endStation,
-//                "departureTime":departureTime,
-//                "arrivalTime":arrivalTime,
-//                "timeSpent":timeSpent,
-//                "countLeft":countLeft,
-//                "price":price};
-//            $.get("/buyTickets/buyTickets.do",data);
-
         });
     });
 </script>

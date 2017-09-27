@@ -80,7 +80,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <button type="button" class="btn btn-default" id="Add">添加</button>
+            <button type="button" class="btn-lg btn-default" id="Add">添加</button>
         </div>
         <div class="col-md-1"></div>
     </div>

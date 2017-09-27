@@ -7,57 +7,6 @@
 --%>
 <jsp:include page="common/IncludeTop.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style type="text/css">
-    #wizard {
-        font-size: 12px;
-        height: 800px;
-        margin: 10px auto;
-        overflow: hidden;
-        position: relative;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-    }
-
-    #wizard .items {
-        width: 10000px;
-        clear: both;
-        position: absolute;
-    }
-
-    #wizard #status {
-        padding-left: 25px !important;
-    }
-
-    #status li {
-        float: left;
-        color: #fff;
-        padding: 10px 30px;
-    }
-
-    #status li.active {
-        background-color: #cdbcf3;
-        font-weight: normal;
-    }
-
-    .page {
-        padding-top: 20px;
-        width: 1000px;
-        float: left;
-        min-height: 500px;
-    }
-
-    .spage {
-        padding-top: 20px;
-        width: 1000px;
-        float: left;
-        min-height: 500px;
-    }
-
-    .form_tips {
-        padding: 0px 100px 0px 150px;
-        color: #8d8d8d
-    }
-</style>
 
 <div class="container">
 
@@ -104,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="spage">
+                <div class="page">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3" style="margin-top: 50px;">
 
@@ -133,7 +82,7 @@
 
                 </div>
 
-                <div class="spage">
+                <div class="page">
                     <div class="row">
                         <div class="col-md-offset-2" style="margin-top: 100px;">
                             <div>

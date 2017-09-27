@@ -112,11 +112,11 @@
                                         <td><input type="password"  name="OldPassword" id="OldPassword" placeholder="请填写旧密码"/></td>
                                     </tr>
                                     <tr>
-                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td>新&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
                                         <td><input type="password" name="NewPassword" id="NewPassword" placeholder="请填写新密码"/></td>
                                     </tr>
                                     <tr>
-                                        <td>原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                        <td>重&nbsp;&nbsp;&nbsp;&nbsp;复&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
                                         <td><input type="password" name="RepeatPassword" id="RepeatPassword" placeholder="请确认新密码"/></td>
                                     </tr>
                                     <tr>
@@ -200,8 +200,8 @@
 
                                     <td class="_operation">
                                         <button type="button" onclick="acs(this)" class="btn btn-dange btn-xs" >删除</button>
-                                        <button type="button" class="btn btn-warning btn-xs" >退订</button>
-                                        <button type="button" class="btn btn-success btn-xs" >付款</button>
+                                        <button type="button" onclick="returnTicket(this)" class="btn btn-warning btn-xs" >退订</button>
+                                        <button type="button" onclick="buyTicket(this)" class="btn btn-success btn-xs" >付款</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -305,19 +305,6 @@
     var noEnd = $("#ordersNoend");
     var noPay = $("#ordersNopay");
     $(function () {
-// <<<<<<< HEAD
-//         $(function () {
-//             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-//                 // Get the name of active tab
-//                 var activeTab = $(e.target).text();
-//                 // Get the name of previous tab
-//                 var previousTab = $(e.relatedTarget).text();
-//                 $(".active-tab span").html(activeTab);
-//                 $(".previous-tab span").html(previousTab);
-//             });
-//         });
-//     });
-// =======
         PostID();
     });
     function PostID() {
@@ -334,6 +321,8 @@
                     var tr = order.clone();
                     var tr2;
                     var tr3;
+                    var count1 = 1;
+                    var count2 = 1;
                     dataGrid.append(tr);
                     $.each(row, function (name, value) {
 
@@ -342,18 +331,22 @@
                             if(name=="status"){
                                 if(value==1) {
                                     tr.find("._status").text("已完成");
-                                    alert(tr.children().last().children().eq(2).attr("disabled","disabled"));
+                                    tr.children().last().children().eq(2).attr("disabled","disabled");
 
                                 }
                                 if(value==0){
-                                    tr.find("._status").text("未完成");
-
+                                    tr.find("._status").text("未出行");
+                                    tr.children().last().children().eq(2).attr("disabled","disabled");
                                     tr2 = tr.clone();
+                                    tr2.find("._id").text(count1);
+                                    count1++;
                                 }
                                 if(value==-1){
                                     tr.find("._status").text("未支付");
-                                    alert(tr.children().last().children().eq(1).attr("disabled","disabled"));
+                                    tr.children().last().children().eq(1).attr("disabled","disabled");
                                     tr3 = tr.clone();
+                                    tr3.find("._id").text(count2);
+                                    count2++;
                                 }
                             }
                     })
@@ -389,10 +382,72 @@
                 data:params,
                 dataType:"json",
                 success:function (data) {
-                    alert("a");
+
                 },
                 error:function () {
-                    alert("gsxgh");
+
+                    PostID();
+                }
+            })
+        }
+        return false;
+    }
+
+    function returnTicket(obj) {
+        var params = {}
+        var $td= $(obj).parents('tr').children('td').eq(1).text();
+
+        params.id = $td;
+        params.status = -1;
+
+        if(confirm("确定要退款码？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+
+        if(window.event.returnValue == true){
+            $.ajax({
+                url:"/Order/returnTicket.do",
+                type:"post",
+                data:params,
+                dataType:"json",
+                success:function (data) {
+
+                },
+                error:function () {
+
+                    PostID();
+                }
+            })
+        }
+        return false;
+    }
+
+    function buyTicket(obj) {
+        var params = {}
+        var $td= $(obj).parents('tr').children('td').eq(1).text();
+
+        params.id = $td;
+        params.status = 0;
+
+        if(confirm("确定要付款码？")){
+            window.event.returnValue = true;
+        }else{
+            window.event.returnValue = false;
+        }
+
+        if(window.event.returnValue == true){
+            $.ajax({
+                url:"/Order/buyTicket.do",
+                type:"post",
+                data:params,
+                dataType:"json",
+                success:function (data) {
+
+                },
+                error:function () {
+
                     PostID();
                 }
             })
