@@ -147,20 +147,20 @@
                         <li><a href="#noPay" data-toggle="tab">待付款订单</a></li>
                     </ul>
 
-                    <div id="query" style="margin-top: 10px;">
-                        <span><label>订单号<input type="text" id="orderID"/></label></span>
-                        <span><label>日期</label></span>
-                        <span>
-                                <input type="text" id="StartDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>
-                                <input type="text" id="EndDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>
-                            <!--这里需要点击输入框显示一个日历的div，用于选择时间-->
-                            </span>
-                        <span>
-                            <input type="text" id="sequeue_train_nameText" value="" placeholder="订单/车次/乘车人姓名"/>
-                            <span id="clear_input_txt" title="清除"></span><!--这里可以添加一个删除的小图标-->
-                            </span>
-                        <input type="button" id="querybt" value="查询"/>
-                    </div>
+                    <%--<div id="query" style="margin-top: 10px;">--%>
+                        <%--<span><label>订单号<input id="orderID"/></label></span>--%>
+                        <%--<span><label>日期</label></span>--%>
+                        <%--<span>--%>
+                                <%--<input type="text" id="StartDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>--%>
+                                <%--<input type="text" id="EndDate" placeholder="yyyy-mm-dd" value="2017-09-14" readonly="readonly"/>--%>
+                            <%--<!--这里需要点击输入框显示一个日历的div，用于选择时间-->--%>
+                            <%--</span>--%>
+                        <%--<span>--%>
+                            <%--<input type="text" id="sequeue_train_nameText" value="" placeholder="订单/车次/乘车人姓名"/>--%>
+                            <%--<span id="clear_input_txt" title="清除"></span><!--这里可以添加一个删除的小图标-->--%>
+                            <%--</span>--%>
+                        <%--<input type="button" id="querybt" value="查询"/>--%>
+                    <%--</div>--%>
 
                     <div id="noticketlist" style="display: none;">
                         <div id="no-ticket">
@@ -171,12 +171,9 @@
                         </div>
                     </div>
 
-
-
                     <div id="myOrderContent" class="tab-content">
                         <div class="tab-pane fade in active" id="all">
                             <table class="table table-bordered table-striped table-hover" id="orderInfoALL">
-
                                 <tr align="center">
                                     <td>序号</td>
                                     <td>订单号</td>
@@ -317,6 +314,7 @@
     var noPay = $("#ordersNopay");
     $(function () {
         PostID();
+
     });
     function PostID() {
         $("#ordershow").hidden;
