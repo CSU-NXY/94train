@@ -123,7 +123,6 @@ public class RegisterAndLoginController {
 
         writer.flush();
         writer.close();
-
     }
 
 

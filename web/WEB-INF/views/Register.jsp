@@ -60,10 +60,10 @@
                             <div class="checkbox">
                                 <label class="form_tips">
                                 <label><input type="checkbox" name="Agree" checked="checked"></label>我已阅读并同意
-                                <a href="Protocol.html" target="_blank">《94购票网服务协议》</a>
+                                <a href="/WEB-INF/views/Protocol.jsp" target="_blank">《94购票网服务协议》</a>
                             </label>
                             </div>
-                            <input type="submit" class="btn btn-primary" onclick="nextPage()" value="注册&raquo;"/>
+                            <input type="submit" class="btn btn-primary" onclick="checkMsg()" value="注册&raquo;"/>
 
                     </form>
                     </div>
@@ -159,7 +159,6 @@
         else if(!myreg.test(phone)){
             message = "请输入有效的手机号码！";
         }else if(checkPhoneIsExist(phone) == "false"){
-            alert(checkPhoneIsExist(phone));
             message = "该手机号码已经被绑定！";
         }else{
             flag = true;
@@ -173,21 +172,18 @@
 
     
     function checkPhoneIsExist(obj) {
-        var num = {}
+        var num = {};
         var message = "";
         num.phone = obj;
-        alert(num.phone);
         $.ajax({
             type: "POST",
             url: "/registerAndLogin/checkPhoneNumIsExist.do",
+            async: false,
             data : num,
             success: function(msg) {
-                alert(msg);
                 message = msg;
-
             }
         });
-        alert(message);
         return message;
     }
 
@@ -232,7 +228,6 @@
                                     url: "/registerAndLogin/checkWord.do",
                                     data: checkword,
                                     success: function (msg) {
-                                        alert(msg);
                                         if (msg.equal("true")) {
                                             nextPage();
                                         } else {
@@ -267,7 +262,7 @@
         if(checkPhone()){
             settime();
             var check = $("input[name='PhoneNum']").val();
-            var num = {}
+            var num = {};
             num.id = check;
 
             $.ajax({
@@ -318,7 +313,7 @@
         });
         $(".end").click(function(){
             var data = $("form").serialize();
-            alert(data);
+            // alert(data);
         });
     });
 </script>
